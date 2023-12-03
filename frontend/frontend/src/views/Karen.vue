@@ -4,7 +4,7 @@
         <button type="button" onclick="handleButtonClick('button1')">
           <el-icon style="color: red;"><ArrowUp /></el-icon></button>
           <button type="button" onclick="handleButtonClick('button2')"><el-icon><Edit /></el-icon>會議基本資訊</button>
-        <button type="button" onclick="handleButtonClick('button3')">
+          <button type="button" onclick="handleButtonClick('button3')">
           <el-icon>
             <Link />
         </el-icon>
@@ -83,31 +83,35 @@
         <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px;"></textarea>
       </div>
     </div>
-    <el-alert class = "popUp_msg" title="會議紀錄連結已複製" type="success" show-icon />
+   
     <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
     <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
     <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
     
-    <el-alert class="popUp_recover"
-      title="成功復原會議紀錄"
-      type="success"
-      show-icon
-      :style="{ backgroundColor: '#FFFFFF'}"
-    >
-    <!-- 不知道怎麼單獨改title的顏色，因為title的屬性好像是跟著圖標的 -->
-    <a href="link-url" :style="{ color: '#67C23A' }">點擊檢視復原檔案</a>
-</el-alert>
+    
 
-    </div>
+    <Recover />
+    <!-- <Delete /> -->
+    <LinkCopy />
+  </div>
 </template>
 
 <script >
 
 import axios from 'axios';
 import { ref } from 'vue';
+import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
+import Delete from "@/components/KarenBricks/Delete.vue";
+import Recover from "@/components/KarenBricks/Recover.vue";
+
 
 export default {
-  name:'meeting',
+  name:'Karen',
+  components: {
+    LinkCopy,
+    Delete,
+    Recover,
+  },
 
   data() {
     return {
@@ -255,18 +259,16 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .popUp_msg{
-  width: 500px;
-  height: 50px;
-  margin: 20px 0 0;
-  font-size: 0px;
+width: 500px;
+height: 50px;
+font-size: 0px;
+margin: 20px 0 0;
+box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+
 }
-.popUp_recover{
-  width: 700px;
-  height: 80px;
-  margin: 20px 0 0;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4); /* 阴影样式 */
-  
-}
+
+
 
 </style>

@@ -1,9 +1,11 @@
 <template>
     <div class="form">
-        <p class="formName">設定會議基本資訊</p>
+        <p class="formName">設定會議基本資訊
+            <button class="close-button" type="button" onclick="close"><el-icon><Close /></el-icon></button>
+             </p>
         <el-form :model="form" >
             <el-form-item label="會議名稱">
-            <el-input v-model="form.name"  :style="{ width: '500px' }" />
+            <el-input v-model="form.name"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
         </el-form-item>
       <el-form-item label="日期">
         <div class="demo-date-picker" >
@@ -29,15 +31,15 @@
         </el-form-item>
         <el-form-item label="出席人員">
         <el-select
-    v-model="value"
-    multiple
-    filterable
-    allow-create
-    default-first-option
-    :reserve-keyword="false"
-    placeholder="選擇出席人員"
-    :style="{ width: '500px' }"
-  >
+            v-model="value"
+            multiple
+            filterable
+            allow-create
+            default-first-option
+            :reserve-keyword="false"
+            placeholder="選擇出席人員"
+            :style="{ width: '500px' }"
+        >
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -47,7 +49,7 @@
   </el-select>
       </el-form-item>
       <el-form-item label="會議進行地點">
-            <el-input v-model="form.place"  :style="{ width: '500px' }" />
+            <el-input v-model="form.place"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
         </el-form-item>
         <el-form-item label="缺席人員">
         <el-select
@@ -88,8 +90,11 @@
   </el-select>
       </el-form-item>
       <el-form-item>
-            <el-button type="primary" @click="onSubmit">儲存</el-button>
-        </el-form-item>
+        <el-button class="commit_button"  @click="onSubmit" >
+            <el-icon><DocumentChecked /></el-icon>  <span style="margin-left: 8px;">儲存</span>
+
+</el-button>
+</el-form-item>
     </el-form>
     </div>
   </template>
@@ -134,10 +139,22 @@
   }
   </script>
 <style>
-.formName{
-    font-size: 20px;
-    text-align: left;
-    font-weight: bold;
+.formName {
+    display: flex;
+  justify-content: space-between;
+  /* 第一个子元素在容器的起始位置，最后一个子元素在容器的末尾位置 */
+  align-items: center;
+  font-size: 20px;
+  text-align: left;
+  font-weight: bold;
+  width: 500px;
+}
+button.close-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1em;
 }
 p {
   margin-top: 0;
@@ -174,6 +191,15 @@ p {
   margin: 0px;
   width: 100%;
 }
+.commit_button{
+    margin-left:418px;
+    background: #EB2348;
+    border: 1px solid #EB2348;
+    display: flex;
+    color: #ffffff;
+    justify-content: flex-end; /* 将内容靠右对齐 */
+}
+
 
 
 </style>

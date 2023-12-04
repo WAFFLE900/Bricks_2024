@@ -42,9 +42,7 @@
           <td class="left-bar">
             <label for="attend">出席人員</label>
           </td>
-          <td class="input-cell">
-            <input type="text" id="attend" v-model="attend" class="text-input" placeholder="-">
-          </td>
+          
         </tr>
         <tr>
           <td class="left-bar">
@@ -89,10 +87,10 @@
     <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
     
     
-
-    <Recover />
+    <BasicInfo />
+    <!-- <Recover /> -->
     <!-- <Delete /> -->
-    <LinkCopy />
+    <!-- <LinkCopy /> -->
   </div>
 </template>
 
@@ -103,7 +101,7 @@ import { ref } from 'vue';
 import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
 import Delete from "@/components/KarenBricks/Delete.vue";
 import Recover from "@/components/KarenBricks/Recover.vue";
-
+import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
 
 export default {
   name:'Karen',
@@ -111,6 +109,7 @@ export default {
     LinkCopy,
     Delete,
     Recover,
+    BasicInfo,
   },
 
   data() {

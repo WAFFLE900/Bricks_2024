@@ -5,9 +5,7 @@
           <el-icon style="color: red;"><ArrowUp /></el-icon></button>
           <button type="button" onclick="handleButtonClick('button2')"><el-icon><Edit /></el-icon>會議基本資訊</button>
           <button type="button" onclick="handleButtonClick('button3')">
-          <el-icon>
-            <Link />
-        </el-icon>
+          <el-icon><Link /></el-icon>
       </button>
        
     </div>
@@ -26,23 +24,16 @@
             <label for="time">時間</label>
           </td>
           <td class="input-cell">
-            <div class="demo-range">
-              <el-time-picker
-                v-model="value1"
-                is-range
-                range-separator="To"
-                start-placeholder="Start time"
-                end-placeholder="End time"
-                placeholder="'-'"
-              />
-            </div>
+            <input type="place" id="time" v-model="place" class="text-input" placeholder="-">
           </td>
         </tr>
         <tr>
           <td class="left-bar">
             <label for="attend">出席人員</label>
           </td>
-          
+          <td class="input-cell">
+            <input type="place" id="attend" v-model="place" class="text-input" placeholder="-">
+          </td>
         </tr>
         <tr>
           <td class="left-bar">
@@ -78,7 +69,7 @@
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
-        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px;"></textarea>
+        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea>
       </div>
     </div>
    

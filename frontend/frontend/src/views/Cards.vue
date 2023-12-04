@@ -1,7 +1,7 @@
 <template>
     <div id="main">
-        <side-bar calss="side"></side-bar>
-        <nav-bar-all calss="nav"></nav-bar-all>
+        <side-bar class="side"></side-bar>
+        <nav-bar-all class="nav"></nav-bar-all>
         <div id="card">
             <meeting-cards></meeting-cards>
             <meeting-cards></meeting-cards>
@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     #main{
         position: relative;
@@ -44,8 +44,8 @@ export default {
     }
     .nav{
         position: absolute;
+        top: 0;
         left: 200px;
-        /* top: 0; */
         right: 0;
     }
 

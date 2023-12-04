@@ -10,7 +10,8 @@
             <div id="icons">
                 <button><a src="#"><el-icon class="icon"><search/></el-icon></a></button>
                 <button><el-icon class="icon"><lock/></el-icon></button>
-                <button><el-icon class="icon"><bell/></el-icon></button>
+                <!-- <button><el-icon class="icon"><bell/></el-icon></button> --> 
+                <notification-menu class="icon"></notification-menu>
             </div>
             <user-info id="userInfo"></user-info>
             <el-icon><language/></el-icon>
@@ -21,10 +22,12 @@
 
 
 <script>
+import NotificationMenu from './NotificationMenu.vue';
 import UserInfo from './UserInfo.vue';
 export default {
     components: {
         UserInfo,
+        NotificationMenu,
     },
     data() {
         return {
@@ -100,11 +103,12 @@ export default {
         justify-content: center;
         align-items: center;
         align-self: stretch;
+        cursor: pointer;
     }
 
-    /* #userInfo{
-        margin-right: 12px;
-    } */
+    .el-dropdown-link{
+        cursor: pointer;
+    }
 
     #icon #languageIcon{
         display: block;

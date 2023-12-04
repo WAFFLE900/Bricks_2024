@@ -86,6 +86,8 @@ export default {
         word-wrap:break-all;
         width: 212px;
         height: 56px;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
     }
     .tag{
         width: fit-content;

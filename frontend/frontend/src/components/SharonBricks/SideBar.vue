@@ -40,7 +40,7 @@
         </el-sub-menu>
         <el-sub-menu index="3" class="menu">
           <template #title>
-            <el-icon><img src="@/assets/schema.svg"></el-icon>
+            <el-icon><span class="material-icons">&#xE4FD;</span></el-icon>
             <span>組織架構圖</span>
           </template>
             <el-menu-item index="3-1">全部</el-menu-item>
@@ -61,19 +61,17 @@ export default {
   components: {
     
   },
-  data() {
+  setup() {
+
+    const menu_clicked = () =>{
+      this.active_color = "#FAE4E7";
+    };
     return {
       project_name: "專案名稱",
       incolor: "#C91F2F",
       active_color: "#fff",
 
     };
-  },
-  methods:{
-    menu_clicked(){
-      this.active_color = "#FAE4E7";
-    },
-    
   }
 }
 </script>
@@ -179,7 +177,7 @@ export default {
     color: #C91F2F;
   }
 
-  .menu{
+  .menu :active{
     
   }
 

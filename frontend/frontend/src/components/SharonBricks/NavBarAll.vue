@@ -12,36 +12,42 @@
                 <el-autocomplete
                     clearable
                     placeholder="Please Input"
-                    disable = true
+                    disabled
                     id = "searchBar"
+                    @click="result"
                 />
             </div>
-            <button><el-icon class="icon"><bell/></el-icon></button>
+            <notification-menu class="noti"></notification-menu>
             <user-info id="userInfo"></user-info>
-            <el-icon><language/></el-icon>
+            
+            <!-- <el-icon><language/></el-icon> -->
         </div>
     </div>
 </template>
 
 <script>
 import UserInfo from './UserInfo.vue';
+import NotificationMenu from './NotificationMenu.vue';
 export default {
     components:{
         UserInfo,
+        NotificationMenu,
     },
-    data(){
+    setup(){
         return{
-            meeting_name: "未命名會議紀錄",
+            // meeting_name: "未命名會議紀錄",
         }
-    }
+    },
 }
+
+    
 </script>
 
 <style scoped>
     #navBar{
         z-index: 5;
         position: fixed;
-        position: absolute;
+        /* position: relative; */
         left: 200px;
         display: flex;
         width: auto;
@@ -80,30 +86,23 @@ export default {
     #toolBar{
         display: flex;
         position: relative;
+        align-items: center;
+        justify-content: center;
         right: 0;
+        flex-direction: row;
+        gap: 12px;
+        /* padding: 0; */
         
     }
     /* #toolBar .icon{
         background-color: none;
         border: none;
     } */
-    #toolBar button{
-        border: none;
-        background: none;
-        cursor: pointer;
-    }
-    
-    #toolBar .icon{
-        display: flex;
-        padding: 0px 12px;
-        justify-content: center;
-        align-items: center;
-        align-self: stretch;
-    }
+
 
     #searchBar{
         display: flex;
-        padding: var(--space-size-0, 0px);
+        padding: var(--space-size-0, 16px);
         align-items: center;
         gap: var(--space-size-0, 0px);
         flex: 1 0 0;
@@ -114,33 +113,26 @@ export default {
         font-size: 12px;
         font-style: normal;
         font-weight: 400;  
-        line-height: 20px; /* 166.667% */
+        /* line-height: 20px; 166.667% */
     }
     #searchPlace{
         position: relative;
+        width: 200px;
+        /* position: absolute; */
+        /* right: 178px; */
         height: 24px;
         min-height: 24px;
         max-height: 40px;
         padding: 10px 6px;
+        /* padding: 0 16px; */
         align-items: center;
-        gap: 8px;
         align-self: stretch;
     }
-
-    /* #searchBar::after {
-        content: "";
-        background: url('@/assets/search.svg') center center/cover;
-        position: relative;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        pointer-events: none; /* 防止伪元素遮挡用户输入 */
-    /* } */ 
 
     #userInfo{
         position: relative;
         /* right: 16px; */
     }
+
 
 </style>

@@ -12,7 +12,7 @@
         </div>
         <div id="toolBar">
             <div id="searchPlace">
-                <el-icon class="el-input__icon"><search /></el-icon>
+                <!-- <el-icon class="el-input__icon"><search /></el-icon> -->
                 <el-autocomplete
                     clearable
                     placeholder="Please Input"
@@ -33,10 +33,10 @@ export default {
     components:{
         UserInfo,
     },
-    data(){
+    setup(){
         return{
             meeting_name: "未命名會議紀錄",
-        }
+        };
     }
 }
 </script>
@@ -164,7 +164,7 @@ export default {
 
     #userInfo{
         position: inherit;
-        right: 16px;
+        /* right: 16px; */
     }
 
 </style>

@@ -59,7 +59,5 @@ export default {
         position: absolute;
         left: 200px;
         top: 48px;
-
-        
     }
 </style>

@@ -41,6 +41,11 @@ const routes = [
     name: "kerwin",
     component: () => import("../views/Kerwin.vue"),
   },
+  {
+    path: "/cards",
+    name: "cards",
+    component: () => import("../views/Cards.vue"),
+  },
 ];
 
 const router = createRouter({

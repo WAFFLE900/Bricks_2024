@@ -1,12 +1,12 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/tim">Tim</router-link> |
     <router-link to="/karen">Karen</router-link> |
     <router-link to="/sharon">Sharon</router-link> |
     <router-link to="/kerwin">Kerwin</router-link>
-  </nav>
+  </nav> -->
 
   <!-- 加上這個才會顯示 views 裏面的東西 -->
   <router-view />
@@ -32,5 +32,11 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #c91f2f;
+}
+
+#app{
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 </style>

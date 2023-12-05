@@ -19,7 +19,7 @@
         </div>
       </el-form-item>
       <el-form-item label="開會時間">
-          <div class="demo-range"  :style="{ width: '471px' }">
+          <div class="demo-range"  :style="{ width: '480px' }">
             <el-time-picker
             v-model="value2"
             is-range
@@ -36,9 +36,10 @@
             filterable
             allow-create
             default-first-option
-            :reserve-keyword="false"
+            :reserve-keyword="true"
             placeholder="選擇出席人員"
             :style="{ width: '500px' }"
+            @change="handleSelectChange"
         >
     <el-option
       v-for="item in options"
@@ -52,7 +53,7 @@
             <el-input v-model="form.place"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
         </el-form-item>
         <el-form-item label="缺席人員">
-        <el-select
+          <el-select
     v-model="value"
     multiple
     filterable
@@ -102,27 +103,53 @@
   <script setup>
   import { reactive } from 'vue'
   import { ref } from 'vue'
+
   const value1 = ref('')
   const value2 = ref<[Date, Date]>([
       new Date(2016, 9, 10, 8, 40),
       new Date(2016, 9, 10, 9, 40),
   ])
- 
-//   const value = ref<string[]>([])
-// const options = [
-//   {
-//     value: 'HTML',
-//     label: 'HTML',
-//   },
-//   {
-//     value: 'CSS',
-//     label: 'CSS',
-//   },
-//   {
-//     value: 'JavaScript',
-//     label: 'JavaScript',
-//   },
-// ]
+  
+  const value = ref([]);
+  // 如果 options 是 ref 的話，也不需要明確指定型別
+  const options = ref([
+    {
+      value: 'HTML',
+      label: 'HTML',
+    },
+    {
+      value: 'CSS',
+      label: 'CSS',
+    },
+    {
+      value: 'JavaScript',
+      label: 'JavaScript',
+    },
+  ]);
+  const handleSelectChange = (selectedValues) => {
+  selectedValues.forEach((selectedValue) => {
+    // 检查选项是否已存在于 options 中
+    const existsInOptions = options.value.some((option) => option.value === selectedValue);
+
+    if (!existsInOptions) {
+      // 将用户选择的选项添加到 options 数组中
+      options.value.push({
+        value: selectedValue,
+        label: selectedValue,
+      });
+    }
+
+    // 检查值是否已存在于 value 中
+    const existsInValue = value.value.includes(selectedValue);
+
+    if (!existsInValue) {
+      // 将用户选择的值添加到 value 数组中
+      value.value.push(selectedValue);
+    }
+  });
+};
+  
+
   // do not use same name with ref
   const form = reactive({
     name: '',
@@ -133,7 +160,7 @@
     desc: '',
     place:'',
   })
-  
+ 
   const onSubmit = () => {
     console.log('submit!')
   }
@@ -185,11 +212,12 @@ p {
 }
 .demo-date-picker {
     display: flex;
-  width: 100%;
+    width: 100%;
 }
+
 .demo-range .el-date-editor {
   margin: 0px;
-  width: 100%;
+width: 100%;
 }
 .commit_button{
     margin-left:418px;

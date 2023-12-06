@@ -79,7 +79,7 @@
     
     
     <BasicInfo />
-    <!-- <Recover /> -->
+    <Recover />
     <!-- <Delete /> -->
     <!-- <LinkCopy /> -->
   </div>

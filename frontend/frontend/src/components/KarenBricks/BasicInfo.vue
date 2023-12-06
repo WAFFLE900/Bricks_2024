@@ -2,7 +2,7 @@
     <div class="form">
         <p class="formName">設定會議基本資訊
             <button class="close-button" type="button" onclick="close"><el-icon><Close /></el-icon></button>
-             </p>
+        </p>
         <el-form :model="form" >
             <el-form-item label="會議名稱">
             <el-input v-model="form.name"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>

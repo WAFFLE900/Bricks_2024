@@ -14,11 +14,13 @@
 </script>
 
 <style>
-.popUp_recover{
+.popUp_recover {
   width: 481px;
   height: 80px;
-  margin:40px 1270px;;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4); /* 阴影样式 */
-  
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 40px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4); 
 }
 </style>

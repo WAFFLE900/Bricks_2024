@@ -1,7 +1,7 @@
 <template>
   <div id="sidebar">
     <div id="container">
-    <div id="title">
+    <div id="title" @click="menu_clicked">
       <el-icon id="logo" :color = "incolor"><elementPlus /></el-icon>
       <p id="title-name">{{ project_name }}</p>
     </div>

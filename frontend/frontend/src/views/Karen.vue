@@ -65,7 +65,12 @@
       <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
       <div class="additional-textarea">
         <div class="textarea-container">
-          <textarea id="textArea" v-model="textArea" placeholder="請輸入內容" :style="{ 'height': '70px', 'max-height': '200px' }"></textarea>
+          <!-- <el-input
+            autosize
+            type="string"
+            placeholder="請輸入內容"
+          >{{ textarea1 }}</el-input> -->
+          <textarea id="textArea" v-model="textArea" placeholder="請輸入內容" cols="90" rows="12" @keyup="autogrow(this)"></textarea>
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
@@ -107,6 +112,7 @@ export default {
     return {
       meetingName: "",
       placeholder: "輸入會議名稱",
+      textarea1: "",
     };
   },
   methods: {
@@ -127,6 +133,15 @@ export default {
       // 返回動態計算的高度
       return `${height}px`;
     },
+    autogrow(textarea){
+      var adjustedHeight=textarea.clientHeight;
+
+      adjustedHeight=Math.max(textarea.scrollHeight,adjustedHeight);
+      if (adjustedHeight>textarea.clientHeight){
+          textarea.style.height=adjustedHeight+'px';
+      }
+
+}
   },
 };
 
@@ -271,6 +286,11 @@ height: 50px;
 font-size: 0px;
 margin: 20px 0 0;
 box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+#textArea{
+  height: auto;
 
 }
 

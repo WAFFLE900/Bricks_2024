@@ -8,7 +8,7 @@
                 <div id="content">
                     <el-tabs v-model="activeName" class="demo-tabs" stretch model-value="first">
                         <el-tab-pane label="總覽" name="first" class="tab">
-                                <div id="content">
+                                <div id="contentCard">
                                     <el-scrollbar height="480px" class="scrollBar">
                                         <noti-content></noti-content>
                                         <noti-content></noti-content>
@@ -60,20 +60,22 @@ export default {
     }
     #content{
         display: flex;
-        height: 474px;
+        height: auto;
         /* padding: 5px var(--space-size-24, 24px) 5px 12px; */
         flex-direction: column;
         align-items: center;
         gap: 8px;
         /* padding: 12px; */
+        overflow: hidden;
     }
 
-    .demo-tabs{
+    .demo-tabs >el-tab-pane{
         display: flex;
         flex-direction: column;
         width: 216px;
         justify-content: center;
         align-items: flex-start;
+        position: fixed;
     }
 
     .tab{
@@ -83,6 +85,11 @@ export default {
 
     .icon{
         cursor: pointer;
+    }
+
+    #contentCard{
+        overflow: hidden;
+        height: 474px;
     }
 
 </style>

@@ -61,22 +61,20 @@
         </tr>
       </table>
     </div>
+    
     <div class="cart_container">
       <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
       <div class="additional-textarea">
         <div class="textarea-container">
-          <!-- <el-input
-            autosize
-            type="string"
-            placeholder="請輸入內容"
-          >{{ textarea1 }}</el-input> -->
-          <textarea id="textArea" v-model="textArea" placeholder="請輸入內容" cols="90" rows="12" @keyup="autogrow(this)"></textarea>
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
         <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea>
+        
+        
       </div>
     </div>
+   
   
     <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
     <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
@@ -98,7 +96,6 @@ import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
 import Delete from "@/components/KarenBricks/Delete.vue";
 import Recover from "@/components/KarenBricks/Recover.vue";
 import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
-
 export default {
   name:'Karen',
   components: {
@@ -107,12 +104,12 @@ export default {
     Recover,
     BasicInfo,
   },
-
+  
   data() {
     return {
+      value: '',
       meetingName: "",
       placeholder: "輸入會議名稱",
-      textarea1: "",
     };
   },
   methods: {
@@ -133,18 +130,8 @@ export default {
       // 返回動態計算的高度
       return `${height}px`;
     },
-    autogrow(textarea){
-      var adjustedHeight=textarea.clientHeight;
-
-      adjustedHeight=Math.max(textarea.scrollHeight,adjustedHeight);
-      if (adjustedHeight>textarea.clientHeight){
-          textarea.style.height=adjustedHeight+'px';
-      }
-
-}
   },
 };
-
 const value1 = ref<[Date, Date]>([
   new Date(2016, 9, 10, 8, 40),
   new Date(2016, 9, 10, 9, 40),
@@ -199,13 +186,16 @@ const value1 = ref<[Date, Date]>([
 
 }
 .textarea-container {
+  height: auto;
   display: flex;
   align-items: flex-start;
 }
 
-textarea {
+.textArea {
+  
+  min-height: 50px;
   font-size: 15px;
-  width: 93%;
+  width: 100%;
   border: 0px; /* 移除 textarea 的边框 */
   resize: none; /* 防止調整 textarea 的大小 */
   outline: none; /* 移除点击时的边框 */

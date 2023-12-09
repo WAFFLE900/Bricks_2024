@@ -12,8 +12,14 @@
     <div class="trans"></div>
     <div class="demo-collapse">
       <el-collapse v-model="activeNames" @change="handleChange">
-        <el-collapse-item title="日期" name="1">
-          <div class="order">
+        <el-collapse-item name="1">
+          <template #title>
+            日期
+            <el-icon class="header-icon">
+              <info-filled />
+            </el-icon>
+          </template>
+          <div class="order scrollbar">
             <el-check-tag
               v-for="(tag, idx) in tagsDate"
               :key="`tag_${idx}`"
@@ -22,11 +28,24 @@
             >
               {{ tag.label }}
             </el-check-tag>
-            <div class="no_use"><p>1213123111212121212121212121</p></div>
+            <p class="no-use">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+              sequi harum deserunt eum eius aliquid temporibus velit quos.
+              Recusandae commodi tenetur blanditiis omnis voluptates nesciunt
+              dolores voluptas quam praesentium quia odit, veritatis modi
+              consequuntur, amet atque iure rerum, quos accusantium cupiditate
+              ad harum dignissimos! Dolores a neque pariatur atque incidunt
+              quaerat culpa veniam quas officiis sequi sed vitae quod commodi,
+              eveniet nobis officia consectetur aut, ab optio similique, placeat
+              aspernatur. Laborum soluta minima expedita. Harum incidunt culpa
+              porro, praesentium nulla ut blanditiis eaque iusto officia itaque
+              reiciendis adipisci et aliquid facilis ipsa explicabo nam sequi ad
+              laborum qui illum corporis.
+            </p>
           </div>
         </el-collapse-item>
         <el-collapse-item title="事項" name="2">
-          <div class="order">
+          <div class="order scrollbar">
             <el-check-tag
               v-for="(tag, idx) in tagsThing"
               :key="`tag_${idx}`"
@@ -35,11 +54,24 @@
             >
               {{ tag.label }}
             </el-check-tag>
-            <div class="no_use"><p>1213123111212121212121212121</p></div>
+            <p class="no-use">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+              sequi harum deserunt eum eius aliquid temporibus velit quos.
+              Recusandae commodi tenetur blanditiis omnis voluptates nesciunt
+              dolores voluptas quam praesentium quia odit, veritatis modi
+              consequuntur, amet atque iure rerum, quos accusantium cupiditate
+              ad harum dignissimos! Dolores a neque pariatur atque incidunt
+              quaerat culpa veniam quas officiis sequi sed vitae quod commodi,
+              eveniet nobis officia consectetur aut, ab optio similique, placeat
+              aspernatur. Laborum soluta minima expedita. Harum incidunt culpa
+              porro, praesentium nulla ut blanditiis eaque iusto officia itaque
+              reiciendis adipisci et aliquid facilis ipsa explicabo nam sequi ad
+              laborum qui illum corporis.
+            </p>
           </div>
         </el-collapse-item>
         <el-collapse-item title="組別" name="3">
-          <div class="order">
+          <div class="order scrollbar">
             <el-check-tag
               v-for="(tag, idx) in tagsTeam"
               :key="`tag_${idx}`"
@@ -48,7 +80,20 @@
             >
               {{ tag.label }}
             </el-check-tag>
-            <div class="no_use"><p>1213123111212121212121212121</p></div>
+            <p class="no-use">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+              sequi harum deserunt eum eius aliquid temporibus velit quos.
+              Recusandae commodi tenetur blanditiis omnis voluptates nesciunt
+              dolores voluptas quam praesentium quia odit, veritatis modi
+              consequuntur, amet atque iure rerum, quos accusantium cupiditate
+              ad harum dignissimos! Dolores a neque pariatur atque incidunt
+              quaerat culpa veniam quas officiis sequi sed vitae quod commodi,
+              eveniet nobis officia consectetur aut, ab optio similique, placeat
+              aspernatur. Laborum soluta minima expedita. Harum incidunt culpa
+              porro, praesentium nulla ut blanditiis eaque iusto officia itaque
+              reiciendis adipisci et aliquid facilis ipsa explicabo nam sequi ad
+              laborum qui illum corporis.
+            </p>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -74,6 +119,24 @@ export default {
       console.log(val);
     };
     const tagsDate = ref([
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: true },
       { label: "Tag 1", checked: false },
       { label: "Tag 2", checked: true },
       { label: "Tag 2", checked: true },
@@ -115,7 +178,6 @@ export default {
 
 <style scoped>
 .tagSearchArea {
-  /* border: 2px solid black; */
   width: 25%;
 }
 .tagSearchArea .trans {
@@ -135,28 +197,41 @@ export default {
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #e4e7ed;
-  /* border: 2px solid black; */
-  /* background-color: white; */
 }
 .demo-collapse .el-collapse-item * {
   display: flex;
   flex-wrap: wrap;
 }
-
+.no-use {
+  font-size: 1px;
+  color: white;
+}
+.header-icon {
+}
 .order {
   display: flex;
-  max-height: 25vh;
+  max-height: 24vh;
   border-top: #e4e7ed 1px;
-  border: 2px solid black;
-  width: 99%;
+  width: 97%;
   display: flex;
+  overflow-y: scroll;
 }
-.no_use {
-  width: 99%;
-  height: 0.00001px;
-  color: white;
-  /* border: 2px solid brown; */
+.scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #e6e8eb;
+  }
 }
+.no-use {
+  font-size: 1px;
+}
+
 .demo-collapse .el-collapse-item .order .el-check-tag {
   color: #c91f2f;
   font-family: PingFang TC;

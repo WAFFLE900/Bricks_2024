@@ -1,7 +1,7 @@
 <template>
     <div class="form">
         <p class="formName">設定會議基本資訊
-            <button class="close-button" type="button" onclick="close"><el-icon><Close /></el-icon></button>
+            <button class="close-button" type="button" @click="close"><el-icon><Close /></el-icon></button>
         </p>
         <el-form :model="form" >
             <el-form-item label="會議名稱">
@@ -19,7 +19,7 @@
         </div>
       </el-form-item>
       <el-form-item label="開會時間">
-          <div class="demo-range"  :style="{ width: '480px' }">
+          <div class="demo-range"  :style="{ width: '440px' }">
             <el-time-picker
             v-model="value2"
             is-range
@@ -31,7 +31,7 @@
         </el-form-item>
         <el-form-item label="出席人員">
         <el-select
-            v-model="value"
+            v-model="valueA"
             multiple
             filterable
             allow-create
@@ -39,10 +39,10 @@
             :reserve-keyword="true"
             placeholder="選擇出席人員"
             :style="{ width: '500px' }"
-            @change="handleSelectChange"
+            @change="handleSelectChangeA"
         >
     <el-option
-      v-for="item in options"
+      v-for="item in optionsA"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -54,7 +54,7 @@
         </el-form-item>
         <el-form-item label="缺席人員">
           <el-select
-    v-model="value"
+    v-model="valueB"
     multiple
     filterable
     allow-create
@@ -62,9 +62,10 @@
     :reserve-keyword="false"
     placeholder="選擇缺席人員"
     :style="{ width: '500px' }"
+    @change="handleSelectChangeB"
   >
     <el-option
-      v-for="item in options"
+      v-for="item in optionsB"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -73,7 +74,7 @@
       </el-form-item>
       <el-form-item label="紀錄負責人員">
         <el-select
-    v-model="value"
+    v-model="valueC"
     multiple
     filterable
     allow-create
@@ -81,9 +82,10 @@
     :reserve-keyword="false"
     placeholder="選擇會議記錄人員"
     :style="{ width: '500px' }"
+    @change="handleSelectChangeC"
   >
     <el-option
-      v-for="item in options"
+      v-for="item in optionsC"
       :key="item.value"
       :label="item.label"
       :value="item.value"
@@ -93,9 +95,8 @@
       <el-form-item>
         <el-button class="commit_button"  @click="onSubmit" >
             <el-icon><DocumentChecked /></el-icon>  <span style="margin-left: 8px;">儲存</span>
-
-</el-button>
-</el-form-item>
+        </el-button>
+      </el-form-item>
     </el-form>
     </div>
   </template>
@@ -110,46 +111,81 @@
       new Date(2016, 9, 10, 9, 40),
   ])
   
-  const value = ref([]);
-  // 如果 options 是 ref 的話，也不需要明確指定型別
-  const options = ref([
+  const valueA = ref([]);
+  const optionsA = ref([
     {
       value: 'HTML',
       label: 'HTML',
-    },
-    {
-      value: 'CSS',
-      label: 'CSS',
-    },
-    {
-      value: 'JavaScript',
-      label: 'JavaScript',
-    },
+    }
   ]);
-  const handleSelectChange = (selectedValues) => {
-  selectedValues.forEach((selectedValue) => {
-    // 检查选项是否已存在于 options 中
-    const existsInOptions = options.value.some((option) => option.value === selectedValue);
-
-    if (!existsInOptions) {
-      // 将用户选择的选项添加到 options 数组中
-      options.value.push({
-        value: selectedValue,
-        label: selectedValue,
-      });
-    }
-
-    // 检查值是否已存在于 value 中
-    const existsInValue = value.value.includes(selectedValue);
-
-    if (!existsInValue) {
-      // 将用户选择的值添加到 value 数组中
-      value.value.push(selectedValue);
-    }
-  });
-};
-  
-
+  const handleSelectChangeA = (selectedValues) => {
+    selectedValues.forEach((selectedValue) => {
+      const existsInOptions = optionsA.value.some((option) => option.value === selectedValue);
+      
+      if (!existsInOptions) {
+        optionsA.value.push({
+          value: selectedValue,
+          label: selectedValue,
+        });
+      }
+      // 检查值是否已存在于 valueA 中
+      const existsInValue = valueA.value.includes(selectedValue);
+      
+      if (!existsInValue) {
+        valueA.value.push(selectedValue);
+      }
+    });
+  };
+  const valueB = ref([]);
+    const optionsB = ref([
+      {
+        value: 'w',
+        label: 'w',
+      }
+    ]);
+    const handleSelectChangeB = (selectedValues) => {
+    selectedValues.forEach((selectedValue) => {
+      const existsInOptions = optionsB.value.some((option) => option.value === selectedValue);
+      
+      if (!existsInOptions) {
+        optionsB.value.push({
+          value: selectedValue,
+          label: selectedValue,
+        });
+      }
+      // 检查值是否已存在于 valueB 中
+      const existsInValue = valueB.value.includes(selectedValue);
+    
+      if (!existsInValue) {
+        valueB.value.push(selectedValue);
+      }
+    });
+  };
+  const valueC = ref([]);
+    const optionsC = ref([
+      {
+        value: 'c',
+        label: 'c',
+      }
+    ]);
+    const handleSelectChangeC = (selectedValues) => {
+    selectedValues.forEach((selectedValue) => {
+      const existsInOptions = optionsC.value.some((option) => option.value === selectedValue);
+      
+      if (!existsInOptions) {
+        optionsC.value.push({
+          value: selectedValue,
+          label: selectedValue,
+        });
+      }
+      // 检查值是否已存在于 valueC 中
+      const existsInValue = valueC.value.includes(selectedValue);
+    
+      if (!existsInValue) {
+        valueC.value.push(selectedValue);
+      }
+    });
+  };
   // do not use same name with ref
   const form = reactive({
     name: '',
@@ -165,7 +201,7 @@
     console.log('submit!')
   }
   </script>
-<style>
+<style scoped>
 .formName {
     display: flex;
   justify-content: space-between;
@@ -176,11 +212,12 @@
   font-weight: bold;
   width: 500px;
 }
+
 button.close-button {
   border: none;
   background: none;
-  padding: 0;
-  cursor: pointer;
+ margin-left: 290px;
+ outline: none;  
   font-size: 1em;
 }
 p {
@@ -189,11 +226,14 @@ p {
 }
 .form{
     width: 500px;
-    margin-left: 700px;
+    margin-left: 200px;
     margin-bottom: 300px;
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 4px;
+    position: absolute;
+    z-index: 1000;
+    background-color: #ffffff;
 }
 .form .el-form-item {
   margin-bottom: 25px;
@@ -201,24 +241,16 @@ p {
   flex-direction: column; /* 垂直方向布局 */
   align-items: flex-start; /* 靠左对齐 */
 }
-/* /label的字 */
-.el-form-item__label {
-  font-size: 15px;
-  color: #000;
-}
+
 /* input內的字 */
 .el-input {
   font-size: 15px;
 }
-.demo-date-picker {
-    display: flex;
-    width: 100%;
+.demo-range .el-form-item .el-time-picker {
+  width: 100%;
 }
 
-.demo-range .el-date-editor {
-  margin: 0px;
-width: 100%;
-}
+
 .commit_button{
     margin-left:418px;
     background: #EB2348;

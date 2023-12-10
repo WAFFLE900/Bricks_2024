@@ -19,7 +19,7 @@
 export default {
     setup(){
         return{
-            content: "@everyone 我們上次的討論結果是中文用 Noto Sans TC 英文及標點符號用Noto Sans，用中文的原...",
+            content: "@everyone 我們上次的討論結果是中文用 Noto Sans TC 英文及標點符號用Noto Sans，用中文的原...對對對度對對",
             circleUrl: "@/assets/Rectangle.png",
             name: "某人名字",
         };

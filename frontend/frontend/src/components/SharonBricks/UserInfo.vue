@@ -58,7 +58,7 @@ export default {
 <style scoped>
     #userInfo{
         display: flex;
-        padding: 0px 12px;
+        /* padding: 0px 0px; */
         align-items: center;
         gap: 8px;
         align-self: stretch;

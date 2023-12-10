@@ -6,20 +6,29 @@
         <template #dropdown>
             <el-dropdown-menu class="dropDown" >
                 <div id="content">
-                    <el-tabs v-model="activeName" class="demo-tabs" stretch model-value="first">
-                        <el-tab-pane label="總覽" name="first" class="tab">
-                                <div id="contentCard">
-                                    <el-scrollbar height="480px" class="scrollBar">
-                                        <noti-content></noti-content>
-                                        <noti-content></noti-content>
-                                        <noti-content></noti-content>
-                                        <noti-content></noti-content>
+                    <el-tabs v-model="activeName" class="tab" stretch model-value="first" tab-position="top">
+                        <el-tab-pane label="總覽" name="first" >
+                                <div class="contentCard">
+                                    <el-scrollbar max-size="480px" class="scrollBar">
+                                        <noti-content v-for="item in 4" :key="item"></noti-content>
                                     </el-scrollbar>
                                 </div>
                             
                         </el-tab-pane>
-                        <el-tab-pane label="提及" name="second" class="tab">提及</el-tab-pane>
-                        <el-tab-pane label="系統" name="third" class="tab">系統</el-tab-pane>
+                        <el-tab-pane label="提及" name="second">
+                            <div class="contentCard">
+                                    <el-scrollbar max-size="480px" class="scrollBar">
+                                        <noti-content v-for="item in 4" :key="item"></noti-content>
+                                    </el-scrollbar>
+                                </div>
+                        </el-tab-pane>
+                        <el-tab-pane label="系統" name="third">
+                            <div class="contentCard">
+                                    <el-scrollbar max-size="480px" class="scrollBar">
+                                        <noti-content v-for="item in 4" :key="item"></noti-content>
+                                    </el-scrollbar>
+                                </div>
+                        </el-tab-pane>
                     </el-tabs>
                 </div>
 
@@ -48,48 +57,30 @@ export default {
 </script>
 
 <style scoped>
+
     .dropDown{
-        width: 252px;
-        height: 480px;
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        width: fit-content;
         padding: 12px;
-        /* overflow: hidden hidden; */
-    }
-    #content{
-        display: flex;
-        height: auto;
-        /* padding: 5px var(--space-size-24, 24px) 5px 12px; */
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        /* padding: 12px; */
-        overflow: hidden;
+        overflow:auto;
+        height: 100%;
     }
 
-    .demo-tabs >el-tab-pane{
-        display: flex;
-        flex-direction: column;
-        width: 216px;
-        justify-content: center;
-        align-items: flex-start;
-        position: fixed;
+    #content{
+        width: fit-content;
+        /* position: absolute; */
     }
 
     .tab{
-        display: flex;
-        flex-direction: column;
+        position: sticky;
+        height: 100%;
+        /* top: 0; */
+
     }
 
-    .icon{
-        cursor: pointer;
+    .contentCard{
+        /* position: absolute; */
+        top: 42px;
     }
 
-    #contentCard{
-        overflow: hidden;
-        height: 474px;
-    }
 
 </style>

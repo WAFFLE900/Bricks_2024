@@ -7,16 +7,7 @@
             </el-breadcrumb>
         </div>
         <div id="toolBar">
-            <div id="searchPlace">
-                <!-- <el-icon class="el-input__icon"><search /></el-icon> -->
-                <el-autocomplete
-                    clearable
-                    placeholder="Please Input"
-                    disabled
-                    id = "searchBar"
-                    @click="result"
-                />
-            </div>
+            <search-bar id="searchPlace"/>
             <notification-menu class="noti"></notification-menu>
             <user-info id="userInfo"></user-info>
             
@@ -28,10 +19,13 @@
 <script>
 import UserInfo from './UserInfo.vue';
 import NotificationMenu from './NotificationMenu.vue';
+// import { Search } from '@element-plus/icons-vue';
+import SearchBar from './SearchBar.vue';
 export default {
     components:{
         UserInfo,
         NotificationMenu,
+        SearchBar,
     },
     setup(){
         return{
@@ -132,6 +126,10 @@ export default {
     #userInfo{
         position: relative;
         /* right: 16px; */
+    }
+
+    .noti{
+        cursor: pointer;
     }
 
 

@@ -7,13 +7,6 @@
             <el-icon><circle-plus/></el-icon>新增
           </div></el-button>
       </el-empty>
-        <!-- <img src="@/assets/empty__image.svg">
-        <el-text>點選新增建立新的會議紀錄</el-text> -->
-        <!-- <el-button id="addBtn">
-          <div id="buttonContent">
-            <el-icon><circle-plus/></el-icon>新增
-          </div>
-          </el-button> -->
     </div>
   </div>
 </template>
@@ -27,11 +20,11 @@ export default {
 <style>
     #background{
         background-color: #F2F3F5;
-        width: auto;
+        /* width: auto; */
         /* height: auto;     */
-        flex-shrink: 1;
+        /* flex-shrink: 1; */
         position: absolute;
-        display: flex;
+        display: block;
         align-items: center; /* 在交叉轴上垂直居中 */
         justify-content: center;
     }
@@ -40,12 +33,11 @@ export default {
       flex-direction: column;
       align-items: center;
       gap: 20px;
+      position: absolute;
+      left: 0;
+
     }
 
-    #center img{
-      width: 160px;
-      height: 173.383px;
-    }
 
     #center #buttonContent {
       display: flex;

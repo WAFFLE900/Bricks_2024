@@ -3,15 +3,18 @@
     <TagSearchArea />
     <div style="margin: 20px"></div>
     <documentArea />
+    <div style="margin: 20px"></div>
+    <documentAreaWithInfo />
   </div>
 </template>
 
 <script>
 import TagSearchArea from "@/components/KerwinBricks/TagSearchArea.vue";
 import documentArea from "@/components/KerwinBricks/DCM.vue";
+import documentAreaWithInfo from "@/components/KerwinBricks/DCMwithDate.vue";
 export default {
   name: "Kerwin",
-  components: { TagSearchArea, documentArea },
+  components: { TagSearchArea, documentArea, documentAreaWithInfo },
 };
 </script>
 

@@ -4,6 +4,11 @@
       <el-icon><Plus /></el-icon>
     </button>
     <div class="additional-textarea">
+      <div class="info">
+        <h3 class="name">會議記錄</h3>
+        <h4 class="date">2023/11/22</h4>
+        <h4 class="time">15:00~16:00</h4>
+      </div>
       <div class="textarea-container">
         <el-input
           v-model="textarea1"
@@ -126,6 +131,35 @@ export default {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+.info {
+  display: flex;
+  height: 36px;
+  position: relative;
+}
+.name {
+  margin-left: 11px;
+  margin-top: 8px;
+  font-weight: 500;
+  position: absolute;
+  font-size: 14px;
+  color: #606266;
+}
+.date {
+  margin-left: 70%;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #606266;
+  position: absolute;
+  font-size: 14px;
+}
+.time {
+  margin-left: 84%;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #606266;
+  position: absolute;
+  font-size: 14px;
 }
 .textarea-container {
   position: relative;

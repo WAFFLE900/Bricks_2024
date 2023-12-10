@@ -177,6 +177,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: PingFang TC;
+}
 .tagSearchArea {
   width: 25%;
 }

@@ -3,10 +3,13 @@
 <div class="button-container">
         <button type="button" onclick="handleButtonClick('button1')">
           <el-icon style="color: red;"><ArrowUp /></el-icon></button>
-          <button type="button" onclick="handleButtonClick('button2')"><el-icon><Edit /></el-icon>會議基本資訊</button>
-          <button type="button" onclick="handleButtonClick('button3')">
-          <el-icon><Link /></el-icon>
-      </button>
+
+          <div class="overlay" v-if="basicComponent"></div>
+          <component :is="basicComponent"></component>
+          <el-button type="button" @click="showBasicInfo"><el-icon><Edit /></el-icon>會議基本資訊</el-button>
+          
+          <el-button :plain="true" @click="copyLinkBtn"><el-icon><Link /></el-icon></el-button>
+    
        
     </div>
     <div class="form-container">
@@ -86,12 +89,10 @@
     <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
     <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
     <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
-    
-    
+    <el-button plain @click="recover"> 復原會議記錄 </el-button>
+    <el-button :plain="true" @click="open2">success</el-button>
     <BasicInfo />
-    <Recover />
     <!-- <Delete /> -->
-    <!-- <LinkCopy /> -->
   </div>
 </template>
 
@@ -101,14 +102,13 @@ import axios from 'axios';
 import { ref } from 'vue';
 import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
 import Delete from "@/components/KarenBricks/Delete.vue";
-import Recover from "@/components/KarenBricks/Recover.vue";
 import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
+import { ElNotification } from 'element-plus';
 export default {
   name:'Karen',
   components: {
     LinkCopy,
     Delete,
-    Recover,
     BasicInfo,
   },
   
@@ -118,7 +118,7 @@ export default {
       meetingName: "",
       placeholder: "輸入會議名稱",
       height: '30px',
-      
+      basicComponent: null,
     };
   },
   methods: {
@@ -127,17 +127,39 @@ export default {
     },
     restorePlaceholder() {
       if (!this.meetingName) {
-        this.placeholder = "輸入會議名稱";
+      this.placeholder = "輸入會議名稱";
       }
     },
-    
+    recover() {
+      ElNotification({
+        dangerouslyUseHTMLString: true,
+        title: '成功復原會議記錄',
+        message: '<a href="/path/to/recovery/file" style="color: #67C23A; text-decoration: underline;">點擊檢視復原檔案</a>',
+        type: 'success',
+        position: 'bottom-right',
+      });
+    },
+    copyLinkBtn() {
+      ElNotification({
+        message: '會議記錄連結已複製',
+        type: 'success',
+        position: 'bottom-right',
+      });
+    },
+    open2() {
+      ElNotification({
+        message: '會議記錄連結已複製',
+        type: 'success',
+      });
+    },
+    showBasicInfo(){
+      this.basicComponent=BasicInfo;
+    },
   }
 };
-const value1 = ref<[Date, Date]>([
-  new Date(2016, 9, 10, 8, 40),
-  new Date(2016, 9, 10, 9, 40),
-])
+
 </script>
+
 <style>
 .demo-range .el-date-editor {
   margin: 8px;
@@ -279,7 +301,15 @@ margin: 20px 0 0;
 box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
 
 }
-
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明的灰色背景 */
+  z-index: 999; /* 确保在最上层 */
+}
 
 
 </style>

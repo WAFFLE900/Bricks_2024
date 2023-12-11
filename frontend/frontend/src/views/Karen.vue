@@ -65,12 +65,11 @@
       <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
       <div class="additional-textarea">
         <div class="textarea-container">
+          <resize-textarea class="textArea" placeholder="請輸入內容" :maxHeight="150" v-model="textValue"></resize-textarea>
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
-        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea>
-        
-        
+        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
       </div>
     </div>
    
@@ -214,10 +213,7 @@ export default {
       meetingName: "",
       placeholder: "輸入會議名稱",
       height: '30px',
-<<<<<<< Updated upstream
       basicComponent: null,
-      
-=======
       value1: '',
       value2: [
         new Date(2016, 9, 10, 8, 40),
@@ -235,7 +231,7 @@ export default {
       optionsC: [
         { value: 'c', label: 'c' }
       ],
->>>>>>> Stashed changes
+
     };
   },
   methods: {
@@ -255,15 +251,10 @@ export default {
         type: 'success',
         position: 'bottom-right',
       });
-<<<<<<< Updated upstream
       },
-      copyLinkBtn() {
-      ElNotification({
-=======
-    },
+      
     copyLinkBtn() {
       ElMessage({
->>>>>>> Stashed changes
         message: '會議記錄連結已複製',
         type: 'success',
         position: 'bottom-right',
@@ -279,11 +270,7 @@ export default {
       this.showOverlay = true;
       this.form = true;
     },
-<<<<<<< Updated upstream
-      
-    
-  }
-=======
+
     close(){
       this.showOverlay = false;
       this.form = false;
@@ -320,7 +307,7 @@ export default {
     },
     
   },
->>>>>>> Stashed changes
+
 };
 const value1 = ref<[Date, Date]>([
   new Date(2016, 9, 10, 8, 40),
@@ -373,8 +360,6 @@ const value1 = ref<[Date, Date]>([
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc; /* 大框框的边框样式，你可以根据需要调整颜色和样式 */
- 
-
 }
 .textarea-container {
   height: auto;

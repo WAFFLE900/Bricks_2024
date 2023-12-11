@@ -2,10 +2,10 @@
   <div class="sharon" @contextmenu.prevent>
     <!-- @click="StopShowing" -->
     <side-bar class="sideBar" @update="selectedItemUpdate"></side-bar>
-    <!-- <div class="navAndCont">
+    <div class="navAndCont" v-if="activeOption === null">
       <nav-bar class="navBar"></nav-bar>
       <empty-back class="content"></empty-back>
-    </div > -->
+    </div >
     <div v-if="activeOption === '1-1'" class="navAndCont">
       <nav-bar-all class="navBar" @click="StopShowing"></nav-bar-all>
       <div class="cards">
@@ -94,7 +94,7 @@ export default {
     position: fixed;
     left: 600px;
     /* right: 0; */
-    top: 48px;
+    top: 30vh;
     bottom: 0;
  }
 
@@ -107,11 +107,13 @@ export default {
 
   position: absolute;
   top: 48px;
+  /* border: 1px; */
  }
  .navAndCont{
   background-color: #F2F3F5;
-  position: relative;
+  position: absolute;
   left: 200px;
+  width:auto;
   top: 0;
   right: 0;
  }

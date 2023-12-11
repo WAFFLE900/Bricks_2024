@@ -84,7 +84,7 @@ export default {
         justify-content: center;
         right: 0;
         flex-direction: row;
-        gap: 12px;
+        gap: 24px;
         /* padding: 0; */
         
     }

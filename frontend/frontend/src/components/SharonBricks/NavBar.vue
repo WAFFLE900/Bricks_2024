@@ -85,7 +85,7 @@ export default {
         display: flex;
         position: absolute;
         right: 0;
-        margin-right: 16px;
+        gap:16px;
     }
     #icons{
         display: flex;
@@ -110,12 +110,13 @@ export default {
         cursor: pointer;
     }
 
-    #icon #languageIcon{
+    #languageIcon{
         display: block;
         padding: 16px 12px;
         justify-content: center;
         align-items: center;
         align-self: stretch;
+        /* margin-right: 16px; */
     }
 
 </style>

@@ -12,7 +12,7 @@
       <div class="textarea-container">
         <el-input
           v-model="textarea1"
-          :autosize="{ minRows: 2, maxRows: 20 }"
+          :autosize="{ minRows: 2 }"
           type="textarea"
           placeholder="請輸入內容"
           size="large"

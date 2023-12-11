@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .kerwin {
-  background-color: antiquewhite;
+  background-color: #ccc;
   height: 200vh;
   width: 100%;
   /* margin: 2rem; */

@@ -21,12 +21,13 @@
           </template>
           <div class="order scrollbar">
             <el-check-tag
-              v-for="(tag, idx) in tagsDate"
-              :key="`tag_${idx}`"
-              :checked="tag.checked"
-              @change="onChange(tag, idx)"
+              v-for="(tagD, idx) in tagsDate"
+              :key="`tagD_${idx}`"
+              :checked="tagD.checked"
+              @change="onChange(tagD, idx)"
+              :class="{ tagChecked: tagD.checked, tagUnchecked: !tagD.checked }"
             >
-              {{ tag.label }}
+              {{ tagD.label }}
             </el-check-tag>
             <p class="no-use">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
@@ -47,12 +48,13 @@
         <el-collapse-item title="事項" name="2">
           <div class="order scrollbar">
             <el-check-tag
-              v-for="(tag, idx) in tagsThing"
-              :key="`tag_${idx}`"
-              :checked="tag.checked"
-              @change="onChange(tag, idx)"
+              v-for="(tag2, idx) in tagsThing"
+              :key="`tag2_${idx}`"
+              :checked="tag2.checked"
+              @change="onChange(tag2, idx)"
+              :class="{ tagChecked: tag2.checked, tagUnchecked: !tag2.checked }"
             >
-              {{ tag.label }}
+              {{ tag2.label }}
             </el-check-tag>
             <p class="no-use">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
@@ -74,9 +76,10 @@
           <div class="order scrollbar">
             <el-check-tag
               v-for="(tag, idx) in tagsTeam"
-              :key="`tag_${idx}`"
+              :key="`tag3_${idx}`"
               :checked="tag.checked"
               @change="onChange(tag, idx)"
+              :class="{ tagChecked: tag.checked, tagUnchecked: !tag.checked }"
             >
               {{ tag.label }}
             </el-check-tag>
@@ -120,37 +123,27 @@ export default {
     };
     const tagsDate = ref([
       { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: false },
       { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: false },
       { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
-      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: false },
     ]);
     const tagsThing = ref([
       { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
+      { label: "Tag 8", checked: false },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: false },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: false },
     ]);
     const tagsTeam = ref([
       { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: true },
+      { label: "Tag 2", checked: false },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: false },
+      { label: "Tag 1", checked: false },
+      { label: "Tag 2", checked: false },
     ]);
     const checked = ref(false);
 
@@ -158,6 +151,27 @@ export default {
       tagsDate.value[idx].checked = !tagsDate.value[idx].checked;
       tagsTeam.value[idx].checked = !tagsTeam.value[idx].checked;
       tagsThing.value[idx].checked = !tagsThing.value[idx].checked;
+      if (tagsDate.value[idx].checked) {
+        const checkedTag = tagsDate.value.splice(idx, 1)[0];
+        tagsDate.value.unshift(checkedTag);
+      } else if (!tagsDate.value[idx].checked) {
+        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
+        tagsDate.value.push(uncheckedTag);
+      }
+      if (tagsTeam.value[idx].checked) {
+        const checkedTag = tagsTeam.value.splice(idx, 1)[0];
+        tagsTeam.value.unshift(checkedTag);
+      } else if (!tagsDate.value[idx].checked) {
+        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
+        tagsDate.value.push(uncheckedTag);
+      }
+      if (tagsThing.value[idx].checked) {
+        const checkedTag = tagsThing.value.splice(idx, 1)[0];
+        tagsThing.value.unshift(checkedTag);
+      } else if (!tagsDate.value[idx].checked) {
+        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
+        tagsDate.value.push(uncheckedTag);
+      }
     };
 
     return {
@@ -193,6 +207,7 @@ export default {
 .tagSearchArea .tagTypingArea .el-select-v2 {
   width: 100%;
 }
+
 .demo-collapse .el-collapse {
   width: 100%;
 }
@@ -235,17 +250,35 @@ export default {
   font-size: 1px;
 }
 
-.demo-collapse .el-collapse-item .order .el-check-tag {
-  color: #c91f2f;
+.tagChecked {
+  color: white;
   font-family: PingFang TC;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: 2vh;
-  border: 1px solid #f4cbcf;
-  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
-  margin: 4px;
+  margin: 6px;
+  background-color: #c91f2f;
+  border: 1px solid #c91f2f;
+}
+
+.tagChecked:hover {
+  background-color: #c91f2f;
+}
+
+.tagUnchecked {
+  font-family: PingFang TC;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2vh;
+  display: flex;
+  justify-content: space-around;
+  margin: 6px;
+  color: #c91f2f;
+  border: 1px solid #f4cbcf;
+  background-color: white;
 }
 </style>

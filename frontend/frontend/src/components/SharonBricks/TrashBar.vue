@@ -1,14 +1,10 @@
 <template>
     <div id="navBar">
-        <div id="breadCrum">
-            <el-breadcrumb separator="/">
-            <el-breadcrumb-item id="first" >個人首頁</el-breadcrumb-item>
-            <el-breadcrumb-item id="now" :color="normal">專案總覽</el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
+        <el-icon><fold/></el-icon>
         <div id="toolBar">
             <div id="icons">
-                <button><a src="#"><el-icon class="icon"><search/></el-icon></a></button>
+                <button @click="searchClick" v-if="show"><a src="#"><el-icon class="icon"><search/></el-icon></a></button>
+                <div class="icon" v-if="actived"><search-bar></search-bar></div>
                 <button><el-icon class="icon"><lock/></el-icon></button>
                 <!-- <button><el-icon class="icon"><bell/></el-icon></button> --> 
                 <notification-menu class="icon"></notification-menu>
@@ -22,22 +18,38 @@
 
 
 <script>
+import { ref } from 'vue';
 import NotificationMenu from './NotificationMenu.vue';
 import UserInfo from './UserInfo.vue';
+import SearchBar from './SearchBar.vue';
 export default {
     components: {
         UserInfo,
         NotificationMenu,
+        SearchBar,
     },
-    data() {
+    setup() {
+        const actived = ref(false);
+        const show = ref(true);
+
+        const searchClick = () => {
+            actived.value = !actived.value;
+            show.value = !show.value;
+
+        };
+
+        const reset = () => {
+            actived.value = false;
+            show.value = true;
+        };
         return {
             normal: "#303133",
+            actived,
+            show,
+            searchClick,
+            reset,
         };
     },
-    methods:{
-        
-  
-    }
 }
 </script>
 
@@ -85,7 +97,8 @@ export default {
         display: flex;
         position: absolute;
         right: 0;
-        gap:16px;
+        /* margin-right: 16px; */
+        gap: 16px;
     }
     #icons{
         display: flex;
@@ -110,13 +123,12 @@ export default {
         cursor: pointer;
     }
 
-    #languageIcon{
+    #icon #languageIcon{
         display: block;
-        padding: 16px 12px;
+        /* padding: 16px 0; */
         justify-content: center;
         align-items: center;
         align-self: stretch;
-        /* margin-right: 16px; */
     }
 
 </style>

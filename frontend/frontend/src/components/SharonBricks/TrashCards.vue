@@ -1,38 +1,35 @@
 <template>
-    <div id="all">
-        <!-- @click="UnShow" -->
-        <el-card id="box-card" @contextmenu="show">
+    <div id="all" @click.right.prevent>
+        <el-card id="box-card" @click.right="show" @click="unshown">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png">
             <div id="namePart">
                 <span id="name">{{ record_name }}</span>
-                <button @click="show" ><i class="material-icons">&#xe5d2</i></button>
-                <!-- @click.stop -->
             </div>
-            <div id="tagPart" >
+            <div id="tagPart">
                 <el-tag class="tag" v-for="item in 8" :key="item">標籤</el-tag>
                 <el-tag class="tag">新增標籤</el-tag>
-                <!-- @click="UnShow" -->
+
             </div>
         
         </el-card>
-        <div v-if="isShowed" id="rightClick" @chosen="unShow"><card-right-click/></div>
-
+        <!-- v-if="isShowed" -->
+        <div id="rightClick" v-if="isShowed">
+            <div id="container">
+                <span id="recover">復原</span>
+                <span id="delete">永久刪除</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 
-import { ref, watch} from 'vue';
-import CardRightClick from './CardRightClick.vue';
-export default{
+import { ref } from 'vue';
+export default {
     components:{
-        CardRightClick,
-    },
-    props:{
-        isShowed: Boolean,
     },
 
-    setup(props,{emit}){
+    setup(){
         
         const isShowed= ref(false);
         const url = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
@@ -45,15 +42,9 @@ export default{
             isShowed.value = !isShowed.value;
         };
 
-        const unShow = (value) => {
-            isShowed.value = value;
-            console.log(value);
+        const unshown = () => {
+            isShowed.value = false;
         };
-
-        // watch(() => {
-        //     isShowed.value = props.isShowed;
-        //     console.log(isShowed.value);
-        // })
 
 
 
@@ -63,7 +54,7 @@ export default{
             url,
             record_name,
             isShowed,
-            unShow,
+            unshown,
         };
 
         
@@ -148,35 +139,68 @@ export default{
         align-items: center;
 
         border-radius: var(--radius-button-large-radius, 4px);
-        border: 1px solid var(--base-color-primary-el-color-primary-8, #F4CBCF);    
+        border: 1px solid var(--base-color-info-el-color-info-5, #C8C9CC);
         background: var(--base-color-fill-el-fill-color-blank, #FFF);
 
-        color: var(--base-color-danger-el-color-danger, #C91F2F);
+        color: var(--base-color-info-el-color-info, #909399);
         text-align: center;
 
         /* CN regular/body2-Regular */
         font-family: PingFang TC;
         font-size: 13px;
         font-style: normal;
-        font-weight: 400;   
+        font-weight: 400;
         line-height: 22px; /* 169.231% */
-    }
-    .material-icons{
-        font-size: 16px;
-    }
-
-    #namePart > button{
-        border: none;
-        background: none;
-        position: absolute;
-        right: 0;
-        cursor: pointer;
     }
 
     #rightClick{
+        display: flex;
+        flex-direction: row;
+        width: 116px;
+        height: auto;
+        flex-wrap: wrap;
+        padding: 8px 0;
+        border-radius: var(--radius-button-large-radius, 4px);
+        border: 1px solid var(--base-color-border-el-border-color-light, #E4E7ED);
+        background: var(--base-color-fill-el-fill-color-blank, #FFF);
+        /* light/--el-box-shadow */
+        box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04), 0px 8px 20px 0px rgba(0, 0, 0, 0.08);
         position: absolute;
         top: 285px;
         left: 285px;
         z-index: 10;
     }
+    #container{
+        display: block;
+        /* font-size: 10px; */
+        width: 116px;
+        padding: 8px 0;
+    }
+
+    #container > span{
+        color: var(--base-color-text-el-text-color-primary, #303133);
+        font-family: Noto Sans TC;
+        font-size: 14px;
+        font-style: normal;
+        /* font-weight: 400; */
+        line-height: 24px; /* 171.429% */
+        text-align: left;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    #container > span:hover{
+        color: #C91F2F;
+        background-color: #FAE4E7;
+    }
+
+    #recover{
+        display: block;
+        /* font-size: 10px; */
+    }
+
+    #delete{
+        display: block;
+    }
+
 </style>

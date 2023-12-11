@@ -1,5 +1,5 @@
 <template>
-    <div class="form">
+    <div class="form" v-show="form">
         <p class="formName">設定會議基本資訊
             <button class="close-button" type="button" @click="close"><el-icon><Close /></el-icon></button>
         </p>
@@ -92,9 +92,10 @@
     />
   </el-select>
       </el-form-item>
+      
       <el-form-item>
         <el-button class="commit_button"  @click="onSubmit" >
-            <el-icon><DocumentChecked /></el-icon>  <span style="margin-left: 8px;">儲存</span>
+          <el-icon><DocumentChecked /></el-icon>  <span style="margin-left: 8px;">儲存</span>
         </el-button>
       </el-form-item>
     </el-form>
@@ -188,6 +189,7 @@
   };
   // do not use same name with ref
   const form = reactive({
+   
     name: '',
     region: '',
     delivery: false,

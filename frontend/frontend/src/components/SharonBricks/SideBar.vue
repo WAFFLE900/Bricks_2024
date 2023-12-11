@@ -1,7 +1,7 @@
 <template>
   <div id="sidebar">
     <div id="container">
-    <div id="title">
+    <div id="title" @click="menu_clicked">
       <el-icon id="logo" :color = "incolor"><elementPlus /></el-icon>
       <p id="title-name">{{ project_name }}</p>
     </div>
@@ -13,14 +13,15 @@
     <div id="menuBar">  
       <el-row class="tac">
       <el-col :span="24">
+        <!-- :active-color = incolor -->
       <el-menu
         unique-opened = true
         class="el-menu-vertical-demo"
         :active-text-color = incolor
-        :active-color = incolor
+        @select="selectedItem"
         @open="handleOpen"
         @close="handleClose"
-        :background-color= active_color
+        :active-bg-color= active_color
       >
         <el-sub-menu index="1" class="menu">
           <template #title>
@@ -29,6 +30,7 @@
           </template>
             <el-menu-item index="1-1">全部</el-menu-item>
             <el-menu-item index="1-2">垃圾桶</el-menu-item>
+            <!-- @click="goTrashBox" -->
         </el-sub-menu>
         <el-sub-menu index="2" class="menu">
         <template #title>
@@ -57,19 +59,37 @@
 </template> 
 
 <script>
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+// import { EmitsOptions } from 'vue';
 export default {
   components: {
     
   },
-  setup() {
-
+  setup(props,{emit}) {
+    const router = useRouter();
+    const active_color = ref("#fff")
+    const project_name = "專案名稱";
+    const incolor = "#C91F2F";
+    const activeOption = ref(null);
     const menu_clicked = () =>{
-      this.active_color = "#FAE4E7";
+      active_color.value = "#FAE4E7";
     };
+
+
+    const selectedItem = (index) =>{
+      activeOption.value = index;
+      emit('update',index);
+    };
+
     return {
-      project_name: "專案名稱",
-      incolor: "#C91F2F",
-      active_color: "#fff",
+      project_name,
+      incolor,
+      active_color,
+      menu_clicked,
+      selectedItem,
+      activeOption,
+      router,
 
     };
   }

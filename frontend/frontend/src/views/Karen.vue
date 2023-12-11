@@ -3,11 +3,7 @@
 <div class="button-container">
         <button type="button" onclick="handleButtonClick('button1')">
           <el-icon style="color: red;"><ArrowUp /></el-icon></button>
-
-          <div class="overlay" v-if="basicComponent"></div>
-          <component :is="basicComponent"></component>
           <el-button type="button" @click="showBasicInfo"><el-icon><Edit /></el-icon>會議基本資訊</el-button>
-          
           <el-button :plain="true" @click="copyLinkBtn"><el-icon><Link /></el-icon></el-button>
     
        
@@ -69,19 +65,11 @@
       <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
       <div class="additional-textarea">
         <div class="textarea-container">
-          <resize-textarea class="textArea"
-      placeholder="請輸入內容"
-     
-      :maxHeight="150"
-      v-model="textValue">
-      </resize-textarea>
-          <!-- <textarea class="textArea"  v-model="value" :auto-size="{ minRows: 2, maxRows: 5 }" ></textarea> -->
+          <resize-textarea class="textArea" placeholder="請輸入內容" :maxHeight="150" v-model="textValue"></resize-textarea>
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
-        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea>
-        
-        
+        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
       </div>
     </div>
    
@@ -90,8 +78,112 @@
     <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
     <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
     <el-button plain @click="recover"> 復原會議記錄 </el-button>
-    <el-button :plain="true" @click="open2">success</el-button>
-    <BasicInfo />
+    <el-button :plain="true" @click="deleteRecord">刪除會議記錄</el-button>
+    <el-button :plain="true" @click="deleteForever">永遠刪除</el-button>
+
+    <div class="overlay" v-show="showOverlay"></div>
+    <div class="form" v-show="form">
+        <p class="formName">設定會議基本資訊
+            <button class="close-button" type="button" @click="close"><el-icon><Close /></el-icon></button>
+        </p>
+        <el-form :model="form" >
+            <el-form-item label="會議名稱">
+            <el-input v-model="form.name"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
+        </el-form-item>
+      <el-form-item label="日期">
+        <div class="demo-date-picker" >
+        <el-date-picker
+            v-model="value1"
+            type="date"
+            placeholder="Pick a date"
+            :default-value="new Date(2010, 9, 1)"
+            :style="{ width: '500px' }"
+        />
+        </div>
+      </el-form-item>
+      <el-form-item label="開會時間">
+          <div class="demo-range"  :style="{ width: '440px' }">
+            <el-time-picker
+            v-model="value2"
+            is-range
+            range-separator="To"
+            start-placeholder="Start time"
+            end-placeholder="End time"
+            />
+            </div>
+        </el-form-item>
+        <el-form-item label="出席人員">
+        <el-select
+            v-model="valueA"
+            multiple
+            filterable
+            allow-create
+            default-first-option
+            :reserve-keyword="true"
+            placeholder="選擇出席人員"
+            :style="{ width: '500px' }"
+            @change="handleSelectChangeA"
+        >
+    <el-option
+      v-for="item in optionsA"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
+      </el-form-item>
+      <el-form-item label="會議進行地點">
+            <el-input v-model="form.place"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
+        </el-form-item>
+        <el-form-item label="缺席人員">
+          <el-select
+    v-model="valueB"
+    multiple
+    filterable
+    allow-create
+    default-first-option
+    :reserve-keyword="false"
+    placeholder="選擇缺席人員"
+    :style="{ width: '500px' }"
+    @change="handleSelectChangeB"
+  >
+    <el-option
+      v-for="item in optionsB"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
+      </el-form-item>
+      <el-form-item label="紀錄負責人員">
+        <el-select
+    v-model="valueC"
+    multiple
+    filterable
+    allow-create
+    default-first-option
+    :reserve-keyword="false"
+    placeholder="選擇會議記錄人員"
+    :style="{ width: '500px' }"
+    @change="handleSelectChangeC"
+  >
+    <el-option
+      v-for="item in optionsC"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
+      </el-form-item>
+      
+      <el-form-item>
+        <el-button class="commit_button"  @click="onSubmit" >
+          <el-icon><DocumentChecked /></el-icon>  <span style="margin-left: 8px;">儲存</span>
+        </el-button>
+      </el-form-item>
+    </el-form>
+    </div>
+    <!-- <BasicInfo /> -->
     <!-- <Delete /> -->
   </div>
 </template>
@@ -104,6 +196,7 @@ import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
 import Delete from "@/components/KarenBricks/Delete.vue";
 import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
 import { ElNotification } from 'element-plus';
+import { ElMessage } from 'element-plus';
 export default {
   name:'Karen',
   components: {
@@ -114,11 +207,31 @@ export default {
   
   data() {
     return {
+      showOverlay: false,
+      form:false,
       value: '',
       meetingName: "",
       placeholder: "輸入會議名稱",
       height: '30px',
       basicComponent: null,
+      value1: '',
+      value2: [
+        new Date(2016, 9, 10, 8, 40),
+        new Date(2016, 9, 10, 9, 40),
+      ],
+      valueA: [],
+      optionsA: [
+        { value: 'HTML', label: 'HTML' }
+      ],
+      valueB: [],
+      optionsB: [
+        { value: 'w', label: 'w' }
+      ],
+      valueC: [],
+      optionsC: [
+        { value: 'c', label: 'c' }
+      ],
+
     };
   },
   methods: {
@@ -138,26 +251,68 @@ export default {
         type: 'success',
         position: 'bottom-right',
       });
-    },
+      },
+      
     copyLinkBtn() {
-      ElNotification({
+      ElMessage({
         message: '會議記錄連結已複製',
         type: 'success',
         position: 'bottom-right',
       });
     },
-    open2() {
-      ElNotification({
-        message: '會議記錄連結已複製',
-        type: 'success',
-      });
+    deleteForever(){
+      ElMessage('您已永久刪除會議記錄')
+    }, 
+    deleteRecord(){
+      ElMessage.error('您已刪除會議記錄');
     },
     showBasicInfo(){
-      this.basicComponent=BasicInfo;
+      this.showOverlay = true;
+      this.form = true;
     },
-  }
-};
 
+    close(){
+      this.showOverlay = false;
+      this.form = false;
+    },
+    handleSelectChangeA(selectedValues) {
+      this.handleSelectChange(selectedValues, this.optionsA, this.valueA);
+    },
+    handleSelectChangeB(selectedValues) {
+      this.handleSelectChange(selectedValues, this.optionsB, this.valueB);
+    },
+    handleSelectChangeC(selectedValues) {
+      this.handleSelectChange(selectedValues, this.optionsC, this.valueC);
+    },
+    handleSelectChange(selectedValues, options, value) {
+      selectedValues.forEach((selectedValue) => {
+        const existsInOptions = options.some((option) => option.value === selectedValue);
+
+        if (!existsInOptions) {
+          options.push({
+            value: selectedValue,
+            label: selectedValue,
+          });
+        }
+
+        const existsInValue = value.includes(selectedValue);
+
+        if (!existsInValue) {
+          value.push(selectedValue);
+        }
+      });
+    },
+    onSubmit() {
+      console.log('submit!');
+    },
+    
+  },
+
+};
+const value1 = ref<[Date, Date]>([
+  new Date(2016, 9, 10, 8, 40),
+  new Date(2016, 9, 10, 9, 40),
+])
 </script>
 
 <style>
@@ -205,8 +360,6 @@ export default {
   margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc; /* 大框框的边框样式，你可以根据需要调整颜色和样式 */
- 
-
 }
 .textarea-container {
   height: auto;
@@ -299,17 +452,75 @@ height: 50px;
 font-size: 0px;
 margin: 20px 0 0;
 box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
-
 }
+.formName {
+    display: flex;
+  justify-content: space-between;
+  /* 第一个子元素在容器的起始位置，最后一个子元素在容器的末尾位置 */
+  align-items: center;
+  font-size: 20px;
+  text-align: left;
+  font-weight: bold;
+  width: 500px;
+}
+
+button.close-button {
+  border: none;
+  background: none;
+ margin-left: 290px;
+ outline: none;  
+  font-size: 1em;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明的灰色背景 */
-  z-index: 999; /* 确保在最上层 */
+  background: rgba(0, 0, 0, 0.5); /* 半透明黑色 */
+  z-index: 999; /* 放在最上层 */
+ 
+}
+.form{
+  top: 100px; 
+    width: 500px;
+    margin-left:650px;
+    margin-bottom: 20px;
+    position: fixed;
+    z-index: 1000;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+.form .el-form-item {
+  margin-bottom: 25px;
+  display: flex; /* 使用 Flexbox 布局 */
+  flex-direction: column; /* 垂直方向布局 */
+  align-items: flex-start; /* 靠左对齐 */
 }
 
+/* input內的字 */
+.el-input {
+  font-size: 15px;
+}
+.demo-range .el-form-item .el-time-picker {
+  width: 100%;
+}
+
+
+.commit_button{
+    margin-left:418px;
+    background: #EB2348;
+    border: 1px solid #EB2348;
+    display: flex;
+    color: #ffffff;
+    justify-content: flex-end; /* 将内容靠右对齐 */
+}
 
 </style>

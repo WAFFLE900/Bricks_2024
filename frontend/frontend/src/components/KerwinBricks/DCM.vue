@@ -7,7 +7,7 @@
       <div class="textarea-container">
         <el-input
           v-model="textarea1"
-          :autosize="{ minRows: 2, maxRows: 20 }"
+          :autosize="{ minRows: 2.5, maxRows: 20 }"
           type="textarea"
           placeholder="請輸入內容"
           size="large"
@@ -33,7 +33,7 @@
           v-if="inputVisible"
           ref="InputRef"
           v-model="inputValue"
-          class="ml-1 w-20"
+          class="ml-1 w-20 input"
           size="small"
           @keyup.enter="handleInputConfirm"
           @blur="handleInputConfirm"
@@ -70,15 +70,17 @@ export default {
     const inputValue = ref("");
     const dynamicTags = ref(["Tag1", "Tag2", "Tag3"]);
     const inputVisible = ref(false);
-    // const InputRef = ref < InstanceType < typeof ElInput >> new ElInput();
     const handleClose = (tag) => {
       dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1);
     };
     const showInput = () => {
       inputVisible.value = true;
-      // nextTick(() => {
-      //   InputRef.value.input.focus();
-      // });
+      setTimeout(() => {
+        const inputElement = document.querySelector(".input");
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }, 10);
     };
     const handleInputConfirm = () => {
       if (inputValue.value) {
@@ -152,5 +154,8 @@ export default {
 }
 .tag {
   margin-right: 4px;
+}
+.ml-1 {
+  width: 80px;
 }
 </style>

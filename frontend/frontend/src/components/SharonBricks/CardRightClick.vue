@@ -1,8 +1,7 @@
 <template>
     <div id="card">
         <div id="container">
-            <!-- @click="change" -->
-            <span id="copy" @click="copyLink"><link-copy/>複製連結</span>
+            <span id="copy" @click="change">複製連結</span>
             <span id="delete" @click="change">刪除會議記錄</span>
         </div>
         
@@ -11,12 +10,8 @@
 
 <script>
 import { ref } from 'vue';
-import LinkCopy from '../KarenBricks/LinkCopy.vue';
-import { ElMessage } from 'element-plus';
 export default {
-    components:{
-        LinkCopy,
-    },
+
     setup(props,{emit}){
         const status = ref(false);
 
@@ -24,18 +19,9 @@ export default {
             status = false;
             emit('chosen', status);
         };
-
-        const copyLink = () => {
-            ElMessage({
-                message: '會議記錄連結已複製',
-                type: 'success',
-                position: 'bottom-right',
-            });
-        };
         return{
             change,
             status,
-            copyLink, 
         }
     }
 }

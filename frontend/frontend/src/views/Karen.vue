@@ -228,6 +228,8 @@ export default {
   
   data() {
     return {
+      formName:'',
+      formPlace:'',
       // handleInputConfirm,
       showOverlay: false,
       form:false,

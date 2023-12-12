@@ -78,7 +78,7 @@
           </p>
           <el-form :model="form" >
               <el-form-item label="會議名稱">
-              <el-input v-model="form.name"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
+              <el-input v-model="formName"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
           </el-form-item>
         <el-form-item label="日期">
           <div class="demo-date-picker" >
@@ -92,7 +92,7 @@
           </div>
         </el-form-item>
         <el-form-item label="開會時間">
-            <div class="demo-range"  :style="{ width: '440px' }">
+            <div class="demo-range" >
               <el-time-picker
               v-model="value2"
               is-range
@@ -123,7 +123,7 @@
     </el-select>
         </el-form-item>
         <el-form-item label="會議進行地點">
-              <el-input v-model="form.place"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
+              <el-input v-model="formPlace"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
           </el-form-item>
           <el-form-item label="缺席人員">
             <el-select
@@ -196,6 +196,8 @@
     
     data() {
       return {
+        formName:'',
+        formPlace:'',
         showOverlay: false,
         form:false,
         value: '',
@@ -312,7 +314,7 @@
   <style scoped>
   .demo-range .el-date-editor {
     width: 100%;
-    margin: 8px;
+    
   }
 
   /* .karen{
@@ -453,9 +455,9 @@
   .el-input {
     font-size: 15px;
   }
-  /* .demo-range .el-form-item .el-time-picker {
+  .demo-range .el-form-item .el-time-picker {
     width: 100%;
-  } */
+  }
   
   
   .commit_button{

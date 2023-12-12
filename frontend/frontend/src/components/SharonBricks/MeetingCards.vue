@@ -15,14 +15,14 @@
             </div>
         
         </el-card>
-        <div v-if="isShowed" id="rightClick" @click="unShow"><card-right-click  /></div>
+        <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow"><card-right-click  /></div>
 
     </div>
 </template>
 
 <script>
 
-import { ref, watch} from 'vue';
+import { onUnmounted, ref, watch} from 'vue';
 import CardRightClick from './CardRightClick.vue';
 import { RouterLink } from 'vue-router';
 import { useRouter } from "vue-router";
@@ -64,6 +64,27 @@ export default{
         // const nextPage = () => {
         //     router.push({ name: });
         // };
+
+
+        // 點擊非指定區域
+        const clickOut = (event) => {
+            if(isShowed && !this.$ref.rightClick.contains(event.target)){
+                unShow();
+            }
+        };
+
+        // mounted (()=>{
+        //     window.addEventListener('click' , clickOut);
+        // });
+
+        // onMounted(() => {
+        //     window.addEventListener('click', clickOut);
+        // });
+           
+        onUnmounted(()=>{
+            window.addEventListener('click' , clickOut);
+        });
+        
 
 
 

@@ -28,8 +28,6 @@ export default {
     .additional-textarea {
     border-radius: 4px;
     width: 890px;
-    margin-left:15px;
-    margin-top: 10px;
     padding: 10px;
     border: 1px solid #ccc; /* 大框框的边框样式，你可以根据需要调整颜色和样式 */
   }
@@ -59,5 +57,22 @@ export default {
     border-top: 1px solid #ccc; 
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .add_cartButton{
+    height: 40px;
+    width: 50px;
+    margin-top: 15px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .edit_textButton{
+    height: 35px;
+    width: 50px;
+    margin-left: 0px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 </style>

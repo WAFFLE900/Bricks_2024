@@ -10,7 +10,7 @@
     <div v-show="activeOption === '1-1'" class="navAndCont">
       <nav-bar-all class="navBar" @click="StopShowing"></nav-bar-all>
       <div class="cards">
-        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed"></meeting-cards>
+        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed" @showMeeting="show"></meeting-cards>
       </div>
     </div>
     <div v-show="activeOption === '1-2'" class="navAndCont">
@@ -22,9 +22,12 @@
     </div>
     <div class="navAndCont" v-show="isShowed">
       <nav-bar-main class="navBar"></nav-bar-main>
-      <div class="content">
-        <meeting class="info"></meeting>
-        <text-block/>
+      <div class="meeting">
+        <div class="info"><meeting ></meeting></div>
+        <div class="textBlock">
+          <text-block />
+      </div>
+        
       </div>
     </div>
       
@@ -141,6 +144,20 @@ export default {
  }
  .info{
   position: absolute;
+ }
+
+ .textBlock{
+  position: absolute;
+  top: 338px;
+ }
+
+ .meeting{
+  position: absolute;
+  top: 68px;
+  left:248px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
  }
 
 </style>

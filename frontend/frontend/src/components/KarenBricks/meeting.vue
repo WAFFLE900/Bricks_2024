@@ -1,14 +1,14 @@
 <template>
     <div class="karen">
-  <div class="button-container">
+  
+      <div class="button-container">
           <button type="button" onclick="handleButtonClick('button1')">
             <el-icon style="color: red;"><ArrowUp /></el-icon></button>
             <el-button type="button" @click="showBasicInfo"><el-icon><Edit /></el-icon>會議基本資訊</el-button>
             <el-button :plain="true" @click="copyLinkBtn"><el-icon><Link /></el-icon></el-button>
-      
-         
       </div>
       <div class="form-container">
+        
         <table class="form-table">
           <tr>
             <td class="left-bar">
@@ -308,11 +308,17 @@
   .demo-range .el-date-editor {
     margin: 8px;
   }
+
+  .karen{
+    position: relative;
+  }
   
-  .form-table {
+  .form-container {
     border-radius: 4px;
-    margin-top: 20px;
-    margin-left: 448px;
+    /* position: absolute; */
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
     width: 910px;
     border-collapse: collapse;
   }
@@ -344,12 +350,14 @@
   
   
   .button-container {
+      /* position: absolute; */
       display: flex;
       height:40px;
       width:910px;
-      margin-top: 68px;
-      margin-left: 448px;
-      margin-bottom: 0px;
+      margin-bottom: 14px;
+      /* top: 20px;
+      left: 248px; */
+      /* margin-bottom: 0px; */
   }
   .button-container button:first-child {
       margin-right: auto; /* 将第一个按钮推到最左边 */
@@ -383,30 +391,6 @@
     display: flex;
     align-items: flex-start;
   }
-  .add_cartButton{
-    height: 40px;
-    width: 50px;
-    margin-top: 15px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .edit_textButton{
-    height: 35px;
-    width: 50px;
-    margin-left: 0px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .popUp_msg{
-  width: 500px;
-  height: 50px;
-  font-size: 0px;
-  margin: 20px 0 0;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
-  }
   .formName {
       display: flex;
     justify-content: space-between;
@@ -424,6 +408,7 @@
    margin-left: 290px;
    outline: none;  
     font-size: 1em;
+    cursor: pointer;
   }
   p {
     margin-top: 0;
@@ -434,25 +419,25 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.5); /* 半透明黑色 */
-    z-index: 999; /* 放在最上层 */
+    z-index: 9; /* 放在最上层 */
    
   }
   .form{
-    /* top: 100px;  */
       width: 500px;
-      /* margin-bottom: 20px; */
       position: absolute;
-      z-index: 1000;
+      top: -40px;
+      left:300px;
+      z-index: 10;
       border: 1px solid #ccc;
       padding: 20px;
       border-radius: 4px;
       background-color: #ffffff;
   }
   .form .el-form-item {
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     display: flex; /* 使用 Flexbox 布局 */
     flex-direction: column; /* 垂直方向布局 */
     align-items: flex-start; /* 靠左对齐 */

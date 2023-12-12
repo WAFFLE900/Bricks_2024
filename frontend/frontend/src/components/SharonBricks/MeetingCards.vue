@@ -1,11 +1,11 @@
 <template>
-    <div id="all">
+    <div id="all" >
         <!-- @click="UnShow" -->
-        <el-card id="box-card" @contextmenu="show">
+        <el-card id="box-card" @contextmenu="show" @click="nextPage">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png">
             <div id="namePart">
                 <span id="name">{{ record_name }}</span>
-                <button @click="show" ><i class="material-icons">&#xe5d2</i></button>
+                <button @click.stop="show" ><i class="material-icons">&#xe5d2</i></button>
                 <!-- @click.stop -->
             </div>
             <div id="tagPart" >
@@ -24,6 +24,8 @@
 
 import { ref, watch} from 'vue';
 import CardRightClick from './CardRightClick.vue';
+import { RouterLink } from 'vue-router';
+import { useRouter } from "vue-router";
 export default{
     components:{
         CardRightClick,
@@ -33,7 +35,7 @@ export default{
     },
 
     setup(props,{emit}){
-        
+        const router = useRouter;
         const isShowed= ref(false);
         const url = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
         const normal = "#303133";
@@ -50,10 +52,18 @@ export default{
             // console.log(value);
         };
 
+        const nextPage = () => {
+            emit("showMeeting", true);
+        };
+
         // watch(() => {
         //     isShowed.value = props.isShowed;
         //     console.log(isShowed.value);
         // })
+
+        // const nextPage = () => {
+        //     router.push({ name: });
+        // };
 
 
 
@@ -64,6 +74,7 @@ export default{
             record_name,
             isShowed,
             unShow,
+            nextPage,
         };
 
         

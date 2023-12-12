@@ -292,6 +292,11 @@
         });
       },
       onSubmit() {
+
+      ElMessage({
+        message: '已儲存會議基本資訊',
+        type: 'success',
+      });
         console.log('submit!');
       },
       
@@ -306,12 +311,13 @@
   
   <style scoped>
   .demo-range .el-date-editor {
+    width: 100%;
     margin: 8px;
   }
 
-  .karen{
+  /* .karen{
     position: relative;
-  }
+  } */
   
   .form-container {
     border-radius: 4px;
@@ -447,9 +453,9 @@
   .el-input {
     font-size: 15px;
   }
-  .demo-range .el-form-item .el-time-picker {
+  /* .demo-range .el-form-item .el-time-picker {
     width: 100%;
-  }
+  } */
   
   
   .commit_button{

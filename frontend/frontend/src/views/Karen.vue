@@ -350,7 +350,8 @@ const value1 = ref<[Date, Date]>([
 
 <style>
 .demo-range .el-date-editor {
-  margin: 8px;
+  width: 100%;
+ 
 }
 
 .form-table {
@@ -542,9 +543,9 @@ p {
 .el-input {
   font-size: 15px;
 }
-.demo-range .el-form-item .el-time-picker {
+/* .demo-range .el-form-item .el-time-picker {
   width: 100%;
-}
+} */
 
 
 .commit_button{
@@ -554,16 +555,5 @@ p {
     display: flex;
     color: #ffffff;
     justify-content: flex-end; /* 将内容靠右对齐 */
-}
-/* .tags {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 6px 10px;
-} */
-/* .tag {
-  margin-right: 4px;
-} */
-.ml-1 {
-  width: 80px;
 }
 </style>

@@ -62,6 +62,10 @@ export default {
   setup(props,{emit}) {
     const activeOption = ref(null);  
     const isShowed = ref(false);  
+    const emptyPage = ref(false);
+    const cardPage = ref(false);
+    const trashCardPage = ref(false);
+    const addPage = ref(false);
 
     // 偵測sideBar的選擇
     const selectedItemUpdate = (option) =>{

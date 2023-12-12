@@ -15,8 +15,8 @@
         <!-- v-if="isShowed" -->
         <div id="rightClick" v-if="isShowed">
             <div id="container">
-                <span id="recover">復原</span>
-                <span id="delete">永久刪除</span>
+                <span id="recover" @click="recover">復原</span>
+                <span id="delete" @click="deleteForever">永久刪除</span>
             </div>
         </div>
     </div>
@@ -25,8 +25,12 @@
 <script>
 
 import { ref } from 'vue';
+import DeleteForever from '../KarenBricks/DeleteForever.vue';
+
 export default {
     components:{
+        DeleteForever,
+
     },
 
     setup(){
@@ -46,6 +50,19 @@ export default {
             isShowed.value = false;
         };
 
+        const deleteForever = () => {
+            ElMessage('您已永久刪除會議記錄')
+        }; 
+
+        const recover = () => {
+            ElNotification({
+                dangerouslyUseHTMLString: true,
+                title: '成功復原會議記錄',
+                message: '<a href="/path/to/recovery/file" style="color: #67C23A; text-decoration: underline;">點擊檢視復原檔案</a>',
+                type: 'success',
+                position: 'bottom-right',
+            });
+        };
 
 
         return{
@@ -55,6 +72,8 @@ export default {
             record_name,
             isShowed,
             unshown,
+            deleteForever,
+            recover,
         };
 
         

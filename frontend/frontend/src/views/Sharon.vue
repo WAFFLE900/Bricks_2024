@@ -1,25 +1,35 @@
 <template>
   <div class="sharon" @contextmenu.prevent>
     <!-- @click="StopShowing" -->
-    <side-bar class="sideBar" @update="selectedItemUpdate"></side-bar>
-    <div class="navAndCont" v-if="activeOption === null">
+    <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar>
+    <!-- @showAdd="show" -->
+    <div class="navAndCont" v-show="activeOption === null">
       <nav-bar class="navBar"></nav-bar>
-      <empty-back class="content"></empty-back>
+      <empty-back class="content" @showAdd="show"></empty-back>
     </div >
-    <div v-if="activeOption === '1-1'" class="navAndCont">
+    <div v-show="activeOption === '1-1'" class="navAndCont">
       <nav-bar-all class="navBar" @click="StopShowing"></nav-bar-all>
       <div class="cards">
-        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed"></meeting-cards>
+        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed" @showMeeting="show"></meeting-cards>
       </div>
     </div>
-    <div v-if="activeOption === '1-2'" class="navAndCont">
+    <div v-show="activeOption === '1-2'" class="navAndCont">
       <trash-bar class="navBar"></trash-bar>
       <div class="cards">
         <trash-cards v-for="items in 16" :key="items"></trash-cards>
       </div>
 
     </div>
-      
+    <div class="navAndCont" v-show="isShowed">
+      <nav-bar-main class="navBar"></nav-bar-main>
+      <div class="meeting">
+        <div class="info"><meeting ></meeting></div>
+        <div class="textBlock">
+          <text-block />
+      </div>
+        
+      </div>
+    </div>
       
   </div>
 </template>
@@ -27,7 +37,7 @@
 
 <script>
 import { ref } from "vue";
-import axios from "axios";
+// import axios from "axios";
 import SideBar from "../components/SharonBricks/SideBar.vue";
 import NavBar from "../components/SharonBricks/NavBar.vue";
 import EmptyBack from "../components/SharonBricks/EmptyBack.vue";
@@ -36,6 +46,8 @@ import MeetingCards from '../components/SharonBricks/MeetingCards.vue';
 import TrashCards from "@/components/SharonBricks/TrashCards.vue";
 import NavBarAll from "@/components/SharonBricks/NavBarAll.vue";
 import TrashBar from '../components/SharonBricks/TrashBar.vue';
+import meeting from '../components/KarenBricks/meeting.vue';
+import TextBlock from "@/components/KarenBricks/TextBlock.vue";
 
 export default {
   components: {
@@ -47,25 +59,42 @@ export default {
     TrashCards,
     NavBarAll,
     TrashBar,
+    meeting,
+    TextBlock,
   },
   setup(props,{emit}) {
     const activeOption = ref(null);  
-    const isShowed = ref(null);  
+    const isShowed = ref(false);  
+    const emptyPage = ref(false);
+    const cardPage = ref(false);
+    const trashCardPage = ref(false);
+    const addPage = ref(false);
 
+    // 偵測sideBar的選擇
     const selectedItemUpdate = (option) =>{
       activeOption.value = option;
       console.log("active="+activeOption.value);
-    };
-
-    const StopShowing = ()=>{
       isShowed.value = false;
     };
+
+    // const StopShowing = ()=>{
+    //   isShowed.value = false;
+    // };
+
+    // 點選新增出現新增的頁面
+    const show = (value) =>{
+      isShowed.value = value;
+      console.log(isShowed.value);
+      activeOption.value = 0;
+    };
+
 
     return {
       activeOption,
       selectedItemUpdate,
       isShowed,
-      StopShowing,
+      // StopShowing,
+      show,
     };
   },
 };
@@ -116,6 +145,23 @@ export default {
   width:auto;
   top: 0;
   right: 0;
+ }
+ .info{
+  position: absolute;
+ }
+
+ .textBlock{
+  position: absolute;
+  top: 338px;
+ }
+
+ .meeting{
+  position: absolute;
+  top: 68px;
+  left:248px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
  }
 
 </style>

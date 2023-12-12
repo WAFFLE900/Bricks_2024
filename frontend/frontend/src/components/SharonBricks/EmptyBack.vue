@@ -2,7 +2,7 @@
   <div id="background">
     <div id="center">
       <el-empty :image-size="200" description="點選新增建立新的會議紀錄" :root =--el-empty-fill-color-0>
-        <el-button id="addBtn">
+        <el-button id="addBtn" @click="addClicked">
           <div id="buttonContent">
             <el-icon><circle-plus/></el-icon>新增
           </div></el-button>
@@ -13,7 +13,15 @@
 
 <script>
 export default {
+  setup(props,{emit}){
+    const addClicked = () => {
+      emit('showAdd',true);
+    };
 
+    return{
+      addClicked,
+    };
+  }
 }
 </script>
 

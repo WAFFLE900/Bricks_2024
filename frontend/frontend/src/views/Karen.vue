@@ -70,13 +70,42 @@
         </div>
         <div class="split-line" style="width: 100%;"></div>
         <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
+        <div class="tags">
+        <!-- <el-tag
+          v-for="tag in dynamicTags"
+          :key="tag"
+          class="tag"
+          closable
+          :disable-transitions="false"
+          @close="handleClose(tag)"
+        >
+          {{ tag }}
+        </el-tag>
+        <el-input
+          v-if="inputVisible"
+          ref="InputRef"
+          v-model="inputValue"
+          class="ml-1 w-20"
+          size="small"
+          @keyup.enter="handleInputConfirm"
+          @blur="handleInputConfirm"
+        />
+        <el-button
+          v-else
+          class="button-new-tag ml-1"
+          size="small"
+          @click="showInput"
+        >
+          + New Tag
+        </el-button> -->
+      </div>
       </div>
     </div>
    
-  
+<!--   
     <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
     <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
-    <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
+    <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon /> -->
     <el-button plain @click="recover"> 復原會議記錄 </el-button>
     <el-button :plain="true" @click="deleteRecord">刪除會議記錄</el-button>
     <el-button :plain="true" @click="deleteForever">永遠刪除</el-button>
@@ -183,8 +212,6 @@
       </el-form-item>
     </el-form>
     </div>
-    <!-- <BasicInfo /> -->
-    <!-- <Delete /> -->
   </div>
 </template>
 
@@ -192,21 +219,19 @@
 
 import axios from 'axios';
 import { ref } from 'vue';
-import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
-import Delete from "@/components/KarenBricks/Delete.vue";
-import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
+// import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
+// import Delete from "@/components/KarenBricks/Delete.vue";
+// import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
 import { ElNotification } from 'element-plus';
 import { ElMessage } from 'element-plus';
 export default {
   name:'Karen',
   components: {
-    LinkCopy,
-    Delete,
-    BasicInfo,
   },
   
   data() {
     return {
+      // handleInputConfirm,
       showOverlay: false,
       form:false,
       value: '',
@@ -257,7 +282,7 @@ export default {
       ElMessage({
         message: '會議記錄連結已複製',
         type: 'success',
-        position: 'bottom-right',
+        
       });
     },
     deleteForever(){
@@ -303,9 +328,20 @@ export default {
       });
     },
     onSubmit() {
+      ElMessage({
+        message: '已儲存會議基本資訊',
+        type: 'success',
+      });
       console.log('submit!');
     },
-    
+    // handleInputConfirm(){
+    //   if (inputValue.value) {
+    //     dynamicTags.value.push(inputValue.value);
+    //   }
+    //   inputVisible.value = false;
+    //   inputValue.value = "";
+    // },
+
   },
 
 };
@@ -446,13 +482,13 @@ const value1 = ref<[Date, Date]>([
   border-radius: 4px;
 }
 
-.popUp_msg{
+/* .popUp_msg{
 width: 500px;
 height: 50px;
 font-size: 0px;
 margin: 20px 0 0;
 box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 .formName {
     display: flex;
   justify-content: space-between;
@@ -522,5 +558,15 @@ p {
     color: #ffffff;
     justify-content: flex-end; /* 将内容靠右对齐 */
 }
-
+/* .tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 10px;
+} */
+/* .tag {
+  margin-right: 4px;
+} */
+.ml-1 {
+  width: 80px;
+}
 </style>

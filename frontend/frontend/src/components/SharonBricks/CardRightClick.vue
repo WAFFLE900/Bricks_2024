@@ -1,8 +1,8 @@
 <template>
     <div id="card">
         <div id="container">
-            <span id="copy" @click="change">複製連結</span>
-            <span id="delete" @click="change">刪除會議記錄</span>
+            <span id="copy" @click="copyLink">複製連結</span>
+            <span id="delete" @click="deleteRecord">刪除會議記錄</span>
         </div>
         
     </div>
@@ -10,8 +10,9 @@
 
 <script>
 import { ref } from 'vue';
+import { ElMessage } from 'element-plus';
 export default {
-
+    
     setup(props,{emit}){
         const status = ref(false);
 
@@ -19,9 +20,27 @@ export default {
             status = false;
             emit('chosen', status);
         };
+
+        const copyLink = () => {
+            ElMessage({
+                message: '會議記錄連結已複製',
+                type: 'success',
+                position: 'bottom-right',
+            });
+
+            // status = false;
+            // emit('clicked',false)
+        };
+        const deleteRecord =()=>{
+            ElMessage.error('您已刪除會議記錄');
+            // status = false;
+            // emit('clicked',status)
+        };
         return{
             change,
             status,
+            copyLink,
+            deleteRecord,
         }
     }
 }

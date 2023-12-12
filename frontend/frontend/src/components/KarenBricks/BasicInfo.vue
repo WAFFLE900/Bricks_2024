@@ -218,7 +218,7 @@
 button.close-button {
   border: none;
   background: none;
- margin-left: 290px;
+ /* margin-left: 290px; */
  outline: none;  
   font-size: 1em;
 }
@@ -228,8 +228,8 @@ p {
 }
 .form{
     width: 500px;
-    margin-left: 200px;
-    margin-bottom: 300px;
+    /* margin-left: 200px; */
+    /* margin-bottom: 300px; */
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 4px;

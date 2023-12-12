@@ -16,7 +16,7 @@
         <div id="rightClick" v-if="isShowed">
             <div id="container">
                 <span id="recover" @click="recover">復原</span>
-                <span id="delete" @click="deleteForever">永久刪除</span>
+                <span id="delete" @click="deleteForever"><deleteForever/>永久刪除</span>
             </div>
         </div>
     </div>
@@ -26,6 +26,8 @@
 
 import { ref } from 'vue';
 import DeleteForever from '../KarenBricks/DeleteForever.vue';
+import { ElNotification } from 'element-plus';
+import { ElMessage } from 'element-plus';
 
 export default {
     components:{

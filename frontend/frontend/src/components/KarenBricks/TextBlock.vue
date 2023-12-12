@@ -1,4 +1,5 @@
 <template>
+    
   <div class="cart_container">
         <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
         <div class="additional-textarea">

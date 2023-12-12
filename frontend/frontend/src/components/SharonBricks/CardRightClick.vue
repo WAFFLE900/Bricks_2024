@@ -12,7 +12,6 @@
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 export default {
-    name:"CardRightClick",
     
     setup(props,{emit}){
         const status = ref(false);
@@ -28,9 +27,14 @@ export default {
                 type: 'success',
                 position: 'bottom-right',
             });
+
+            // status = false;
+            // emit('clicked',false)
         };
         const deleteRecord =()=>{
             ElMessage.error('您已刪除會議記錄');
+            // status = false;
+            // emit('clicked',status)
         };
         return{
             change,

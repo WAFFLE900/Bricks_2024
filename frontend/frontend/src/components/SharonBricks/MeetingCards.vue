@@ -15,7 +15,7 @@
             </div>
         
         </el-card>
-        <div v-if="isShowed" id="rightClick" @chosen="unShow"><card-right-click/></div>
+        <div v-if="isShowed" id="rightClick" @click="unShow"><card-right-click  /></div>
 
     </div>
 </template>
@@ -45,9 +45,9 @@ export default{
             isShowed.value = !isShowed.value;
         };
 
-        const unShow = (value) => {
-            isShowed.value = value;
-            console.log(value);
+        const unShow = () => {
+            isShowed.value = !isShowed.value;
+            // console.log(value);
         };
 
         // watch(() => {

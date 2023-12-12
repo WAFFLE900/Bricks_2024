@@ -7,18 +7,13 @@
             </el-breadcrumb>
         </div>
         <div id="meetingName">
-            <el-text id="name">{{ meeting_name }}</el-text>
+            <input type="text" id="name" v-model="meeting_name">
             <el-icon id="edit"><edit-pen/></el-icon>
         </div>
         <div id="toolBar">
             <div id="searchPlace">
                 <!-- <el-icon class="el-input__icon"><search /></el-icon> -->
-                <el-autocomplete
-                    clearable
-                    placeholder="Please Input"
-                    disable = true
-                    id = "searchBar"
-                />
+                <search-bar/>
             </div>
             <button><el-icon class="icon"><bell/></el-icon></button>
             <user-info id="userInfo"></user-info>
@@ -29,9 +24,11 @@
 
 <script>
 import UserInfo from './UserInfo.vue';
+import SearchBar from './SearchBar.vue';
 export default {
     components:{
         UserInfo,
+        SearchBar,
     },
     setup(){
         return{
@@ -101,6 +98,10 @@ export default {
         font-style: normal;
         font-weight: 400;
         line-height: 24px; /* 171.429% */
+        border: none;
+        padding: 0;
+        width: auto;
+        text-align: right;
     }
 
     #toolBar{
@@ -149,17 +150,6 @@ export default {
         align-items: center;
         gap: 8px;
         align-self: stretch;
-    }
-
-    #searchBar::after {
-        content: "";
-        background: url('@/assets/search.svg') center center/cover;
-        position: relative;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        pointer-events: none; /* 防止伪元素遮挡用户输入 */
     }
 
     #userInfo{

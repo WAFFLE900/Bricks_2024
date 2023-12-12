@@ -4,7 +4,7 @@
 <script>
 
 </script>
-<style>
+<style scoped>
 .popUp_msg{
 width: 500px;
 height: 50px;

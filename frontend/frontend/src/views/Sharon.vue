@@ -18,7 +18,6 @@
       <div class="cards">
         <trash-cards v-for="items in 16" :key="items"></trash-cards>
       </div>
-
     </div>
     <div class="navAndCont" v-show="isShowed">
       <nav-bar-main class="navBar"></nav-bar-main>

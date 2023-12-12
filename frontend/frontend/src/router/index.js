@@ -41,6 +41,26 @@ const routes = [
     name: "kerwin",
     component: () => import("../views/Kerwin.vue"),
   },
+  {
+    path: "/homepage",
+    name: "homepage",
+    component: () => import("../views/Homepage.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/Login.vue"),
+  },
+  {
+    path: "/questionnaire",
+    name: "questionnaire",
+    component: () => import("../views/Questionnaire.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("../views/Register.vue"),
+  },
 ];
 
 const router = createRouter({
@@ -49,4 +69,3 @@ const router = createRouter({
 });
 
 export default router;
-

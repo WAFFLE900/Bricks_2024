@@ -25,14 +25,13 @@
 <script>
 
 import { ref } from 'vue';
-import DeleteForever from '../KarenBricks/DeleteForever.vue';
+// import DeleteForever from '../KarenBricks/DeleteForever.vue';
 import { ElNotification } from 'element-plus';
 import { ElMessage } from 'element-plus';
 
 export default {
     components:{
-        DeleteForever,
-
+        
     },
 
     setup(){

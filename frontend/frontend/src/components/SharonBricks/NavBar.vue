@@ -15,7 +15,7 @@
             </div>
             <user-info id="userInfo"></user-info>
             <el-icon><language/></el-icon>
-            <img src="@/assets/language.svg" id="languageIcon">
+            <!-- <img src="@/assets/language.svg" id="languageIcon"> -->
         </div>
     </div>
 </template>

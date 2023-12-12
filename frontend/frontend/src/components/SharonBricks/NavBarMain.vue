@@ -85,8 +85,8 @@ export default {
         padding: 12px 20px;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        
+        /* position: absolute; */
+        margin-left: 420px;
     }
 
     #meetingName #edit{

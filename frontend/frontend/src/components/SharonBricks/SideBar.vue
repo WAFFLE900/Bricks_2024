@@ -6,7 +6,7 @@
       <p id="title-name">{{ project_name }}</p>
     </div>
     <div id="btnBlock">
-      <el-button id="addBtn">新增</el-button>
+      <el-button id="addBtn" @click="addClicked">新增</el-button>
     </div>
     
     <!-- 選單部分 -->
@@ -60,27 +60,40 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from "vue-router";
-// import { EmitsOptions } from 'vue';
+
 export default {
   components: {
     
   },
   setup(props,{emit}) {
-    const router = useRouter();
     const active_color = ref("#fff")
     const project_name = "專案名稱";
     const incolor = "#C91F2F";
     const activeOption = ref(null);
+    const isClicked = ref(false);
+
+    // 按下後字體改變顏色
     const menu_clicked = () =>{
       active_color.value = "#FAE4E7";
     };
 
-
+    // 提供父元件選擇的改變
     const selectedItem = (index) =>{
       activeOption.value = index;
       emit('update',index);
     };
+
+    // 提供父元件點擊事件
+    const addClicked = (value) =>{
+      value = true;
+      emit('showAdd',value);
+    };
+
+    // 改變頁面時停止顯示
+    // const stopShowing = () =>{
+    //   isClicked.value = false;
+    //   // emit('stop', isClicked.value);
+    // };
 
     return {
       project_name,
@@ -89,7 +102,10 @@ export default {
       menu_clicked,
       selectedItem,
       activeOption,
-      router,
+      // router,
+      addClicked,
+      // stopShowing,
+      isClicked,
 
     };
   }

@@ -61,17 +61,7 @@
         </table>
       </div>
       
-      <div class="cart_container">
-        <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
-        <div class="additional-textarea">
-          <div class="textarea-container">
-            <resize-textarea class="textArea" placeholder="請輸入內容" :maxHeight="150" v-model="textValue"></resize-textarea>
-            <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
-          </div>
-          <div class="split-line" style="width: 100%;"></div>
-          <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
-        </div>
-      </div>
+      
      
     
       <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
@@ -198,7 +188,6 @@
   import { ElNotification } from 'element-plus';
   import { ElMessage } from 'element-plus';
   export default {
-    name:'Karen',
     components: {
       LinkCopy,
       Delete,
@@ -315,7 +304,7 @@
   ])
   </script>
   
-  <style>
+  <style scoped>
   .demo-range .el-date-editor {
     margin: 8px;
   }
@@ -353,41 +342,6 @@
     font-size: 14px;
   }
   
-  .additional-textarea {
-    border-radius: 4px;
-    width: 890px;
-    margin-left:15px;
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc; /* 大框框的边框样式，你可以根据需要调整颜色和样式 */
-  }
-  .textarea-container {
-    height: auto;
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  .textArea {
-    
-    min-height: 50px;
-    font-size: 15px;
-    width: 100%;
-    border: 0px; /* 移除 textarea 的边框 */
-    resize: none; /* 防止調整 textarea 的大小 */
-    outline: none; /* 移除点击时的边框 */
-  }
-  #tag{
-    font-size: 15px;
-    width: 100%;
-    border: 0px; /* 移除 textarea 的边框 */
-    resize: none; /* 防止調整 textarea 的大小 */
-    outline: none;
-  }
-  .split-line {
-    border-top: 1px solid #ccc; 
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
   
   .button-container {
       display: flex;
@@ -487,11 +441,10 @@
    
   }
   .form{
-    top: 100px; 
+    /* top: 100px;  */
       width: 500px;
-      margin-left:650px;
-      margin-bottom: 20px;
-      position: fixed;
+      /* margin-bottom: 20px; */
+      position: absolute;
       z-index: 1000;
       border: 1px solid #ccc;
       padding: 20px;

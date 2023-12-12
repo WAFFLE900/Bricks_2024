@@ -41,6 +41,11 @@ const routes = [
     name: "kerwin",
     component: () => import("../views/Kerwin.vue"),
   },
+  {
+    path: "/personalHomepage",
+    name: "personalHomepage",
+    component: () => import("../views/PersonalHomepage.vue"),
+  },
 ];
 
 const router = createRouter({

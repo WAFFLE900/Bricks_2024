@@ -102,10 +102,7 @@
       </div>
     </div>
    
-<!--   
-    <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
-    <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
-    <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon /> -->
+
     <el-button plain @click="recover"> 復原會議記錄 </el-button>
     <el-button :plain="true" @click="deleteRecord">刪除會議記錄</el-button>
     <el-button :plain="true" @click="deleteForever">永遠刪除</el-button>

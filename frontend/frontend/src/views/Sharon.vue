@@ -38,16 +38,16 @@
 <script>
 import { ref } from "vue";
 // import axios from "axios";
-import SideBar from "../components/SharonBricks/SideBar.vue";
-import NavBar from "../components/SharonBricks/NavBar.vue";
-import EmptyBack from "../components/SharonBricks/EmptyBack.vue";
-import NavBarMain from '../components/SharonBricks/NavBarMain.vue';
-import MeetingCards from '../components/SharonBricks/MeetingCards.vue';
-import TrashCards from "@/components/SharonBricks/TrashCards.vue";
-import NavBarAll from "@/components/SharonBricks/NavBarAll.vue";
-import TrashBar from '../components/SharonBricks/TrashBar.vue';
-import meeting from '../components/KarenBricks/meeting.vue';
-import TextBlock from "@/components/KarenBricks/TextBlock.vue";
+import SideBar from "../components/SideBar.vue";
+import NavBar from "../components/NavBar.vue";
+import EmptyBack from "../components/EmptyBack.vue";
+import NavBarMain from '../components/NavBarMain.vue';
+import MeetingCards from '../components/MeetingCards.vue';
+import TrashCards from "@/components/TrashCards.vue";
+import NavBarAll from "@/components/NavBarAll.vue";
+import TrashBar from '../components/TrashBar.vue';
+import meeting from '../components/meeting.vue';
+import TextBlock from "@/components/TextBlock.vue";
 
 export default {
   components: {

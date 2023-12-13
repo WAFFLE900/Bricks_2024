@@ -182,16 +182,16 @@
   
   import axios from 'axios';
   import { ref } from 'vue';
-  import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
-  import Delete from "@/components/KarenBricks/Delete.vue";
-  import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
+  // import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
+  // import Delete from "@/components/KarenBricks/Delete.vue";
+  // import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
   import { ElNotification } from 'element-plus';
   import { ElMessage } from 'element-plus';
   export default {
     components: {
-      LinkCopy,
-      Delete,
-      BasicInfo,
+      // LinkCopy,
+      // Delete,
+      // BasicInfo,
     },
     
     data() {

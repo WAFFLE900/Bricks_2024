@@ -24,7 +24,6 @@
 
 import { onUnmounted, ref, watch} from 'vue';
 import CardRightClick from './CardRightClick.vue';
-import { RouterLink } from 'vue-router';
 import { useRouter } from "vue-router";
 export default{
     components:{
@@ -67,11 +66,11 @@ export default{
 
 
         // 點擊非指定區域
-        const clickOut = (event) => {
-            if(isShowed && !this.$ref.rightClick.contains(event.target)){
-                unShow();
-            }
-        };
+        // const clickOut = (event) => {
+        //     if(isShowed && !this.$ref.rightClick.contains(event.target)){
+        //         unShow();
+        //     }
+        // };
 
         // mounted (()=>{
         //     window.addEventListener('click' , clickOut);
@@ -81,9 +80,9 @@ export default{
         //     window.addEventListener('click', clickOut);
         // });
            
-        onUnmounted(()=>{
-            window.addEventListener('click' , clickOut);
-        });
+        // onUnmounted(()=>{
+        //     window.addEventListener('click' , clickOut);
+        // });
         
 
 

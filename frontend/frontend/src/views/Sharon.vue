@@ -1,5 +1,12 @@
 <template>
   <div class="sharon" @contextmenu.prevent>
+      <div trigger="click" class="tagsPlace" @click="showTags" v-show="activeOption === null || isShowed">
+        <span class="el-dropdown-link">
+          標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
+        </span>
+      </div>
+      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area>    
+    
     <!-- @click="StopShowing" -->
     <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar>
     <!-- @showAdd="show" -->
@@ -21,7 +28,7 @@
     </div>
     <div class="navAndCont" v-show="isShowed">
       <nav-bar-main class="navBar"></nav-bar-main>
-      <div class="meeting">
+      <div :class="meetingClass">
         <div class="info"><meeting ></meeting></div>
         <div class="textBlock">
           <text-block />
@@ -48,6 +55,7 @@ import NavBarAll from "@/components/NavBarAll.vue";
 import TrashBar from '../components/TrashBar.vue';
 import meeting from '../components/meeting.vue';
 import TextBlock from "@/components/TextBlock.vue";
+import TagSearchArea from '../components/KerwinBricks/TagSearchArea.vue';
 
 export default {
   components: {
@@ -61,10 +69,13 @@ export default {
     TrashBar,
     meeting,
     TextBlock,
+    TagSearchArea,
   },
   setup(props,{emit}) {
+    const meetingClass = ref("meeting");
     const activeOption = ref(null);  
     const isShowed = ref(false);  
+    const tagShowed = ref(false);
 
     // 偵測sideBar的選擇
     const selectedItemUpdate = (option) =>{
@@ -81,6 +92,16 @@ export default {
       activeOption.value = 0;
     };
 
+    const showTags = () =>{
+      tagShowed.value = !tagShowed.value;
+      if(tagShowed.value === true){
+        meetingClass.value = "showingClass";
+      }
+      else{
+        meetingClass.value = "meeting";
+      }
+    };
+
 
     return {
       activeOption,
@@ -88,6 +109,9 @@ export default {
       isShowed,
       // StopShowing,
       show,
+      showTags,
+      tagShowed,
+      meetingClass,
     };
   },
 };
@@ -132,7 +156,7 @@ export default {
   /* border: 1px; */
  }
  .navAndCont{
-  background-color: #F2F3F5;
+  background-color: #DCDFE6;
   position: absolute;
   left: 200px;
   width:auto;
@@ -158,6 +182,44 @@ export default {
   top: 68px;
   left:248px;
   
+ }
+
+ .tagsPlace{
+  position: absolute;
+  right: 32px;
+  top: 68px;
+  border-radius: var(--radius-button-large-radius, 4px);
+  border: 1px solid var(--base-color-border-el-border-color, #DCDFE6);
+  background: #FFF;
+  padding: 4px 16px;
+ }
+
+ .el-dropdown-link{
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+ }
+
+ .el-dropdown-link{
+  color: #C91F2F;
+ }
+
+ .tagInside{
+  position: absolute;
+  right: 32px;
+  top: 114px;
+  z-index: 10;
+ }
+
+ .tagMenu{
+  width: 372px;
+ }
+
+ .showingClass{
+  position: absolute;
+  top: 68px;
+  /* right: 430px; */
+  left: 66px;
  }
 
 </style>

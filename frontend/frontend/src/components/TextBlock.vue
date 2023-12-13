@@ -9,19 +9,71 @@
             <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
           </div>
           <div class="split-line" style="width: 100%;"></div>
-          <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
-        </div>
+          <div class="tags">
+        <el-tag
+          v-for="tag in dynamicTags"
+          :key="tag"
+          class="tag"
+          closable
+          :disable-transitions="false"
+          @close="handleClose(tag)"
+        >
+          {{ tag }}
+        </el-tag>
+        <el-input
+          v-if="inputVisible"
+          ref="InputRef"
+          v-model="inputValue"
+          class="ml-1 w-20"
+          size="small"
+          @keyup.enter="handleInputConfirm"
+          @blur="handleInputConfirm"
+        />
+        <el-button
+        v-if="!inputVisible"
+          class="button-new-tag ml-1"
+          size="small"
+          @click="showInput"
+        >+ 事項</el-button>
+        <el-button
+        v-if="!inputVisible"
+          class="button-new-tag ml-1"
+          size="small"
+          @click="showInput"
+        >+ 組別</el-button>
+      </div>
+      </div>
+        
       </div>
 </template>
 
 <script>
 export default {
-    setup(){
+    data(){
+      return{
 
-        return{
-
-        };
-    }
+      };
+    },
+    methods:{
+        //tags
+      handleClose(tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+      showInput() {
+        this.inputVisible = true;
+        // this.$nextTick(() => {
+        //   this.$refs.InputRef.focus();
+        // });
+      },
+      handleInputConfirm() {
+        if (this.inputValue) {
+          this.dynamicTags.push(this.inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = "";
+      },
+      //tags
+    },
 }
 </script>
 
@@ -80,4 +132,15 @@ export default {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  .tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px 10px;
+}
+.tag {
+  margin-right: 4px;
+}
+.ml-1 {
+  width: 60px;
+}
 </style>

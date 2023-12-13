@@ -91,13 +91,17 @@
           @blur="handleInputConfirm"
         />
         <el-button
-          v-else
+        v-if="!inputVisible"
           class="button-new-tag ml-1"
           size="small"
           @click="showInput"
-        >
-          + New Tag
-        </el-button>
+        >+ 事項</el-button>
+        <el-button
+        v-if="!inputVisible"
+          class="button-new-tag ml-1"
+          size="small"
+          @click="showInput"
+        >+ 組別</el-button>
       </div>
       </div>
     </div>
@@ -231,7 +235,7 @@ export default {
       //tags
       textarea1: "",
       inputValue: "",
-      dynamicTags: ["Tag1", "Tag2", "Tag3"],
+      dynamicTags: [],
       inputVisible: false,
       //tags
       formName:'',
@@ -591,6 +595,6 @@ p {
   margin-right: 4px;
 }
 .ml-1 {
-  width: 80px;
+  width: 60px;
 }
 </style>

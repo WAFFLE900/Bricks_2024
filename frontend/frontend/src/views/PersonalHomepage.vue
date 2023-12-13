@@ -325,6 +325,7 @@
                         this.ended_projects.push(project.project_name);
                     });
                 })
+                this.trash_boxes.length = 0;
             }
             if (index === 3) {
                 this.middle_show_trash_page = true

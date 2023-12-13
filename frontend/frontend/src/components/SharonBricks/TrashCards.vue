@@ -53,6 +53,7 @@ export default {
 
         const deleteForever = () => {
             ElMessage('您已永久刪除會議記錄')
+            unshown();
         }; 
 
         const recover = () => {
@@ -63,6 +64,7 @@ export default {
                 type: 'success',
                 position: 'bottom-right',
             });
+            unshown();
         };
 
 

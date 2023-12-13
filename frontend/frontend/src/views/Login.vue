@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; position: absolute; left: 0; top: 0">
     <div class="nav">
       <a href="./homepage">
         <img src="../assets/brickslogo.svg" alt="" />
@@ -98,14 +98,9 @@
         </div>
         <div class="other_resource">
           <!-- <div v-if="loggedIn">
-              <p>The email is: {{ user.email }}</p>
-            </div> -->
-          <!-- <GoogleLogin
-            class="googleButton"
-            :callback="callback"
-            prompt
-            auto-login
-          /> -->
+            <p>The email is: {{ user.email }}</p>
+          </div> -->
+          <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
           <a href="">
             <div id="FB_login_btn">
               <img src="../assets/FB_login.svg" alt="" />
@@ -140,10 +135,11 @@
 <script>
 import axios from "axios";
 import { Base64 } from "js-base64";
-import { decodeCredential } from "vue3-google-login";
+import { GoogleLogin, decodeCredential } from "vue3-google-login";
 
 export default {
   name: "Login",
+
   data() {
     return {
       showpassword: false,
@@ -156,15 +152,13 @@ export default {
       token: "",
       decode_token_json: "",
       loggedIn: false,
-      user: null,
       callback: (response) => {
         console.log("logged in");
-        this.loggedIn = true;
         console.log(response);
-        this.user = decodeCredential(response.credential);
       },
     };
   },
+  setup() {},
   methods: {
     eyebtn() {
       this.showpassword = !this.showpassword;
@@ -203,7 +197,6 @@ export default {
             this.decode_token_json = this.decodeToken(this.token);
             // 直接取出要的東西
             // console.log("decode_token_json: ", this.decode_token_json.status);
-
             if (this.decode_token_json.status == "success") {
               this.errorTime = 0;
               console.log("登入成功");
@@ -240,16 +233,12 @@ export default {
     decodeToken(token) {
       // 获取Token的第二部分（Payload）
       const encodedPayload = token.split(".")[1];
-
       // 解码Base64字符串
       const decodedPayload = Base64.decode(encodedPayload);
-
       // 将解码后的字符串转换为JavaScript对象
       const payloadObject = JSON.parse(decodedPayload);
-
       // 现在您可以在payloadObject中访问解密后的Token数据
       console.log(payloadObject);
-
       // 返回解密后的Token数据，或进行其他后续处理
       return payloadObject;
     },

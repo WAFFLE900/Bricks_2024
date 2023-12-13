@@ -14,15 +14,11 @@
 
 <script>
 export default {
-  components:{
-
+  components: {},
+  setup() {
+    return {};
   },
-  setup(){
-    return{
-
-    };
-  }
-}
+};
 </script>
 
 <style>
@@ -47,7 +43,7 @@ nav a.router-link-exact-active {
   color: #c91f2f;
 }
 
-#app{
+#app {
   margin: 0;
   padding: 0;
   border: 0;

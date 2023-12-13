@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import ResizeTextarea from 'resize-textarea-vue3'
+import ResizeTextarea from "resize-textarea-vue3";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import vue3GoogleLogin from "vue3-google-login";
@@ -25,11 +25,12 @@ const CLIENT_ID =
 
 app.use(vue3GoogleLogin, {
   clientId: CLIENT_ID,
-  scope: "email",
-  prompt: "consent",
+  // scope: "email",
+  // prompt: "consent",
 });
+
 app.use(ElementPlus);
 app.use(router);
-app.use(ResizeTextarea)
+app.use(ResizeTextarea);
 app.mount("#app");
 // createApp(App).use(router).mount("#app");

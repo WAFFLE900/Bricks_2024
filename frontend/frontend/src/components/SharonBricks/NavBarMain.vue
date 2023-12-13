@@ -7,7 +7,7 @@
             </el-breadcrumb>
         </div>
         <div id="meetingName">
-            <input type="text" id="name" v-model="meeting_name">
+            <input type="text" id="name" placeholder="未命名會議紀錄">
             <el-icon id="edit"><edit-pen/></el-icon>
         </div>
         <div id="toolBar">
@@ -34,7 +34,7 @@ export default {
     },
     setup(){
         return{
-            meeting_name: "未命名會議紀錄",
+            
         };
     }
 }

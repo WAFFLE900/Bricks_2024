@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; position: absolute; left: 0; top: 0">
     <div class="nav" v-if="scroll" style="background-color: transparent">
       <a href="./homepage_2">
         <img src="../assets/brickslogo.svg" alt="" />
@@ -7,8 +7,8 @@
 
       <div class="tribtn">
         <div class="btn">試用</div>
-        <a href="./login_2" class="btn nav_login_btn">登入</a>
-        <a href="./register_2" class="btn" style="margin-right: 0px">註冊</a>
+        <a href="./login" class="btn nav_login_btn">登入</a>
+        <a href="./register" class="btn" style="margin-right: 0px">註冊</a>
       </div>
     </div>
     <div class="nav_scroll" v-else style="background-color: white">
@@ -158,7 +158,7 @@ export default {
   width: 100%;
   height: 65px;
   position: fixed;
-  top: 0;
+  z-index: 100;
 }
 
 .nav_scroll {
@@ -166,7 +166,6 @@ export default {
   height: 65px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: fixed;
-  top: 0;
   z-index: 9;
 }
 
@@ -233,7 +232,8 @@ export default {
   width: 100%;
   height: 100vh;
   background-size: cover;
-  background-position: top;
+  /* background-position: top; */
+  position: relative;
 }
 
 .slogan {

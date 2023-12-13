@@ -69,9 +69,9 @@
           <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
-        <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea> 
+        <!-- <textarea id="tag" v-model="tag" placeholder="選擇標籤類型並建立標籤" style="height: 20px; "></textarea>  -->
         <div class="tags">
-        <!-- <el-tag
+        <el-tag
           v-for="tag in dynamicTags"
           :key="tag"
           class="tag"
@@ -97,7 +97,7 @@
           @click="showInput"
         >
           + New Tag
-        </el-button> -->
+        </el-button>
       </div>
       </div>
     </div>
@@ -228,6 +228,14 @@ export default {
   
   data() {
     return {
+      //tags
+      textarea1: "",
+      inputValue: "",
+      dynamicTags: ["Tag1", "Tag2", "Tag3"],
+      inputVisible: false,
+      //tags
+      formName:'',
+      formPlace:'',
       // handleInputConfirm,
       showOverlay: false,
       form:false,
@@ -339,6 +347,24 @@ export default {
     //   inputValue.value = "";
     // },
 
+    //tags
+    handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    },
+    showInput() {
+      this.inputVisible = true;
+      // this.$nextTick(() => {
+      //   this.$refs.InputRef.focus();
+      // });
+    },
+    handleInputConfirm() {
+      if (this.inputValue) {
+        this.dynamicTags.push(this.inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = "";
+    },
+    //tags
   },
 
 };
@@ -350,7 +376,8 @@ const value1 = ref<[Date, Date]>([
 
 <style>
 .demo-range .el-date-editor {
-  margin: 8px;
+  width: 100%;
+ 
 }
 
 .form-table {
@@ -542,9 +569,9 @@ p {
 .el-input {
   font-size: 15px;
 }
-.demo-range .el-form-item .el-time-picker {
+/* .demo-range .el-form-item .el-time-picker {
   width: 100%;
-}
+} */
 
 
 .commit_button{
@@ -555,14 +582,14 @@ p {
     color: #ffffff;
     justify-content: flex-end; /* 将内容靠右对齐 */
 }
-/* .tags {
+.tags {
   display: flex;
   flex-wrap: wrap;
   margin: 6px 10px;
-} */
-/* .tag {
+}
+.tag {
   margin-right: 4px;
-} */
+}
 .ml-1 {
   width: 80px;
 }

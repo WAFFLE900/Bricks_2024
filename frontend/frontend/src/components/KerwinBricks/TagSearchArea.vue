@@ -1,6 +1,7 @@
 <template>
   <div class="tagSearchArea">
     <div class="tagTypingArea">
+      <!-- <el-button class="taglist">標籤</el-button> -->
       <el-select-v2
         v-model="value"
         filterable
@@ -8,6 +9,7 @@
         placeholder="點擊選擇或輸入標籤"
         multiple
       />
+      
     </div>
     <div class="trans"></div>
     <div class="demo-collapse">
@@ -280,5 +282,9 @@ export default {
   color: #c91f2f;
   border: 1px solid #f4cbcf;
   background-color: white;
+}
+
+.taglist{
+ 
 }
 </style>

@@ -51,7 +51,12 @@
 export default {
     data(){
       return{
-
+        //tags
+      textarea1: "",
+      inputValue: "",
+      dynamicTags: [],
+      inputVisible: false,
+      //tags
       };
     },
     methods:{

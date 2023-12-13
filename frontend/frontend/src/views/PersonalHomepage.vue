@@ -171,9 +171,9 @@
                 class="right_click_box_overview_option"
                 style="
                   border-top-left-radius: 5px;
-                  border-top-right-radius: 5px;
-                "
-                @click=""
+                  border-top-right-radius: 5px;"
+                
+                @click=" "
               >
                 重新命名
               </div>

@@ -3,7 +3,7 @@
         <div id="breadCrum">
             <el-breadcrumb separator="/">
             <el-breadcrumb-item id="first" >會議記錄</el-breadcrumb-item>
-            <el-breadcrumb-item id="now" :color="normal">全部</el-breadcrumb-item>
+            <el-breadcrumb-item id="now">全部</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div id="meetingName">

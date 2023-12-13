@@ -15,8 +15,8 @@
     <div class="demo-collapse">
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item name="1">
-          <template #title>
-            日期
+          <template #title><span>
+            日期</span>
             <el-icon class="header-icon">
               <info-filled />
             </el-icon>
@@ -212,15 +212,30 @@ export default {
 
 .demo-collapse .el-collapse {
   width: 100%;
+  /* border: 2px solid black; */
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+  background: #fff;
 }
 .demo-collapse .el-collapse-item {
   display: flex;
   flex-wrap: wrap;
   border-bottom: 1px solid #e4e7ed;
+  padding: 16px;
+  color: var(--base-color-text-el-text-color-primary, #303133);
+  font-family: PingFang TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
 }
 .demo-collapse .el-collapse-item * {
   display: flex;
   flex-wrap: wrap;
+  
+}
+
+.el-collapse-item > template{
+
 }
 .no-use {
   font-size: 1px;

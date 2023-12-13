@@ -102,10 +102,7 @@
       </div>
     </div>
    
-<!--   
-    <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
-    <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
-    <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon /> -->
+
     <el-button plain @click="recover"> 復原會議記錄 </el-button>
     <el-button :plain="true" @click="deleteRecord">刪除會議記錄</el-button>
     <el-button :plain="true" @click="deleteForever">永遠刪除</el-button>
@@ -231,6 +228,8 @@ export default {
   
   data() {
     return {
+      formName:'',
+      formPlace:'',
       // handleInputConfirm,
       showOverlay: false,
       form:false,
@@ -353,7 +352,8 @@ const value1 = ref<[Date, Date]>([
 
 <style>
 .demo-range .el-date-editor {
-  margin: 8px;
+  width: 100%;
+ 
 }
 
 .form-table {
@@ -545,9 +545,9 @@ p {
 .el-input {
   font-size: 15px;
 }
-.demo-range .el-form-item .el-time-picker {
+/* .demo-range .el-form-item .el-time-picker {
   width: 100%;
-}
+} */
 
 
 .commit_button{
@@ -557,16 +557,5 @@ p {
     display: flex;
     color: #ffffff;
     justify-content: flex-end; /* 将内容靠右对齐 */
-}
-/* .tags {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 6px 10px;
-} */
-/* .tag {
-  margin-right: 4px;
-} */
-.ml-1 {
-  width: 80px;
 }
 </style>

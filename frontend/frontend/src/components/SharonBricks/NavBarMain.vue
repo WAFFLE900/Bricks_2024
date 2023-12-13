@@ -7,7 +7,7 @@
             </el-breadcrumb>
         </div>
         <div id="meetingName">
-            <input type="text" id="name" v-model="meeting_name">
+            <input type="text" id="name" placeholder="未命名會議紀錄">
             <el-icon id="edit"><edit-pen/></el-icon>
         </div>
         <div id="toolBar">
@@ -15,7 +15,7 @@
                 <!-- <el-icon class="el-input__icon"><search /></el-icon> -->
                 <search-bar/>
             </div>
-            <button><el-icon class="icon"><bell/></el-icon></button>
+            <notification-menu class="noti"></notification-menu>
             <user-info id="userInfo"></user-info>
             <el-icon><language/></el-icon>
         </div>
@@ -25,14 +25,16 @@
 <script>
 import UserInfo from './UserInfo.vue';
 import SearchBar from './SearchBar.vue';
+import NotificationMenu from './NotificationMenu.vue';
 export default {
     components:{
         UserInfo,
         SearchBar,
+        NotificationMenu,
     },
     setup(){
         return{
-            meeting_name: "未命名會議紀錄",
+            
         };
     }
 }
@@ -101,7 +103,7 @@ export default {
         border: none;
         padding: 0;
         width: auto;
-        text-align: right;
+        text-align: center;
     }
 
     #toolBar{
@@ -118,12 +120,13 @@ export default {
         cursor: pointer;
     }
     
-    #toolBar .icon{
+    #toolBar .noti{
         display: flex;
         padding: 0px 12px;
         justify-content: center;
         align-items: center;
         align-self: stretch;
+        cursor: pointer;
     }
 
     #searchBar{

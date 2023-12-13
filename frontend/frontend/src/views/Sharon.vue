@@ -18,7 +18,6 @@
       <div class="cards">
         <trash-cards v-for="items in 16" :key="items"></trash-cards>
       </div>
-
     </div>
     <div class="navAndCont" v-show="isShowed">
       <nav-bar-main class="navBar"></nav-bar-main>
@@ -26,6 +25,7 @@
         <div class="info"><meeting ></meeting></div>
         <div class="textBlock">
           <text-block />
+          <text-block/>
       </div>
         
       </div>
@@ -65,10 +65,6 @@ export default {
   setup(props,{emit}) {
     const activeOption = ref(null);  
     const isShowed = ref(false);  
-    const emptyPage = ref(false);
-    const cardPage = ref(false);
-    const trashCardPage = ref(false);
-    const addPage = ref(false);
 
     // 偵測sideBar的選擇
     const selectedItemUpdate = (option) =>{
@@ -77,9 +73,6 @@ export default {
       isShowed.value = false;
     };
 
-    // const StopShowing = ()=>{
-    //   isShowed.value = false;
-    // };
 
     // 點選新增出現新增的頁面
     const show = (value) =>{
@@ -152,16 +145,19 @@ export default {
 
  .textBlock{
   position: absolute;
-  top: 338px;
+  
+  top: 350px;
+  left: -65px;
+  display: grid;
+  grid-row-gap: 8px;
+  /* gap: 8px; */
  }
 
  .meeting{
   position: absolute;
   top: 68px;
   left:248px;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
+  
  }
 
 </style>

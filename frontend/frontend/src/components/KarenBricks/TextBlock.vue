@@ -4,7 +4,8 @@
         <button class="add_cartButton" type="button" @click="add_cart"><el-icon><Plus /></el-icon></button>
         <div class="additional-textarea">
           <div class="textarea-container">
-            <resize-textarea class="textArea" placeholder="請輸入內容" :maxHeight="150" v-model="textValue"></resize-textarea>
+            <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue"></resize-textarea>
+            <!-- :maxHeight="150" -->
             <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
           </div>
           <div class="split-line" style="width: 100%;"></div>
@@ -25,6 +26,10 @@ export default {
 </script>
 
 <style scoped>
+    .cart_container{
+        position: relative;
+        display: flex;
+    }
     .additional-textarea {
     border-radius: 4px;
     width: 890px;
@@ -62,7 +67,7 @@ export default {
   .add_cartButton{
     height: 40px;
     width: 50px;
-    margin-top: 15px;
+    margin-right: 15px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;

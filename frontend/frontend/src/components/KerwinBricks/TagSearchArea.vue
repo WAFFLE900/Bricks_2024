@@ -1,6 +1,7 @@
 <template>
   <div class="tagSearchArea">
     <div class="tagTypingArea">
+      <el-button type="danger">標籤</el-button>
       <el-select-v2
         v-model="value"
         filterable

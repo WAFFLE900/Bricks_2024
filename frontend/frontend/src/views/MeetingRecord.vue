@@ -1,33 +1,21 @@
 <template>
   <div class="sharon" @contextmenu.prevent>
-      <div trigger="click" class="tagsPlace" @click="showTags" v-show="activeOption === null || isShowed">
+    <!-- @update="selectedItemUpdate" -->
+    <!-- :activeIndex="currentActive" -->
+    <!-- @showAdd="show" -->
+      <side-bar class="sideBar"  ></side-bar>
+
+    <!-- 新增、會議記錄主頁 -->
+    <!-- v-show="isShowed" -->
+    <div class="navAndCont"  id="new">
+      <nav-bar-main class="navBar"></nav-bar-main>
+      <!-- 標籤 -->
+      <div trigger="click" class="tagsPlace" @click="showTags">
         <span class="el-dropdown-link">
           標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
         </span>
       </div>
-      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area>    
-    
-    <!-- @click="StopShowing" -->
-    <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar>
-    <!-- @showAdd="show" -->
-    <div class="navAndCont" v-show="activeOption === null">
-      <nav-bar class="navBar"></nav-bar>
-      <empty-back class="content" @showAdd="show"></empty-back>
-    </div >
-    <div v-show="activeOption === '1-1'" class="navAndCont">
-      <nav-bar-all class="navBar" @click="StopShowing"></nav-bar-all>
-      <div class="cards">
-        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed" @showMeeting="show"></meeting-cards>
-      </div>
-    </div>
-    <div v-show="activeOption === '1-2'" class="navAndCont">
-      <trash-bar class="navBar"></trash-bar>
-      <div class="cards">
-        <trash-cards v-for="items in 16" :key="items"></trash-cards>
-      </div>
-    </div>
-    <div class="navAndCont" v-show="isShowed">
-      <nav-bar-main class="navBar"></nav-bar-main>
+      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area>
       <div :class="meetingClass">
         <div class="info"><meeting ></meeting></div>
         <div class="textBlock">
@@ -56,6 +44,7 @@ import TrashBar from '../components/TrashBar.vue';
 import meeting from '../components/meeting.vue';
 import TextBlock from "@/components/TextBlock.vue";
 import TagSearchArea from '../components/KerwinBricks/TagSearchArea.vue';
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -76,21 +65,8 @@ export default {
     const activeOption = ref(null);  
     const isShowed = ref(false);  
     const tagShowed = ref(false);
-
-    // 偵測sideBar的選擇
-    const selectedItemUpdate = (option) =>{
-      activeOption.value = option;
-      console.log("active="+activeOption.value);
-      isShowed.value = false;
-    };
-
-
-    // 點選新增出現新增的頁面
-    const show = (value) =>{
-      isShowed.value = value;
-      console.log(isShowed.value);
-      activeOption.value = 0;
-    };
+    const router = useRouter();
+    const currentActive = ref("1-1")
 
     const showTags = () =>{
       tagShowed.value = !tagShowed.value;
@@ -100,18 +76,20 @@ export default {
       else{
         meetingClass.value = "meeting";
       }
-    };
+    }
 
 
     return {
       activeOption,
-      selectedItemUpdate,
+      // selectedItemUpdate,
       isShowed,
       // StopShowing,
-      show,
+      // show,
       showTags,
       tagShowed,
       meetingClass,
+      // nextPage,
+      currentActive,
     };
   },
 };
@@ -134,26 +112,6 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
- }
- .content{
-    /* grid-area: content; */
-    position: fixed;
-    left: 600px;
-    /* right: 0; */
-    top: 30vh;
-    bottom: 0;
- }
-
- .cards{
-  display: grid;
-  grid-column-gap:16px;
-  grid-row-gap:20px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 28px 10vw 28px 28px;
-
-  position: absolute;
-  top: 48px;
-  /* border: 1px; */
  }
  .navAndCont{
   background-color: #DCDFE6;

@@ -32,9 +32,9 @@ const routes = [
     component: () => import("../views/Karen.vue"),
   },
   {
-    path: "/sharon",
-    name: "sharon",
-    component: () => import("../views/Sharon.vue"),
+    path: "/meetingRecord",
+    name: "meetingRecord",
+    component: () => import("../views/MeetingRecord.vue"),
   },
   {
     path: "/kerwin",
@@ -66,6 +66,26 @@ const routes = [
     name: "personalHomepage",
     component: () => import("../views/PersonalHomepage.vue"),
   },
+  {
+    path: "/empty",
+    name: "empty",
+    component: () => import("../views/Empty.vue"),
+  },
+  {
+    path: "/recordCards",
+    name: "recordCards",
+    component: () => import("../views/RecordCard.vue"),
+  },
+  {
+    path: "/trashBox",
+    name: "trashBox",
+    component: () => import("../views/TrashBox.vue"),
+  },
+  {
+    path: "/searching",
+    name: "searching",
+    component: () => import("../views/Searching.vue"),
+  }
 ];
 
 const router = createRouter({

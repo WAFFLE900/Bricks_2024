@@ -24,6 +24,7 @@
 
 import { onUnmounted, ref, watch} from 'vue';
 import CardRightClick from './CardRightClick.vue';
+import { RouterLink } from 'vue-router';
 import { useRouter } from "vue-router";
 export default{
     components:{
@@ -34,7 +35,7 @@ export default{
     },
 
     setup(props,{emit}){
-        const router = useRouter();
+        const router = useRouter;
         const isShowed= ref(false);
         const url = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
         const normal = "#303133";
@@ -52,8 +53,7 @@ export default{
         };
 
         const nextPage = () => {
-            // emit("showMeeting", true);
-            router.push('/meetingRecord');
+            emit("showMeeting", true);
         };
 
         // watch(() => {
@@ -67,11 +67,11 @@ export default{
 
 
         // 點擊非指定區域
-        // const clickOut = (event) => {
-        //     if(isShowed && !this.$ref.rightClick.contains(event.target)){
-        //         unShow();
-        //     }
-        // };
+        const clickOut = (event) => {
+            if(isShowed && !this.$ref.rightClick.contains(event.target)){
+                unShow();
+            }
+        };
 
         // mounted (()=>{
         //     window.addEventListener('click' , clickOut);
@@ -81,9 +81,9 @@ export default{
         //     window.addEventListener('click', clickOut);
         // });
            
-        // onUnmounted(()=>{
-        //     window.addEventListener('click' , clickOut);
-        // });
+        onUnmounted(()=>{
+            window.addEventListener('click' , clickOut);
+        });
         
 
 

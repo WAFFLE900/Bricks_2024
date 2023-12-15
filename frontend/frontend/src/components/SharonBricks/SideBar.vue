@@ -1,5 +1,4 @@
 <template>
-  <keep-alive>
   <div id="sidebar">
     <div id="container">
     <div id="title" @click="menu_clicked">
@@ -23,15 +22,14 @@
         @open="handleOpen"
         @close="handleClose"
         :active-bg-color= active_color
-        :default-active="activeIndex"
       >
         <el-sub-menu index="1" class="menu">
           <template #title>
             <el-icon><list /></el-icon>
             <span>會議記錄</span>
           </template>
-            <router-link to="/recordCards" class="link"><el-menu-item index="1-1" >全部</el-menu-item></router-link>
-            <router-link to="/trashBox" class="link"><el-menu-item index="1-2" >垃圾桶</el-menu-item></router-link>
+            <el-menu-item index="1-1">全部</el-menu-item>
+            <el-menu-item index="1-2">垃圾桶</el-menu-item>
             <!-- @click="goTrashBox" -->
         </el-sub-menu>
         <el-sub-menu index="2" class="menu">
@@ -57,34 +55,22 @@
   </div> <!-- menuBar -->
   </div> <!-- container -->
 </div>
-  </keep-alive>
+  
 </template> 
 
 <script>
 import { ref } from 'vue';
-// import {mapState, mapMutations} from 'vuex';
-// import store from '@/store';
-import { useRouter } from 'vue-router';
 
 export default {
   components: {
     
   },
-  props:{
-    activeIndex: String,
-  },
-
   setup(props,{emit}) {
     const active_color = ref("#fff")
     const project_name = "專案名稱";
     const incolor = "#C91F2F";
     const activeOption = ref(null);
     const isClicked = ref(false);
-    // const activeIndex = ref("0");
-    const router = useRouter();
-    const activeIndex = ref(props.activeIndex);
-    const menuClass = ref("menu");
-    
 
     // 按下後字體改變顏色
     const menu_clicked = () =>{
@@ -100,15 +86,14 @@ export default {
     // 提供父元件點擊事件
     const addClicked = (value) =>{
       value = true;
-      // emit('showAdd',value);
-      router.push('/meetingRecord');
+      emit('showAdd',value);
     };
 
-    const selected = () =>{
-      menuClass.value = "selected";
-    };
-
-
+    // 改變頁面時停止顯示
+    // const stopShowing = () =>{
+    //   isClicked.value = false;
+    //   // emit('stop', isClicked.value);
+    // };
 
     return {
       project_name,
@@ -121,9 +106,7 @@ export default {
       addClicked,
       // stopShowing,
       isClicked,
-      // setActiveIndex,
-      activeIndex,
-      selected,
+
     };
   }
 }
@@ -226,24 +209,15 @@ export default {
     line-height: 24px;
   }
 
-  /* #menuBar .menu{
-    color: #C91F2F;
-  } */
-
-
-  .menu :hover{
-    background-color: #FAE4E7;
+  #menuBar .menu{
     color: #C91F2F;
   }
 
-  .link{
-    text-decoration: none;
+  .menu :active{
+    
   }
 
-  .selected{
-    background-color: #FAE4E7;
-    color:#C91F2F;
-  }
+
 
   
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="karen">
+    <side-bar/>
 <div class="button-container">
         <button type="button" onclick="handleButtonClick('button1')">
           <el-icon style="color: red;"><ArrowUp /></el-icon></button>
@@ -225,9 +226,11 @@ import { ref } from 'vue';
 // import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
 import { ElNotification } from 'element-plus';
 import { ElMessage } from 'element-plus';
+import SideBar from '../components/SideBar.vue';
 export default {
   name:'Karen',
   components: {
+    SideBar,
   },
   
   data() {

@@ -20,7 +20,6 @@
         <div class="info"><meeting ></meeting></div>
         <div class="textBlock">
           <text-block />
-          <text-block/>
       </div>
         
       </div>

@@ -5,10 +5,27 @@
       <el-select-v2
         v-model="value"
         filterable
-        :options="options1"
         placeholder="點擊選擇或輸入標籤"
+        multiple = "true"
+        allow-create
+      >
+      <!-- :options="options1" -->
+      <!-- <el-select-v2
+        v-model="value"
         multiple
-      />
+        filterable
+        allow-create
+        default-first-option
+        :reserve-keyword="false"
+        placeholder="點擊選擇或輸入標籤"
+      > -->
+        <el-option
+          v-for="item in options1"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select-v2>
       
     </div>
     <div class="trans"></div>
@@ -115,6 +132,7 @@ export default {
   setup() {
     const initials = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
     const selectedOptions = ref([]);
+    const value = ref([]);
     const options1 = Array.from({ length: 1000 }).map((_, idx) => ({
       key: `Option${idx + 1}`, // Assuming key is needed
       label: `${initials[idx % 10]}${idx}`,
@@ -156,6 +174,7 @@ export default {
       if (tagsDate.value[idx].checked) {
         const checkedTag = tagsDate.value.splice(idx, 1)[0];
         tagsDate.value.unshift(checkedTag);
+        // value.push(checkedTag);
       } else if (!tagsDate.value[idx].checked) {
         const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
         tagsDate.value.push(uncheckedTag);
@@ -174,6 +193,7 @@ export default {
         const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
         tagsDate.value.push(uncheckedTag);
       }
+
     };
 
     return {
@@ -186,6 +206,7 @@ export default {
       tagsThing,
       tagsTeam,
       onChange,
+      value,
     };
   },
   methods() {},

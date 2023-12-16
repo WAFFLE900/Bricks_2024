@@ -231,7 +231,7 @@ line-height: 24px;
   
     min-height: 50px;
     font-size: 15px;
-    width: 100%;
+    width: 90%;
     border: 0px; /* 移除 textarea 的边框 */
     resize: none; /* 防止調整 textarea 的大小 */
     outline: none; /* 移除点击时的边框 */

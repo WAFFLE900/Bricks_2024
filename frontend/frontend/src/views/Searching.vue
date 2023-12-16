@@ -1,9 +1,9 @@
 <template>
     <div class="view">
-    <side-bar class="sideBar"/>
-    <div class="navAndCont"  id="new">
+    <!-- <side-bar class="sideBar"/> -->
+    <div class="navAndCont" >
 
-      <nav-bar-main class="navBar"></nav-bar-main>
+      <!-- <nav-bar-main class="navBar"></nav-bar-main> -->
       
       <div class="result">    
             
@@ -22,12 +22,12 @@
             </div>
         
       <!-- 標籤 -->
-      <div trigger="click" class="tagsPlace" @click="showTags">
+      <!-- <div trigger="click" class="tagsPlace" @click="showTags">
         <span class="el-dropdown-link">
           標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
         </span>
       </div>
-      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area>
+      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area> -->
       
       
     

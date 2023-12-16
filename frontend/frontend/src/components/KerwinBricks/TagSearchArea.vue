@@ -3,11 +3,14 @@
     <div class="tagTypingArea">
       <!-- <el-button class="taglist">標籤</el-button> -->
       <el-select
-        v-model="value"
+        v-model= "selectedOptions"
         filterable
         :options="options1"
         placeholder="點擊選擇或輸入標籤"
         multiple = "true"
+        autocomplete="false"
+        automatic-dropdown="false"
+        @remove-tag="handleChange"
       />
       
     </div>
@@ -109,13 +112,15 @@
 <script>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 export default {
   name: "TagSearchArea",
-  setup() {
-    const initials = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+  setup(props,{emit}) {
+    const initials = ref(['a','b','c','d','e','f','g','h','i']);
+    const router = useRouter();
     const selectedOptions = ref([]);
-    const value = ref("");
+    const value = ref("嗨");
     const checked = ref(false);
     const options1 = Array.from({ length: 1000 }).map((_, idx) => ({
       key: `Option${idx + 1}`, // Assuming key is needed
@@ -151,15 +156,17 @@ export default {
     ]);
 
     const onChange = (tag, idx) => {
+      goSearch();
       if(tag === "tagD"){
         tagsDate.value[idx].checked = !tagsDate.value[idx].checked;
         if (tagsDate.value[idx].checked) {
           const checkedTag = tagsDate.value.splice(idx, 1)[0];
           tagsDate.value.unshift(checkedTag);
-        // value.push(checkedTag);
+          selectedOptions.value.push(checkedTag.label);
         } else if (!tagsDate.value[idx].checked) {
           const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
           tagsDate.value.push(uncheckedTag);
+          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
         }
       }
       else if(tag === "tag2"){
@@ -167,9 +174,11 @@ export default {
         if (tagsThing.value[idx].checked) {
           const checkedTag = tagsThing.value.splice(idx, 1)[0];
           tagsThing.value.unshift(checkedTag);
+          selectedOptions.value.push(checkedTag);
         } else if (!tagsThing.value[idx].checked) {
           const uncheckedTag = tagsThing.value.splice(idx, 1)[0];
           tagsThing.value.push(uncheckedTag);
+          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
         }
       }
       else{
@@ -177,12 +186,21 @@ export default {
         if (tagsTeam.value[idx].checked) {
           const checkedTag = tagsTeam.value.splice(idx, 1)[0];
           tagsTeam.value.unshift(checkedTag);
+          selectedOptions.value.push(checkedTag.label);
         } else if (!tagsTeam.value[idx].checked) {
           const uncheckedTag = tagsTeam.value.splice(idx, 1)[0];
           tagsTeam.value.push(uncheckedTag);
+          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
         }
       }
     };
+    const goSearch = () => {
+      if(selectedOptions.value != null) {
+      // router.push('/searching');
+      emit('showBlock',false);
+    }
+    };
+    
 
     return {
       selectedOptions,
@@ -195,9 +213,9 @@ export default {
       tagsTeam,
       onChange,
       value,
+      goSearch,
     };
   },
-  methods() {},
 };
 </script>
 

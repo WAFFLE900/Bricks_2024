@@ -2,8 +2,12 @@
     <div class="karen">
   
       <div class="button-container">
-          <button type="button" onclick="handleButtonClick('button1')">
-            <el-icon style="color: red;"><ArrowUp /></el-icon></button>
+        <el-backtop visibility-height="0" class="backtop">
+                <div id="backtop">
+                    <el-icon class="icon"><upload/></el-icon>
+                </div>
+                </el-backtop>
+            
             <el-button type="button" @click="showBasicInfo"><el-icon><Edit /></el-icon>會議基本資訊</el-button>
             <el-button :plain="true" @click="copyLinkBtn"><el-icon><Link /></el-icon></el-button>
       </div>
@@ -182,9 +186,6 @@
   
   import axios from 'axios';
   import { ref } from 'vue';
-  // import LinkCopy from "@/components/KarenBricks/LinkCopy.vue";
-  // import Delete from "@/components/KarenBricks/Delete.vue";
-  // import BasicInfo from "@/components/KarenBricks/BasicInfo.vue";
   import { ElNotification } from 'element-plus';
   import { ElMessage } from 'element-plus';
   export default {
@@ -363,18 +364,19 @@
       height:40px;
       width:910px;
       margin-bottom: 14px;
+      margin-left: 696px;
       /* top: 20px;
       left: 248px; */
       /* margin-bottom: 0px; */
   }
-  .button-container button:first-child {
-      margin-right: auto; /* 将第一个按钮推到最左边 */
+   /* .button-container button:first-child {
+     margin-left: 400px;
       width: 50px;
       background-color: white;
       border: 1px solid #ccc;
       border-radius: 4px;
-  }
-  .button-container button:nth-child(2) {
+  } */
+  /* .button-container button:nth-child(2) {
     margin-right: 20px;
     width: 140px;
     background-color: white;
@@ -383,7 +385,7 @@
     display: flex;
     align-items: center;
     
-  }
+  }  */
   .button-container button:nth-child(2) .el-icon {
     margin: 10px; /* 设置图标与文本之间的右边距 */
   }
@@ -468,5 +470,16 @@
       color: #ffffff;
       justify-content: flex-end; /* 将内容靠右对齐 */
   }
-  
+  #backtop{
+    background-color: var(--el-bg-color-overlay);
+    box-shadow: var(--el-box-shadow-lighter);
+    text-align: center;
+    color: #C91F2F;
+    padding: 9px 16px;
+    justify-content: left;
+    position: fixed;
+    left: 255px;
+    top: 70px;
+ }
+
   </style>

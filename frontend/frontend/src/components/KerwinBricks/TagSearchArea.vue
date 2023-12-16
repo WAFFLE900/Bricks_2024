@@ -2,30 +2,13 @@
   <div class="tagSearchArea">
     <div class="tagTypingArea">
       <!-- <el-button class="taglist">標籤</el-button> -->
-      <el-select-v2
+      <el-select
         v-model="value"
         filterable
+        :options="options1"
         placeholder="點擊選擇或輸入標籤"
         multiple = "true"
-        allow-create
-      >
-      <!-- :options="options1" -->
-      <!-- <el-select-v2
-        v-model="value"
-        multiple
-        filterable
-        allow-create
-        default-first-option
-        :reserve-keyword="false"
-        placeholder="點擊選擇或輸入標籤"
-      > -->
-        <el-option
-          v-for="item in options1"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select-v2>
+      />
       
     </div>
     <div class="trans"></div>
@@ -43,7 +26,7 @@
               v-for="(tagD, idx) in tagsDate"
               :key="`tagD_${idx}`"
               :checked="tagD.checked"
-              @change="onChange(tagD, idx)"
+              @change="onChange('tagD', idx)"
               :class="{ tagChecked: tagD.checked, tagUnchecked: !tagD.checked }"
             >
               {{ tagD.label }}
@@ -70,7 +53,7 @@
               v-for="(tag2, idx) in tagsThing"
               :key="`tag2_${idx}`"
               :checked="tag2.checked"
-              @change="onChange(tag2, idx)"
+              @change="onChange('tag2', idx)"
               :class="{ tagChecked: tag2.checked, tagUnchecked: !tag2.checked }"
             >
               {{ tag2.label }}
@@ -97,7 +80,7 @@
               v-for="(tag, idx) in tagsTeam"
               :key="`tag3_${idx}`"
               :checked="tag.checked"
-              @change="onChange(tag, idx)"
+              @change="onChange( 'tag', idx)"
               :class="{ tagChecked: tag.checked, tagUnchecked: !tag.checked }"
             >
               {{ tag.label }}
@@ -132,7 +115,8 @@ export default {
   setup() {
     const initials = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
     const selectedOptions = ref([]);
-    const value = ref([]);
+    const value = ref("");
+    const checked = ref(false);
     const options1 = Array.from({ length: 1000 }).map((_, idx) => ({
       key: `Option${idx + 1}`, // Assuming key is needed
       label: `${initials[idx % 10]}${idx}`,
@@ -142,58 +126,62 @@ export default {
       console.log(val);
     };
     const tagsDate = ref([
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
+      { label: "2021/10/12", checked: false },
+      { label: "2022/10/12", checked: false },
+      { label: "2023", checked: false },
+      { label: "10/13", checked: false },
+      { label: "10/14", checked: false },
+      { label: "1014/01/12", checked: false },
     ]);
     const tagsThing = ref([
-      { label: "Tag 1", checked: false },
-      { label: "Tag 8", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
+      { label: "早餐", checked: false },
+      { label: "午餐", checked: false },
+      { label: "開會", checked: false },
+      { label: "事項", checked: false },
+      { label: "重要", checked: false },
+      { label: "非常重要", checked: false },
     ]);
     const tagsTeam = ref([
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
-      { label: "Tag 1", checked: false },
-      { label: "Tag 2", checked: false },
+      { label: "前端", checked: false },
+      { label: "後端", checked: false },
+      { label: "美宣", checked: false },
+      { label: "設計", checked: false },
+      { label: "場佈", checked: false },
+      { label: "視覺", checked: false },
     ]);
-    const checked = ref(false);
 
     const onChange = (tag, idx) => {
-      tagsDate.value[idx].checked = !tagsDate.value[idx].checked;
-      tagsTeam.value[idx].checked = !tagsTeam.value[idx].checked;
-      tagsThing.value[idx].checked = !tagsThing.value[idx].checked;
-      if (tagsDate.value[idx].checked) {
-        const checkedTag = tagsDate.value.splice(idx, 1)[0];
-        tagsDate.value.unshift(checkedTag);
+      if(tag === "tagD"){
+        tagsDate.value[idx].checked = !tagsDate.value[idx].checked;
+        if (tagsDate.value[idx].checked) {
+          const checkedTag = tagsDate.value.splice(idx, 1)[0];
+          tagsDate.value.unshift(checkedTag);
         // value.push(checkedTag);
-      } else if (!tagsDate.value[idx].checked) {
-        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
-        tagsDate.value.push(uncheckedTag);
+        } else if (!tagsDate.value[idx].checked) {
+          const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
+          tagsDate.value.push(uncheckedTag);
+        }
       }
-      if (tagsTeam.value[idx].checked) {
-        const checkedTag = tagsTeam.value.splice(idx, 1)[0];
-        tagsTeam.value.unshift(checkedTag);
-      } else if (!tagsDate.value[idx].checked) {
-        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
-        tagsDate.value.push(uncheckedTag);
+      else if(tag === "tag2"){
+        tagsThing.value[idx].checked = !tagsThing.value[idx].checked;
+        if (tagsThing.value[idx].checked) {
+          const checkedTag = tagsThing.value.splice(idx, 1)[0];
+          tagsThing.value.unshift(checkedTag);
+        } else if (!tagsThing.value[idx].checked) {
+          const uncheckedTag = tagsThing.value.splice(idx, 1)[0];
+          tagsThing.value.push(uncheckedTag);
+        }
       }
-      if (tagsThing.value[idx].checked) {
-        const checkedTag = tagsThing.value.splice(idx, 1)[0];
-        tagsThing.value.unshift(checkedTag);
-      } else if (!tagsDate.value[idx].checked) {
-        const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
-        tagsDate.value.push(uncheckedTag);
+      else{
+        tagsTeam.value[idx].checked = !tagsTeam.value[idx].checked;
+        if (tagsTeam.value[idx].checked) {
+          const checkedTag = tagsTeam.value.splice(idx, 1)[0];
+          tagsTeam.value.unshift(checkedTag);
+        } else if (!tagsTeam.value[idx].checked) {
+          const uncheckedTag = tagsTeam.value.splice(idx, 1)[0];
+          tagsTeam.value.push(uncheckedTag);
+        }
       }
-
     };
 
     return {
@@ -227,7 +215,7 @@ export default {
   /* border: 2px solid black; */
 }
 
-.tagSearchArea .tagTypingArea .el-select-v2 {
+.tagSearchArea .tagTypingArea .el-select {
   width: 100%;
 }
 

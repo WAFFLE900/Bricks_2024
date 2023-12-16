@@ -11,7 +11,8 @@
         autocomplete="false"
         automatic-dropdown="false"
         @remove-tag="deleteTag"
-      />
+      >
+      </el-select>
       
     </div>
     <div class="trans"></div>
@@ -175,7 +176,8 @@ export default {
       else{
         const tagNow = tagsTeam.value[idx];
         tagNow.checked = !tagsTeam.value[idx].checked;
-        tagsTeam.value.sort((a,b) => b.checked - a.checked);
+        arraySorter(tagsTeam);
+        // tagsTeam.value.sort((a,b) => b.checked - a.checked);
         if(tagNow.checked){
           selectedOptions.value.push(tagNow);
         }
@@ -190,13 +192,18 @@ export default {
       }
     };
 
+    const arraySorter = (arrayGroup) => {
+      arrayGroup.value.sort((a,b) => b.checked - a.checked);
+    };
+
     const arrayFilter = () => {
       selectedOptions.value = selectedOptions.value.filter(tag => tag.checked !== false);
     };
 
     const deleteTag = (tag) => {
       tag.checked = false;
-      // selectedOptions.value = selectedOptions.value.filter(tag => tag.checked);
+      // arraySorter();  //刪除後想要重新排序內部
+      arrayFilter();
       console.log(tag.label);
     };
     

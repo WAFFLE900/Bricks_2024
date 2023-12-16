@@ -5,7 +5,6 @@
         <div class="additional-textarea">
           <div class="textarea-container">
             <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue"></resize-textarea>
-            <!-- :maxHeight="150" -->
             <button class="edit_textButton" type="button" @click="edit_textArea"><el-icon><MoreFilled /></el-icon></button>
           </div>
           <div class="split-line" style="width: 100%;"></div>

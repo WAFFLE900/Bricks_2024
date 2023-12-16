@@ -12,7 +12,7 @@
       <div :class="meetingClass">
         <div class="info"><meeting ></meeting></div>
         <div class="textBlock">
-          <text-block />
+          <text-block v-for="cart in quantity" :key="cart" @add_cart="add_block"/>
       </div>
         
       </div>
@@ -78,6 +78,7 @@ export default {
     const router = useRouter();
     const currentActive = ref("1-1");
     const showedInfo = ref(true);
+    const quantity = ref(1);
 
     const showTags = () =>{
       tagShowed.value = !tagShowed.value;
@@ -92,7 +93,9 @@ export default {
     const showInfo = (value) =>{
       showedInfo.value = value;
     };
-
+    const add_block = () =>{
+      quantity.value +=1;
+    }
 
     return {
       activeOption,
@@ -107,6 +110,8 @@ export default {
       currentActive,
       showInfo,
       showedInfo,
+      quantity,
+      add_block,
     };
   },
 };

@@ -1,12 +1,11 @@
 <template>
     
-  <div class="cart_container">
+  <div class="cart_container" >
     <el-button class="add_cartButton"  @click="add_cart"><el-icon><Plus /></el-icon></el-button>
     <div class="additional-textarea">
         <div class="textarea-container">
-          <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue"></resize-textarea>
+          <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue" :disabled="isCartDisabled" ></resize-textarea>
           <el-button class="edit_textButton" @click="show()"><el-icon><MoreFilled /></el-icon></el-button>
-          <!-- <div v-if="isShowed" class="editCPN"><EditTextara /></div> -->
         </div>
         <div class="split-line" style="width: 100%;"></div>
         <div class="tags">
@@ -34,18 +33,18 @@
         class="button-new-tag ml-1"
         size="small"
         @click="showInput"
-      >+ 事項</el-button>
+        :disabled="isCartDisabled" @locked="isLocked">+ 事項</el-button>
       <el-button
       v-if="!inputVisible"
         class="button-new-tag ml-1"
         size="small"
         @click="showInput"
-      >+ 組別</el-button>
+        :disabled="isCartDisabled" @locked="isLocked">+ 組別</el-button>
     </div>
     </div>
   </div>
 
-  <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow()"><EditTextara  /></div>        
+  <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow()"><EditTextara @locked="isLocked"/></div>        
 
 </template>
 
@@ -66,6 +65,7 @@ setup(props, { emit }) {
   const inputVisible = ref(false);
   const isShowed= ref(false);
   const rightClickRef = ref(null);
+  const isCartDisabled = ref(false);
   const cartContainers = ref([{
     belowCarts: [],  // 当前 cart 下方的其他 cart
   }]);
@@ -102,24 +102,26 @@ setup(props, { emit }) {
   const handleClickOutside = (event) => {
   const rightClick = rightClickRef.value;
 
-  if (rightClick && !rightClick.contains(event.target)) {
-    unShow(index); // 或者使用具體的索引值
-  }
-};
+    if (rightClick && !rightClick.contains(event.target)) {
+      unShow(index); // 或者使用具體的索引值
+    }
+  };
 
+  const isLocked = (value) =>{
+    isCartDisabled.value = value;
+  }
   const add_cart = () => {
-    // 为了保证唯一性，使用当前时间戳作为唯一标识
-    const uniqueId = Date.now().toString();
     
-    // 新增一个 cart_container 对象
-    cartContainers.value.push({
-      id: uniqueId,
-      textValue: '',  // 可以在这里设置 cart_container 的初始数据
-      dynamicTags: [],
-      inputValue: '',
-      inputVisible: false,
-      isShowed: false,
-    });
+    // const uniqueId = Date.now().toString();
+    // cartContainers.value.push({
+    //   id: uniqueId,
+    //   textValue: '',  
+    //   dynamicTags: [],
+    //   inputValue: '',
+    //   inputVisible: false,
+    //   isShowed: false,
+    // });
+    emit('add_cart');
   };
   
 
@@ -144,7 +146,8 @@ setup(props, { emit }) {
     isShowed,
     rightClickRef,
     add_cart,
-    cartContainers,
+    isCartDisabled,
+    isLocked,
   };
 },
 };

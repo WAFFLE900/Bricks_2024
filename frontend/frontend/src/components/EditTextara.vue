@@ -43,16 +43,13 @@ export default {
         // document.removeEventListener('click', handleClickOutside);
         // });
 
-        const change = (status) => {
-            status = false;
-            emit('chosen', status);
-        };
+        // const change = (status) => {
+        //     status = false;
+        //     emit('chosen', status);
+        // };
         
         const lockEdit = () => {
-            
-
-            // status = false;
-            // emit('clicked',false)
+            emit('locked',true)
         };
         const deleteTxt =()=>{
             
@@ -60,8 +57,8 @@ export default {
             // emit('clicked',status)
         };
         return{
-            change,
-            status,
+            // change,
+            // status,
             lockEdit,
             deleteTxt,
         }

@@ -1,12 +1,12 @@
 <template>
     
-  <div v-for="(cart, index) in cartContainers" :key="cart.id" class="cart_container">
+  <div class="cart_container">
     <el-button class="add_cartButton"  @click="add_cart"><el-icon><Plus /></el-icon></el-button>
     <div class="additional-textarea">
         <div class="textarea-container">
           <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue"></resize-textarea>
-          <el-button class="edit_textButton" @click="show(index)"><el-icon><MoreFilled /></el-icon></el-button>
-          <div v-if="cart.isShowed" class="editCPN"><EditTextara /></div>
+          <el-button class="edit_textButton" @click="show()"><el-icon><MoreFilled /></el-icon></el-button>
+          <!-- <div v-if="isShowed" class="editCPN"><EditTextara /></div> -->
         </div>
         <div class="split-line" style="width: 100%;"></div>
         <div class="tags">
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow(index)"><EditTextara  /></div>        
+  <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow()"><EditTextara  /></div>        
 
 </template>
 
@@ -91,15 +91,13 @@ setup(props, { emit }) {
   };
 
   const edit_textArea = () => {
-    // Your implementation for edit_textArea
+
   };
-  const show = (index) => {
- 
-  cartContainers.value[index].isShowed = true;
+  const show = () => {
+    isShowed.value = !isShowed.value;
   };
-  const unShow = (index) => {
-  // 在点击时将指定索引的 cart_container 的 isShowed 设置为 false
-  cartContainers.value[index].isShowed = false;
+  const unShow = () => {
+    isShowed.value = !isShowed.value;
   };
   const handleClickOutside = (event) => {
   const rightClick = rightClickRef.value;

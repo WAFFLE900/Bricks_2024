@@ -10,7 +10,7 @@
         multiple = "true"
         autocomplete="false"
         automatic-dropdown="false"
-        @remove-tag="handleChange"
+        @remove-tag="deleteTag"
       />
       
     </div>
@@ -120,7 +120,6 @@ export default {
     const initials = ref(['a','b','c','d','e','f','g','h','i']);
     const router = useRouter();
     const selectedOptions = ref([]);
-    const value = ref("嗨");
     const checked = ref(false);
     const options1 = Array.from({ length: 1000 }).map((_, idx) => ({
       key: `Option${idx + 1}`, // Assuming key is needed
@@ -158,47 +157,47 @@ export default {
     const onChange = (tag, idx) => {
       goSearch();
       if(tag === "tagD"){
-        tagsDate.value[idx].checked = !tagsDate.value[idx].checked;
-        if (tagsDate.value[idx].checked) {
-          const checkedTag = tagsDate.value.splice(idx, 1)[0];
-          tagsDate.value.unshift(checkedTag);
-          selectedOptions.value.push(checkedTag.label);
-        } else if (!tagsDate.value[idx].checked) {
-          const uncheckedTag = tagsDate.value.splice(idx, 1)[0];
-          tagsDate.value.push(uncheckedTag);
-          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
+        const tagNow = tagsDate.value[idx];
+        tagNow.checked = !tagsDate.value[idx].checked;
+        tagsDate.value.sort((a,b) => b.checked - a.checked);
+        if(tagNow.checked){
+          selectedOptions.value.push(tagNow);
         }
       }
       else if(tag === "tag2"){
-        tagsThing.value[idx].checked = !tagsThing.value[idx].checked;
-        if (tagsThing.value[idx].checked) {
-          const checkedTag = tagsThing.value.splice(idx, 1)[0];
-          tagsThing.value.unshift(checkedTag);
-          selectedOptions.value.push(checkedTag);
-        } else if (!tagsThing.value[idx].checked) {
-          const uncheckedTag = tagsThing.value.splice(idx, 1)[0];
-          tagsThing.value.push(uncheckedTag);
-          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
+        const tagNow = tagsThing.value[idx];
+        tagNow.checked = !tagsThing.value[idx].checked;
+        tagsThing.value.sort((a,b) => b.checked - a.checked);
+        if(tagNow.checked){
+          selectedOptions.value.push(tagNow);
         }
       }
       else{
-        tagsTeam.value[idx].checked = !tagsTeam.value[idx].checked;
-        if (tagsTeam.value[idx].checked) {
-          const checkedTag = tagsTeam.value.splice(idx, 1)[0];
-          tagsTeam.value.unshift(checkedTag);
-          selectedOptions.value.push(checkedTag.label);
-        } else if (!tagsTeam.value[idx].checked) {
-          const uncheckedTag = tagsTeam.value.splice(idx, 1)[0];
-          tagsTeam.value.push(uncheckedTag);
-          selectedOptions.value = selectedOptions.value.filter(tag => tag.checked == false);
+        const tagNow = tagsTeam.value[idx];
+        tagNow.checked = !tagsTeam.value[idx].checked;
+        tagsTeam.value.sort((a,b) => b.checked - a.checked);
+        if(tagNow.checked){
+          selectedOptions.value.push(tagNow);
         }
       }
+      arrayFilter();
     };
+    
     const goSearch = () => {
       if(selectedOptions.value != null) {
       // router.push('/searching');
-      emit('showBlock',false);
-    }
+        emit('showBlock',false);
+      }
+    };
+
+    const arrayFilter = () => {
+      selectedOptions.value = selectedOptions.value.filter(tag => tag.checked !== false);
+    };
+
+    const deleteTag = (tag) => {
+      tag.checked = false;
+      // selectedOptions.value = selectedOptions.value.filter(tag => tag.checked);
+      console.log(tag.label);
     };
     
 
@@ -212,8 +211,8 @@ export default {
       tagsThing,
       tagsTeam,
       onChange,
-      value,
       goSearch,
+      deleteTag,
     };
   },
 };
@@ -260,15 +259,9 @@ export default {
   flex-wrap: wrap;
   
 }
-
-.el-collapse-item > template{
-
-}
 .no-use {
   font-size: 1px;
   color: white;
-}
-.header-icon {
 }
 .order {
   display: flex;

@@ -27,7 +27,7 @@
               <label for="time">時間</label>
             </td>
             <td class="input-cell">
-              <input type="place" id="time" v-model="place" class="text-input" placeholder="-">
+              <input type="place" id="time" v-model="time" class="text-input" placeholder="-">
             </td>
           </tr>
           <tr>
@@ -35,7 +35,8 @@
               <label for="attend">出席人員</label>
             </td>
             <td class="input-cell">
-              <input type="place" id="attend" v-model="place" class="text-input" placeholder="-">
+              <el-tag class="ml-2" type="danger" v-for="(option, index) in optionsA" :key="index">{{ option.label }}</el-tag>
+              <!-- <input type="attend" id="attend" v-model="attends" class="text-input" placeholder="-"> -->
             </td>
           </tr>
           <tr>
@@ -51,7 +52,9 @@
               <label for="absent">缺席人員</label>
             </td>
             <td class="input-cell">
-              <input type="absent" id="absent" v-model="absent" class="text-input" placeholder="-">
+              <el-tag class="ml-2" type="danger" v-for="(option, index) in optionsB" :key="index">{{ option.label }}</el-tag>
+
+              <!-- <input type="absent" id="absent" v-model="absents" class="text-input" placeholder="-"> -->
             </td>
           </tr>
           <tr>
@@ -59,46 +62,38 @@
               <label for="record">紀錄人員</label>
             </td>
             <td class="input-cell">
-              <input type="record" id="record" v-model="record" class="text-input" placeholder="-">
+              <el-tag class="ml-2" type="danger" v-for="(option, index) in optionsC" :key="index">{{ option.label }}</el-tag>
+              <!-- <input type="record" id="record" v-model="recorder" class="text-input" placeholder="-"> -->
             </td>
           </tr>
         </table>
       </div>
       
-      
-     
-    
-      <!-- <el-alert class = "popUp_msg" title="已刪除會議紀錄" type="warning" show-icon :style="{ backgroundColor: '#FFEFF0',color: '#EB3B23' }" />
-      <el-alert class = "popUp_msg" title="已儲存會議基本資訊" type="success" show-icon />
-      <el-alert class = "popUp_msg" title="您已永久刪除會議紀錄" type="info" show-icon />
-      <el-button plain @click="recover"> 復原會議記錄 </el-button>
-      <el-button :plain="true" @click="deleteRecord">刪除會議記錄</el-button>
-      <el-button :plain="true" @click="deleteForever">永遠刪除</el-button> -->
-  
       <div class="overlay" v-show="showOverlay"></div>
-      <div class="form" v-show="form">
+      <div class="form" v-show="form.show">
           <p class="formName">設定會議基本資訊
               <button class="close-button" type="button" @click="close"><el-icon><Close /></el-icon></button>
           </p>
           <el-form :model="form" >
               <el-form-item label="會議名稱">
-              <el-input v-model="formName"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
+              <el-input v-model="form.data.formName"  :style="{ width: '500px' }" placeholder="輸入會議名稱"/>
           </el-form-item>
         <el-form-item label="日期">
           <div class="demo-date-picker" >
           <el-date-picker
-              v-model="value1"
+              v-model="form.data.date"
               type="date"
               placeholder="Pick a date"
               :default-value="new Date(2010, 9, 1)"
               :style="{ width: '500px' }"
+              
           />
           </div>
         </el-form-item>
         <el-form-item label="開會時間">
             <div class="demo-range" >
               <el-time-picker
-              v-model="value2"
+              v-model="form.data.time"
               is-range
               range-separator="To"
               start-placeholder="Start time"
@@ -127,20 +122,20 @@
     </el-select>
         </el-form-item>
         <el-form-item label="會議進行地點">
-              <el-input v-model="formPlace"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
+              <el-input v-model="form.data.place"  :style="{ width: '500px' }" placeholder="輸入會議地點"/>
           </el-form-item>
           <el-form-item label="缺席人員">
             <el-select
-      v-model="valueB"
-      multiple
-      filterable
-      allow-create
-      default-first-option
-      :reserve-keyword="false"
-      placeholder="選擇缺席人員"
-      :style="{ width: '500px' }"
-      @change="handleSelectChangeB"
-    >
+            v-model="valueB"
+            multiple
+            filterable
+            allow-create
+            default-first-option
+            :reserve-keyword="false"
+            placeholder="選擇缺席人員"
+            :style="{ width: '500px' }"
+            @change="handleSelectChangeB"
+          >
       <el-option
         v-for="item in optionsB"
         :key="item.value"
@@ -179,6 +174,7 @@
       </div>
       <!-- <BasicInfo /> -->
       <!-- <Delete /> -->
+
     </div>
   </template>
   
@@ -186,7 +182,7 @@
   
   import axios from 'axios';
   import { ref } from 'vue';
-  import { ElNotification } from 'element-plus';
+  import { ElNotification, useTransitionFallthroughEmits } from 'element-plus';
   import { ElMessage } from 'element-plus';
   export default {
     components: {
@@ -197,31 +193,42 @@
     
     data() {
       return {
-        formName:'',
+        form: {
+          show: false,
+          data: {
+            formName: '',
+            date:'',
+            time:'',
+            place:'',
+            // 其他表單項目
+          },
+      },
+      meetingName: '',
+      time:'',
+      attends:[],
+      place:'',
+      absents:'',
+      recorder:'',
+        
         formPlace:'',
+        
         showOverlay: false,
-        form:false,
         value: '',
-        meetingName: "",
         placeholder: "輸入會議名稱",
-        height: '30px',
-        basicComponent: null,
-        value1: '',
-        value2: [
-          new Date(2016, 9, 10, 8, 40),
-          new Date(2016, 9, 10, 9, 40),
-        ],
+        // height: '30px',
+        // basicComponent: null,
+        // date: '',
+        // value2: [
+        //   new Date(2016, 9, 10, 8, 40),
+        //   new Date(2016, 9, 10, 9, 40),
+        // ],
         valueA: [],
-        optionsA: [
-          { value: 'HTML', label: 'HTML' }
-        ],
+        optionsA: [],
         valueB: [],
-        optionsB: [
-          { value: 'w', label: 'w' }
-        ],
+        optionsB: [],
         valueC: [],
         optionsC: [
-          { value: 'c', label: 'c' }
+          // { value: 'c', label: 'c' }
         ],
   
       };
@@ -260,12 +267,12 @@
       },
       showBasicInfo(){
         this.showOverlay = true;
-        this.form = true;
+        this.form.show = true;
       },
   
       close(){
         this.showOverlay = false;
-        this.form = false;
+        this.form.show = false;
       },
       handleSelectChangeA(selectedValues) {
         this.handleSelectChange(selectedValues, this.optionsA, this.valueA);
@@ -276,7 +283,7 @@
       handleSelectChangeC(selectedValues) {
         this.handleSelectChange(selectedValues, this.optionsC, this.valueC);
       },
-      handleSelectChange(selectedValues, options, value) {
+      handleSelectChange(selectedValues, options, value,who) {
         selectedValues.forEach((selectedValue) => {
           const existsInOptions = options.some((option) => option.value === selectedValue);
   
@@ -292,24 +299,47 @@
           if (!existsInValue) {
             value.push(selectedValue);
           }
+          
         });
       },
       onSubmit() {
+        const selectedDate = this.form.data.date;
+        const selectedTimeRange = this.form.data.time; // 獲取選擇的時間範圍
 
-      ElMessage({
-        message: '已儲存會議基本資訊',
-        type: 'success',
-      });
-        console.log('submit!');
+        // 格式化開始時間的小時和分鐘
+        const startHours = ('0' + selectedTimeRange[0].getHours()).slice(-2);
+        const startMinutes = ('0' + selectedTimeRange[0].getMinutes()).slice(-2);
+
+        // 格式化結束時間的小時和分鐘
+        const endHours = ('0' + selectedTimeRange[1].getHours()).slice(-2);
+        const endMinutes = ('0' + selectedTimeRange[1].getMinutes()).slice(-2);
+        //開始加結束
+        const meetingTime = `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`;
+
+
+        this.meetingName = this.form.data.formName;
+        this.time =new Date(selectedDate).toISOString().split('T')[0]+" "+ meetingTime;
+
+        this.place = this.form.data.place;
+        // this.attends = this.optionsA.map(option => option.label);
+        
+
+
+        ElMessage({
+          message: '已儲存會議基本資訊',
+          type: 'success',
+        });
+        this.showOverlay = false;
+        this.form.show = false;
       },
       
     },
   
   };
-  const value1 = ref<[Date, Date]>([
-    new Date(2016, 9, 10, 8, 40),
-    new Date(2016, 9, 10, 9, 40),
-  ])
+  // const date = ref<[Date, Date]>([
+  //   new Date(2016, 9, 10, 8, 40),
+  //   new Date(2016, 9, 10, 9, 40),
+  // ])
   </script>
   
   <style scoped>
@@ -481,5 +511,11 @@
     left: 255px;
     top: 70px;
  }
+ .input-cell {
+  text-align: left;
+}
+.el-tag {
+  margin-left: 5px;
+}
 
   </style>

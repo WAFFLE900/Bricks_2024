@@ -84,7 +84,7 @@
               v-model="form.data.date"
               type="date"
               placeholder="Pick a date"
-              :default-value="new Date(2010, 9, 1)"
+              :default-value="new Date()"
               :style="{ width: '500px' }"
               
           />
@@ -98,6 +98,7 @@
               range-separator="To"
               start-placeholder="Start time"
               end-placeholder="End time"
+              :default-value="[new Date(), new Date()]"
               />
               </div>
           </el-form-item>
@@ -215,6 +216,7 @@
         showOverlay: false,
         value: '',
         placeholder: "輸入會議名稱",
+
         // height: '30px',
         // basicComponent: null,
         // date: '',
@@ -222,6 +224,15 @@
         //   new Date(2016, 9, 10, 8, 40),
         //   new Date(2016, 9, 10, 9, 40),
         // ],
+
+        // height: '30px',
+        // basicComponent: null,
+        // value1: '',
+        // value2: [
+        //   new Date(), 
+        //   new Date(),
+        // ],
+
         valueA: [],
         optionsA: [],
         valueB: [],

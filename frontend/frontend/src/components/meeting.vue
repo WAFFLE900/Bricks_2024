@@ -90,7 +90,7 @@
               v-model="value1"
               type="date"
               placeholder="Pick a date"
-              :default-value="new Date(2010, 9, 1)"
+              :default-value="new Date()"
               :style="{ width: '500px' }"
           />
           </div>
@@ -103,6 +103,7 @@
               range-separator="To"
               start-placeholder="Start time"
               end-placeholder="End time"
+              :default-value="[new Date(), new Date()]"
               />
               </div>
           </el-form-item>
@@ -208,8 +209,8 @@
         basicComponent: null,
         value1: '',
         value2: [
-          new Date(2016, 9, 10, 8, 40),
-          new Date(2016, 9, 10, 9, 40),
+          new Date(), 
+          new Date(),
         ],
         valueA: [],
         optionsA: [

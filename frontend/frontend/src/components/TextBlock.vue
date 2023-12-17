@@ -5,7 +5,7 @@
     <div class="additional-textarea">
         <div class="textarea-container">
           <resize-textarea class="textArea" placeholder="請輸入內容" v-model="textValue" :disabled="isCartDisabled" ></resize-textarea>
-          <el-button class="edit_textButton" @click="show()"><el-icon><MoreFilled /></el-icon></el-button>
+          <el-button class="edit_textButton" @click="show"><el-icon><MoreFilled /></el-icon></el-button>
         </div>
         <div class="split-line" style="width: 100%;"></div>
         <div class="tags">
@@ -45,18 +45,22 @@
   </div>
 
   <div v-if="isShowed" id="rightClick" ref = "rightClick" @click="unShow()"><EditTextara @locked="isLocked"/></div>        
+  <div v-if="isUnlockShowed" id="rightClick" ref = "rightClick" @click="unShow()"><Unlock @unlocked="unLocked"/></div>        
 
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted} from 'vue';
+import { ref, onMounted, onUnmounted,nextTick } from 'vue';
 import EditTextara from './EditTextara.vue';
+import Unlock from './Unlock.vue';
 export default {
 components: {
   EditTextara,
+  Unlock,
 },
 props: {
   isShowed: Boolean,
+  isUnlockShowed: Boolean,
 },
 setup(props, { emit }) {
   const textarea1 = ref("");
@@ -66,10 +70,7 @@ setup(props, { emit }) {
   const isShowed= ref(false);
   const rightClickRef = ref(null);
   const isCartDisabled = ref(false);
-  const cartContainers = ref([{
-    belowCarts: [],  // 当前 cart 下方的其他 cart
-  }]);
-
+  const isUnlockShowed = ref(false);
 
   const handleClose = (tag) => {
     dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1);
@@ -94,22 +95,32 @@ setup(props, { emit }) {
 
   };
   const show = () => {
-    isShowed.value = !isShowed.value;
-  };
+    if (isCartDisabled) {
+      console.log(isCartDisabled.value);
+      isShowed.value = true;
+    } else {
+      isUnlockShowed.value = true;
+    }
+};
+
   const unShow = () => {
-    isShowed.value = !isShowed.value;
+    isUnlockShowed.value = false;
+    isShowed.value = false;
+  };
+  const isLocked = () =>{
+    isCartDisabled.value = true;
+  }
+  const unlocked = () =>{
+    isCartDisabled.value = false;
   };
   const handleClickOutside = (event) => {
   const rightClick = rightClickRef.value;
-
-    if (rightClick && !rightClick.contains(event.target)) {
-      unShow(index); // 或者使用具體的索引值
-    }
-  };
-
-  const isLocked = (value) =>{
-    isCartDisabled.value = value;
+  if (rightClick && !rightClick.contains(event.target)) {
+    unShow(index); // 或者使用具體的索引值
   }
+};
+
+
   const add_cart = () => {
     
     // const uniqueId = Date.now().toString();
@@ -147,7 +158,9 @@ setup(props, { emit }) {
     rightClickRef,
     add_cart,
     isCartDisabled,
+    isUnlockShowed,
     isLocked,
+    unlocked,
   };
 },
 };

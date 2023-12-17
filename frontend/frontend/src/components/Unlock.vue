@@ -1,8 +1,7 @@
 <template>
     <div id="card">
         <div id="container" >
-            <span id="lock" @click="lockEdit">鎖定編輯</span>
-            <span id="delete" @click="deleteTxt">刪除文字區塊</span>
+            <span @click="unlock">解除編輯</span>
         </div>
     </div>
     <div ref="containerRef">
@@ -48,19 +47,11 @@ export default {
         //     emit('chosen', status);
         // };
         
-        const lockEdit = () => {
-            emit('locked')
-        };
-        const deleteTxt =()=>{
-            
-            // status = false;
-            // emit('clicked',status)
+        const unlock = () => {
+           emit('unlocked')
         };
         return{
-            // change,
-            // status,
-            lockEdit,
-            deleteTxt,
+            unlock,
         }
     }
 }
@@ -105,12 +96,9 @@ export default {
         background-color: #FAE4E7;
     }
 
-    #lock{
+    #unlock{
         display: block;
         /* font-size: 10px; */
     }
 
-    #delete{
-        display: block;
-    }
 </style>

@@ -1,9 +1,13 @@
 <template>
-    <side-bar class="sideBar"/>
+  <div>
+    <side-bar class="sideBar" @update="activeChange"/>
+    <router-view class="navAndCont"></router-view>
+  
+    
     <div class="navAndCont" id="empty">
       <nav-bar class="navBar"></nav-bar>
       <empty-back class="content" @showAdd="show"></empty-back>
-      <!-- 標籤 -->
+      標籤
       <div trigger="click" class="tagsPlace" @click="showTags">
         <span class="el-dropdown-link">
           標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
@@ -11,6 +15,7 @@
       </div>
       <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area>
     </div >
+  </div>
   
 </template>
 
@@ -19,6 +24,8 @@ import SideBar from '../components/SideBar.vue'
 import EmptyBack from '@/components/EmptyBack.vue';
 import NavBar from '@/components/NavBar.vue';
 import TagSearchArea from '@/components/KerwinBricks/TagSearchArea.vue';
+import RecordCard from './RecordCard.vue';
+import { useRouter } from 'vue-router';
 export default {
     name: 'empty',
     components: {
@@ -26,9 +33,24 @@ export default {
         EmptyBack,
         NavBar,
         TagSearchArea,
+        RecordCard,
     },
     setup(){
+      const router = useRouter();
+      const activeIndex = ref('0');
+      const activeChange = (index) =>{
+        activeIndex.value = index;
+        toNextPage(activeIndex.value);
+      }
+      const toNextPage = (index) =>{
+        if(index === "1-1"){
+          router.push('/recordCards');
+        }
+      }
         return{
+          activeIndex,
+          activeChange,
+          router,
 
         };
     }

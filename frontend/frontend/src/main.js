@@ -12,7 +12,7 @@ import store from './store.js';
 
 // 导入 Element Plus 的图标组件
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
-import "material-design-icons/iconfont/material-icons.css";
+// import "material-design-icons/iconfont/material-icons.css";
 
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

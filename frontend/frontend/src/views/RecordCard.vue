@@ -1,5 +1,5 @@
 <template>
-    <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar>
+    <!-- <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar> -->
     <!-- :activeIndex="currentActive" -->
 
     <div class="navAndCont" id="cards">

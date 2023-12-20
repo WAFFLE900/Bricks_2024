@@ -630,6 +630,18 @@ export default {
           this.mouseTop = event.clientY - 49;
           this.mouseLeft = event.clientX - 368;
       },
+      decodeToken(token) {
+      // 获取Token的第二部分（Payload）
+      const encodedPayload = token.split(".")[1];
+      // 解码Base64字符串
+      const decodedPayload = Base64.decode(encodedPayload);
+      // 将解码后的字符串转换为JavaScript对象
+      const payloadObject = JSON.parse(decodedPayload);
+      // 现在您可以在payloadObject中访问解密后的Token数据
+      console.log(payloadObject);
+      // 返回解密后的Token数据，或进行其他后续处理
+      return payloadObject;
+    },
   },
   mounted() {
       window.addEventListener('click' , this.handleClickOutside);

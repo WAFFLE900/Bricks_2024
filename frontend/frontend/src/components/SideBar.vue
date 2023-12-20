@@ -1,5 +1,4 @@
 <template>
-  <keep-alive>
   <div id="sidebar">
     <div id="container">
     <div id="title" @click="menu_clicked">
@@ -30,8 +29,10 @@
             <el-icon><list /></el-icon>
             <span>會議記錄</span>
           </template>
-            <router-link to="/recordCards" class="link"><el-menu-item index="1-1" >全部</el-menu-item></router-link>
-            <router-link to="/trashBox" class="link"><el-menu-item index="1-2" >垃圾桶</el-menu-item></router-link>
+          <!-- <router-link to="/recordCards" class="link"></router-link> -->
+            <el-menu-item index="1-1" >全部</el-menu-item>
+            <!-- <router-link to="/trashBox" class="link"></router-link> -->
+            <el-menu-item index="1-2" >垃圾桶</el-menu-item>
             <!-- @click="goTrashBox" -->
         </el-sub-menu>
         <el-sub-menu index="2" class="menu">
@@ -57,7 +58,6 @@
   </div> <!-- menuBar -->
   </div> <!-- container -->
 </div>
-  </keep-alive>
 </template> 
 
 <script>

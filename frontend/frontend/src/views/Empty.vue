@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <side-bar class="sideBar" @update="activeChange"/>
-    <router-view class="navAndCont"></router-view>
-  
-    
+  <div> 
     <div class="navAndCont" id="empty">
       <nav-bar class="navBar"></nav-bar>
       <empty-back class="content" @showAdd="show"></empty-back>
@@ -20,11 +16,10 @@
 </template>
 
 <script>
-import SideBar from '../components/SideBar.vue'
 import EmptyBack from '@/components/EmptyBack.vue';
 import NavBar from '@/components/NavBar.vue';
 import TagSearchArea from '@/components/KerwinBricks/TagSearchArea.vue';
-import RecordCard from './RecordCard.vue';
+// import RecordCard from './RecordCard.vue';
 import { useRouter } from 'vue-router';
 export default {
     name: 'empty',
@@ -41,12 +36,12 @@ export default {
       const activeChange = (index) =>{
         activeIndex.value = index;
         toNextPage(activeIndex.value);
-      }
+      };
       const toNextPage = (index) =>{
         if(index === "1-1"){
           router.push('/recordCards');
         }
-      }
+      };
         return{
           activeIndex,
           activeChange,

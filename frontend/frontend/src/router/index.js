@@ -32,7 +32,7 @@ const routes = [
     component: () => import("../views/Karen.vue"),
   },
   {
-    path: "/meetingRecord",
+    path: "/meetingRecord1",
     name: "meetingRecord",
     component: () => import("../views/MeetingRecord.vue"),
   },
@@ -72,20 +72,38 @@ const routes = [
     component: () => import("../views/Empty.vue"),
   },
   {
-    path: "/recordCards",
-    name: "recordCards",
-    component: () => import("../views/RecordCard.vue"),
-  },
-  {
-    path: "/trashBox",
-    name: "trashBox",
-    component: () => import("../views/TrashBox.vue"),
-  },
-  {
     path: "/searching",
     name: "searching",
     component: () => import("../views/Searching.vue"),
-  }
+  },
+  {
+    path: "/all",
+    name: "all",
+    component: () => import("../views/meetingAll.vue"),
+    children:[
+      {
+        path: "cards",
+        component: () => import("../views/RecordCard.vue"),
+        children:[
+          {
+            path: "meetingRecord",
+            name: "meetingRecord",
+            component: () => import("../views/MeetingRecord.vue"),
+          },
+          // {
+          //   path: "calender",
+          //   name: "calender",
+          //   component: () => import("../views/Calender.vue"),
+          // },
+        ],
+      },
+      {
+        path: "trashBox",
+        component: () => import("../views/TrashBox.vue"),
+      }
+
+    ],
+  },
 ];
 
 const router = createRouter({

@@ -1,13 +1,9 @@
 <template>
   <div class="sharon" @contextmenu.prevent>
-    <!-- @update="selectedItemUpdate" -->
-    <!-- :activeIndex="currentActive" -->
-    <!-- @showAdd="show" -->
-      <side-bar class="sideBar"  ></side-bar>
-      <nav-bar-main class="navBar"></nav-bar-main>
+      <!-- <side-bar class="sideBar"  ></side-bar>-->
+      <nav-bar-main class="navBar"></nav-bar-main> 
 
     <!-- 新增、會議記錄主頁 -->
-    <!-- v-show="isShowed" -->
     <div class="navAndCont"  id="new" v-if="showedInfo">
       <div :class="meetingClass">
         <div class="info"><meeting ></meeting></div>
@@ -28,7 +24,7 @@
             <ordering/>
             <sort/>
         </div>
-            <!-- <text-block v-for="item in 10" :key="item"/> -->
+            <text-block v-for="item in 10" :key="item"/>
             <document-with-info v-for="item in 10" :key="item"/>
       </div>
 
@@ -67,7 +63,7 @@ export default {
     TagSearchArea,
     sort,
     Ordering,
-    DocumentWithInfo
+    DocumentWithInfo,
 
   },
   setup(props,{emit}) {

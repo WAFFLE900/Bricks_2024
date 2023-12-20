@@ -1,5 +1,4 @@
 <template>
-    <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" :activeIndex="currentActive"></side-bar>
     <div class="navAndCont" id="trash">
         <trash-bar class="navBar"></trash-bar>
         <div class="cards">
@@ -9,13 +8,11 @@
 </template>
 
 <script>
-import SideBar from '../components/SideBar.vue';
 import TrashBar from '../components/TrashBar.vue';
 import TrashCards from '../components/TrashCards.vue';
 export default {
     name : 'trashBox',
     components : {
-        SideBar,
         TrashBar,
         TrashCards,
 

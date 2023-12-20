@@ -1,6 +1,7 @@
 <template>
     <div id="all" >
         <!-- @click="UnShow" -->
+        <!--  -->
         <el-card id="box-card" @contextmenu="show" @click="nextPage">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png">
             <div id="namePart">
@@ -9,8 +10,8 @@
                 <!-- @click.stop -->
             </div>
             <div id="tagPart" >
-                <el-tag class="tag" v-for="item in 8" :key="item">標籤</el-tag>
-                <el-tag class="tag">新增標籤</el-tag>
+                <el-tag class="tag" v-for="item in tags" :key="item">{{ item }}</el-tag>
+                <!-- <el-tag class="tag">新增標籤</el-tag> -->
                 <!-- @click="UnShow" -->
             </div>
         
@@ -31,6 +32,8 @@ export default{
     },
     props:{
         isShowed: Boolean,
+        recordName: String,
+        tags: Array,
     },
 
     setup(props,{emit}){
@@ -38,7 +41,8 @@ export default{
         const isShowed= ref(false);
         const url = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
         const normal = "#303133";
-        const record_name = "會議記錄";
+        const record_name = props.recordName;
+        const tags = props.tags;
         // ParentIsShowed = false;
         // const buttonRef = ref(null);
 
@@ -53,37 +57,9 @@ export default{
 
         const nextPage = () => {
             // emit("showMeeting", true);
-            router.push('/meetingRecord');
+            router.push('/all/cards/meetingRecord');
         };
 
-        // watch(() => {
-        //     isShowed.value = props.isShowed;
-        //     console.log(isShowed.value);
-        // })
-
-        // const nextPage = () => {
-        //     router.push({ name: });
-        // };
-
-
-        // 點擊非指定區域
-        // const clickOut = (event) => {
-        //     if(isShowed && !this.$ref.rightClick.contains(event.target)){
-        //         unShow();
-        //     }
-        // };
-
-        // mounted (()=>{
-        //     window.addEventListener('click' , clickOut);
-        // });
-
-        // onMounted(() => {
-        //     window.addEventListener('click', clickOut);
-        // });
-           
-        // onUnmounted(()=>{
-        //     window.addEventListener('click' , clickOut);
-        // });
         
 
 
@@ -96,6 +72,7 @@ export default{
             isShowed,
             unShow,
             nextPage,
+            tags,
         };
 
         

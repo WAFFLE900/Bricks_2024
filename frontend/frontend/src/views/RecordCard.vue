@@ -1,13 +1,15 @@
 <template>
-    <!-- <side-bar class="sideBar" @update="selectedItemUpdate" @showAdd="show" ></side-bar> -->
-    <!-- :activeIndex="currentActive" -->
 
     <div class="navAndCont" id="cards">
-      <nav-bar-all class="navBar" @click="StopShowing"></nav-bar-all>
+      <nav-bar-all class="navBar"></nav-bar-all>
       <div class="cards">
-        <meeting-cards v-for="items in 16" :key="items" :isShowed="isShowed" @showMeeting="show"></meeting-cards>
+        <meeting-cards v-for="(items,index) in name" :key="items.id" :recordName = "items" :tags="tags[index]"></meeting-cards>
+        <!-- // :recordName = "items.name" -->
+         <!-- :isShowed="isShowed" @showMeeting="show" -->
       </div>
+      <router-view></router-view>
     </div>
+    
 </template>
 
 <script>
@@ -15,6 +17,7 @@ import NavBarAll from '../components/NavBarAll.vue';
 import SideBar from '../components/SideBar.vue';
 import MeetingCards from '../components/MeetingCards.vue';
 import { ref } from 'vue';
+import axios from 'axios';
 
 export default {
     name: 'recordCard',
@@ -25,19 +28,37 @@ export default {
         
     },
     setup(props,{emit}){
-
+        const name = ref(["Sprint5_計畫會議","Sprint5_demo"]);
+        const recordName = ref("會議記錄");
+        const projectID = ref("94");//之後要放動態ID
+        const tags = ref([["會議紀錄","API"],[]]);
         const currentActive = ref("1-1");
 
         return{
             currentActive,
+            name,
+            projectID,
+            recordName,
+            tags,
 
         };
     },
+    // mounted(){
+    //     axios.get("http://35.194.196.179:5000/get_record_index",{params:{project_id : 94}}).then(res => {
+    //         this.name.value.push(res.data.record.record_name);
+    //         console.log(this.name.value);
+    //     })
+    //     .catch((error) => {
+    //         // Handle error
+    //         console.error("Error:", "找不到阿");
+    //     });
+    // }
 
 }
 </script>
 
 <style scoped>
+
     .navBar{
     position: absolute;
     top: 0;

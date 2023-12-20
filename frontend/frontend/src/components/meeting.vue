@@ -192,6 +192,35 @@
       // BasicInfo,
     },
     
+    mounted() {
+      const postData = {
+        project_id: 94,
+        record_id: 1
+      };
+      // window.addEventListener('click' , this.handleClickOutside);
+      // 在 mounted 鉤子中執行初始化請求
+      axios.post('http://35.194.196.179:5000/get_record', postData)
+      .then(res => {
+        // 處理後端返回的數據
+        console.log(res.data.status);
+        this.meetingName = res.data.record_info[0].record_name;
+        this.form.data.formName = this.meetingName;
+        this.time = res.data.record_info[0].record_date;
+        // time 的整合比較難用 之後再來用
+        this.place = res.data.record_info[0].record_place;
+        this.form.data.place = this.place;
+        // 這邊還要再修
+        this.optionsA.push(res.data.record_info[0].record_host_name);
+
+        console.log(res.data.record_info[0].record_host_name);
+      })
+      .catch(error => {
+        // 處理錯誤
+        console.error('Error fetching data:', error);
+      });
+
+    },
+    
     data() {
       return {
         form: {

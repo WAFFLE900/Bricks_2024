@@ -57,7 +57,7 @@ export default{
 
         const nextPage = () => {
             // emit("showMeeting", true);
-            router.push('/all/cards/meetingRecord');
+            // router.push({ name: "meetingRecord" });
         };
 
         

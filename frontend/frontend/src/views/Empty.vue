@@ -3,7 +3,7 @@
     <div class="navAndCont" id="empty">
       <nav-bar class="navBar"></nav-bar>
       <empty-back class="content" @showAdd="show"></empty-back>
-      標籤
+      
       <div trigger="click" class="tagsPlace" @click="showTags">
         <span class="el-dropdown-link">
           標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
@@ -16,10 +16,9 @@
 </template>
 
 <script>
-import EmptyBack from '@/components/EmptyBack.vue';
-import NavBar from '@/components/NavBar.vue';
-import TagSearchArea from '@/components/KerwinBricks/TagSearchArea.vue';
-// import RecordCard from './RecordCard.vue';
+import EmptyBack from '../components/EmptyBack.vue';
+import NavBar from '../components/NavBar.vue';
+import TagSearchArea from '../components/TagSearchArea.vue';
 import { useRouter } from 'vue-router';
 export default {
     name: 'empty',

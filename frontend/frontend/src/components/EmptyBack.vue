@@ -5,7 +5,8 @@
         <el-button id="addBtn" @click="addClicked">
           <div id="buttonContent">
             <el-icon><circle-plus/></el-icon>新增
-          </div></el-button>
+          </div>
+        </el-button>
       </el-empty>
     </div>
   </div>

@@ -2,7 +2,7 @@
     <div>
         <side-bar @update="activeChange" class="sideBar"/>
         <router-view></router-view>
-        <router-view name="meetingRecord"></router-view>
+        <!-- <router-view name="meetingRecord"></router-view> -->
     </div>
   
 </template>

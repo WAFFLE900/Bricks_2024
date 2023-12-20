@@ -86,20 +86,19 @@ const routes = [
         component: () => import("../views/RecordCard.vue"),
         children:[
           {
-            path: "meetingRecord",
+            path: "meetingRecord/:cardId",
             name: "meetingRecord",
             component: () => import("../views/MeetingRecord.vue"),
           },
-          // {
-          //   path: "calender",
-          //   name: "calender",
-          //   component: () => import("../views/Calender.vue"),
-          // },
         ],
       },
       {
         path: "trashBox",
         component: () => import("../views/TrashBox.vue"),
+      },
+      {
+        path: "empty",
+        component: () => import("../views/Empty.vue"),
       }
 
     ],

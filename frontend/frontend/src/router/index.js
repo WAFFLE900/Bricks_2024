@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+// import Searching from "../views/Searching.vue";
+// import MeetingRecord from "../views/MeetingRecord.vue";
 
 const routes = [
   {
@@ -84,13 +86,6 @@ const routes = [
       {
         path: "cards",
         component: () => import("../views/RecordCard.vue"),
-        children:[
-          {
-            path: "meetingRecord/:cardId",
-            name: "meetingRecord",
-            component: () => import("../views/MeetingRecord.vue"),
-          },
-        ],
       },
       {
         path: "trashBox",
@@ -99,7 +94,12 @@ const routes = [
       {
         path: "empty",
         component: () => import("../views/Empty.vue"),
-      }
+      },
+      {
+        path: "cards/meetingRecord/:cardId",
+        name: "meetingRecord",
+        component: () => import("../views/MeetingRecord.vue"),
+      },
 
     ],
   },

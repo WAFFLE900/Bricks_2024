@@ -24,7 +24,6 @@
             <ordering/>
             <sort/>
         </div>
-            <text-block v-for="item in 10" :key="item"/>
             <document-with-info v-for="item in 10" :key="item"/>
       </div>
 
@@ -52,6 +51,8 @@ import { useRouter } from "vue-router";
 import Ordering from '../components/SharonBricks/Ordering.vue';
 import sort from '../components/SharonBricks/Sort.vue';
 import DocumentWithInfo from "@/components/KerwinBricks/DCMwithDate.vue";
+import axios from 'axios';
+import { onMounted } from "vue";
 
 
 export default {
@@ -66,6 +67,9 @@ export default {
     DocumentWithInfo,
 
   },
+  // props: {
+  //   record_id: Number,
+  // },
   setup(props,{emit}) {
     const meetingClass = ref("meeting");
     const activeOption = ref(null);  
@@ -75,8 +79,15 @@ export default {
     const currentActive = ref("1-1");
     const showedInfo = ref(true);
     const quantity = ref(1);
+    const recordID = ref("");
+
+    // onMounted(() => {
+    //   recordID.value = this.router.query.cardId;
+    //   console.log(recordID.value);
+    // });
 
     const showTags = () =>{
+      // console.log(recordID);
       tagShowed.value = !tagShowed.value;
       if(tagShowed.value === true){
         meetingClass.value = "showingClass";
@@ -108,8 +119,12 @@ export default {
       showedInfo,
       quantity,
       add_block,
+      recordID,
     };
   },
+  // mounted(){
+    // axios.post("http://35.194.196.179:5000/get_record",{params:{}})
+  // },
 };
 </script>
 

@@ -3,9 +3,8 @@
     <div class="navAndCont" id="cards">
       <nav-bar-all class="navBar"></nav-bar-all>
       <div class="cards">
-        <meeting-cards v-for="(item,index) in name" :key="index" :recordName = "item.name" :tags="tags[index]" @click="handleCardClick(item.id)"></meeting-cards>
-        <!-- // :recordName = "items.name" -->
-         <!-- :isShowed="isShowed" @showMeeting="show" -->
+        <!--  -->
+        <meeting-cards v-for="(item,index) in name" :key="index" :recordName = "item.name" :tags="tags[index]" @click="handleCardClick(item.id)" :record_id = "item.id"></meeting-cards>
       </div>
       <router-view></router-view>
     </div>
@@ -40,6 +39,17 @@ export default {
             router.push(`/all/cards/meetingRecord/${cardId}`);
         };
 
+        const click = () =>{
+            axios.get("http://35.194.196.179:5000/get_record_index",{params:{"project_id" : 94}}).then(res => {
+            this.name.value.push(res.data.record.record_name);
+            console.log(this.name.value);
+        })
+        .catch((error) => {
+            // Handle error
+            console.error("Error:", "failed");
+        });
+        };
+
         return{
             currentActive,
             name,
@@ -47,6 +57,7 @@ export default {
             recordName,
             tags,
             handleCardClick,
+            click,
 
         };
     },

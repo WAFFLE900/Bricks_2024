@@ -2,7 +2,7 @@
     <div id="all" >
         <!-- @click="UnShow" -->
         <!--  -->
-        <el-card id="box-card" @contextmenu="show" @click="nextPage">
+        <el-card id="box-card" @contextmenu="show">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png">
             <div id="namePart">
                 <span id="name">{{ record_name }}</span>
@@ -55,14 +55,6 @@ export default{
             // console.log(value);
         };
 
-        const nextPage = () => {
-            // emit("showMeeting", true);
-            // router.push({ name: "meetingRecord" });
-        };
-
-        
-
-
 
         return{
             show,
@@ -71,7 +63,6 @@ export default{
             record_name,
             isShowed,
             unShow,
-            nextPage,
             tags,
         };
 

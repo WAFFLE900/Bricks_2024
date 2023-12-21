@@ -7,7 +7,7 @@
       <div class="tribtn">
         <div class="btn">試用</div>
         <a
-          href="./login_2"
+          href="./login"
           class="btn nav_login_btn"
           style="
             background-color: #b82c30;
@@ -16,7 +16,7 @@
           "
           >登入</a
         >
-        <a href="./register_2" class="btn" style="margin-right: 0px">註冊</a>
+        <a href="./register" class="btn" style="margin-right: 0px">註冊</a>
       </div>
     </div>
     <div class="bg">
@@ -75,7 +75,7 @@
           <img
             src="../assets/checkbox/CheckBox_off.svg"
             class="keep_login_checkbox keep_login_checkbox_off"
-            v-if="checked"
+            v-if="!checked"
             @click="check_btn"
           />
           <img
@@ -101,6 +101,7 @@
             <p>The email is: {{ user.email }}</p>
           </div> -->
           <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
+
           <a href="">
             <div id="FB_login_btn">
               <img src="../assets/FB_login.svg" alt="" />
@@ -110,7 +111,7 @@
         </div>
         <div class="register">
           <p>還沒有帳戶？</p>
-          <a href="./register_2">
+          <a href="./register">
             <p>註冊</p>
           </a>
         </div>
@@ -144,7 +145,7 @@ export default {
     return {
       showpassword: false,
       error: false, // 錯誤訊息的div顯示
-      checked: true,
+      checked: false,
       account: "",
       password: "",
       errorMessage: "",
@@ -179,13 +180,13 @@ export default {
         console.log("前端block");
         this.error = true;
       } else {
-        const path = "http://34.81.186.58:5000/login";
+        const path = "http://35.194.196.179:5000/bricks_login";
         const user = {
           user_email: this.account,
           user_password: this.password,
           isKeepLogin: this.checked,
         };
-        // console.log("user: ", user);
+        console.log("user: ", user);
         this.account = "";
         this.password = "";
         axios
@@ -193,6 +194,7 @@ export default {
           .then((res) => {
             // token 在 res.data裡面
             this.token = res.data;
+            console.log(this.token);
             // 在Vue组件中的某个方法中执行解密操作
             this.decode_token_json = this.decodeToken(this.token);
             // 直接取出要的東西
@@ -201,7 +203,7 @@ export default {
               this.errorTime = 0;
               console.log("登入成功");
               this.$router.push({
-                name: "Personal_homepage",
+                name: "PersonalHomepage",
                 params: { user_email: this.decode_token_json.user_email },
               });
             } else {
@@ -623,7 +625,6 @@ input::placeholder {
     top: 108.75px;
     left: 50%;
     transform: translate(-50%);
-    border: 2px solid black;
   }
 
   .bg {
@@ -651,7 +652,6 @@ input::placeholder {
     top: 108.75px;
     left: 50%;
     transform: translate(-50%);
-    border: 2px solid black;
   }
 
   .bg {

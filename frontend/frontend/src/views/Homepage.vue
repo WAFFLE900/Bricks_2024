@@ -1,24 +1,24 @@
 <template>
   <div style="width: 100%; position: absolute; left: 0; top: 0">
     <div class="nav" v-if="scroll" style="background-color: transparent">
-      <a href="./homepage_2">
+      <a href="./homepage">
         <img src="../assets/brickslogo.svg" alt="" />
       </a>
 
       <div class="tribtn">
-        <div class="btn">試用</div>
+        <a href="./register" class="btn">試用</a>
         <a href="./login" class="btn nav_login_btn">登入</a>
         <a href="./register" class="btn" style="margin-right: 0px">註冊</a>
       </div>
     </div>
     <div class="nav_scroll" v-else style="background-color: white">
-      <a href="./homepage_2">
+      <a href="./homepage">
         <img src="../assets/brickslogo.svg" alt="" />
       </a>
       <div class="tribtn">
         <div class="btn">試用</div>
         <a
-          href="./login_2"
+          href="./login"
           class="btn nav_login_btn"
           style="
             background-color: #b82c30;
@@ -27,23 +27,17 @@
           "
           >登入</a
         >
-        <a href="./register_2" class="btn" style="margin-right: 0px">註冊</a>
+        <a href="./register" class="btn" style="margin-right: 0px">註冊</a>
       </div>
     </div>
     <div class="first_bg">
       <div class="slogan">
         <div class="first_line">
           <p style="float: left">一磚一磚</p>
-          <p style="float: right">
-            建<span style="letter-spacing: 0">造</span>
-          </p>
+          <p style="float: right">建造</p>
         </div>
-        <p class="second_line">
-          你的專<span style="letter-spacing: 0">案</span>
-        </p>
-        <p class="third_line">
-          為大學生設計的專案管理工<span style="letter-spacing: 0">具</span>
-        </p>
+        <p class="second_line">你的專案</p>
+        <p class="third_line">為大學生設計的專案管理工具</p>
         <a href="" class="try_now_first">立即試用</a>
       </div>
     </div>
@@ -232,13 +226,12 @@ export default {
   width: 100%;
   height: 100vh;
   background-size: cover;
-  /* background-position: top; */
   position: relative;
 }
 
 .slogan {
-  width: 70%;
-  height: 368px;
+  height: 60%;
+  width: 26rem;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -247,10 +240,10 @@ export default {
 }
 
 .first_line {
-  font-size: 3.5vw;
+  font-size: 47px;
   font-weight: 400;
   height: 56.4px;
-  width: 40%;
+  width: 92%;
   line-height: 56.4px;
   position: absolute;
   left: 50%;
@@ -260,30 +253,26 @@ export default {
 }
 
 .second_line {
-  font-size: 6vw;
+  font-size: 520%;
   font-weight: 700;
-  line-height: 112px;
+  width: 100%;
   position: absolute;
-  left: 50%;
+  justify-content: space-around;
   display: flex;
-
-  transform: translate(-50%);
-  letter-spacing: 24px;
-  top: 4vw;
+  letter-spacing: 16px;
+  top: 14%;
 }
 
 .third_line {
-  font-size: 2.2vw;
+  font-size: 176%;
   font-weight: 400;
-  height: 40px;
-  width: auto;
-  line-height: 40px;
+  width: 100%;
   position: absolute;
+  display: flex;
+  justify-content: space-around;
   left: 50%;
-  transform: translate(-50%);
-  letter-spacing: 0.25px;
-  top: 14vw;
-  /* border: #120405 2px solid; */
+  transform: translate(-51%);
+  top: 50%;
 }
 
 .try_now_first {
@@ -575,7 +564,7 @@ export default {
   letter-spacing: 4px;
   position: relative;
   top: 160px;
-  left: 28%;
+  left: 50%;
   transform: translate(-50%);
   text-decoration: none;
   line-height: 48px;

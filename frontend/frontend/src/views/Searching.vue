@@ -20,14 +20,6 @@
                 <!-- <text-block v-for="item in 10" :key="item"/> -->
                 <document-with-info v-for="item in 10" :key="item"/>
             </div>
-        
-      <!-- 標籤 -->
-      <!-- <div trigger="click" class="tagsPlace" @click="showTags">
-        <span class="el-dropdown-link">
-          標籤<el-icon class="el-icon--right"><arrow-down /></el-icon>
-        </span>
-      </div>
-      <tag-search-area v-show="tagShowed" class="tagInside"></tag-search-area> -->
       
       
     
@@ -43,7 +35,8 @@ import NavBarMain from '../components/NavBarMain.vue';
 import SideBar from '../components/SideBar.vue';
 import DocumentWithInfo from '../components/KerwinBricks/DCMwithDate.vue';
 import Sort from '../components/SharonBricks/Sort.vue';
-import Ordering from '../components/SharonBricks/Ordering.vue';
+// import Ordering from '../components/SharonBricks/Ordering.vue';
+import Ordering from '@/components/SharonBricks/Ordering.vue';
 import TextBlock from '@/components/TextBlock.vue';
 
 export default {

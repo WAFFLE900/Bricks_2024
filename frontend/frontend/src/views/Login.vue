@@ -89,7 +89,7 @@
           </p>
         </div>
         <!-- 點擊登入按鈕的事件放在這邊 -->
-        <div class="login_btn" @click="login">登入</div>
+        <div class="login_btn" @click="goToPersonalPage">登入</div>
         <div class="forget_password">忘記密碼</div>
         <div class="line">
           <div class="left_line"></div>
@@ -231,6 +231,10 @@ export default {
     },
     goToPersonalPage() {
       console.log("goToPersonalPage");
+      this.$router.push({
+        name: "personalHomepage",
+        params: {},
+      });
     },
     decodeToken(token) {
       // 获取Token的第二部分（Payload）

@@ -82,7 +82,7 @@ const routes = [
     path: "/all",
     name: "all",
     component: () => import("../views/meetingAll.vue"),
-    children:[
+    children: [
       {
         path: "cards",
         component: () => import("../views/RecordCard.vue"),
@@ -100,7 +100,6 @@ const routes = [
         name: "meetingRecord",
         component: () => import("../views/MeetingRecord.vue"),
       },
-
     ],
   },
 ];
@@ -109,5 +108,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+// router.beforeEach((to, from) => {
+//   if (to.path === "/personalHomepage") {
+//     next("/login");
+//   } else {
+//     next("/personalHomepage");
+//   }
+// });
 
 export default router;

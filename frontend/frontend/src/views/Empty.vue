@@ -19,10 +19,7 @@ import EmptyBack from "../components/EmptyBack.vue";
 import NavBar from "../components/NavBar.vue";
 import TagSearchArea from "../components/KerwinBricks/TagSearchArea.vue";
 import { useRouter } from "vue-router";
-import EmptyBack from "../components/EmptyBack.vue";
-import NavBar from "../components/NavBar.vue";
-import TagSearchArea from "../components/KerwinBricks/TagSearchArea.vue";
-import { useRouter } from "vue-router";
+
 export default {
   name: "empty",
   components: {

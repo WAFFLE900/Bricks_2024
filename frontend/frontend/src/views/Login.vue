@@ -286,7 +286,7 @@ export default {
 }
 
 .tribtn {
-  width: 213px;
+  width: 215px;
   height: 30.75px;
   position: absolute;
   top: 9px;

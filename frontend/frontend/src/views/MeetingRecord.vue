@@ -156,9 +156,9 @@ export default {
   background-color: #F2F3F5;
   position: absolute;
   left: 200px;
-  /* width:1240px; */
   top: 0;
   right: 0;
+  
  }
  .info{
   position: relative;

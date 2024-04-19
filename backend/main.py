@@ -1092,6 +1092,15 @@ def delete_record_permanent():
         response_object["message"] = str(e)
 
     return jsonify(response_object)
+@app.route('/rollback', methods=['POST'])
+def rollback():
+    try:
+        response_object = {"status": "success"}
+        session.rollback()
+    except Exception as e:
+        response_object["status"] = "failed"
+        response_object["message"] = str(e)
+    return jsonify(response_object)
 
 if __name__ == "__main__":
     app.run(debug=True)

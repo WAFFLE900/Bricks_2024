@@ -1092,6 +1092,7 @@ def delete_record_permanent():
         response_object["message"] = str(e)
 
     return jsonify(response_object)
+
 @app.route('/rollback', methods=['POST'])
 def rollback():
     try:
